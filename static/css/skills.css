@@ -1,0 +1,248 @@
+/* Skills Header */
+.skills-header {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.skills-intro {
+    font-size: 1.2rem;
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Skills Categories */
+.skills-category {
+    margin-bottom: 4rem;
+}
+
+.category-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.category-title.can-do {
+    color: #059669;
+}
+
+.category-title.learning {
+    color: #d97706;
+}
+
+.category-title.planned {
+    color: #7c3aed;
+}
+
+.category-icon {
+    font-size: 2rem;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Basis Skill Card */
+.skill-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #e5e7eb;
+}
+
+.skill-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* "Kann ich" Cards */
+.skills-category:nth-child(2) .skill-card {
+    border-left-color: #10b981;
+}
+
+.skills-category:nth-child(2) .skill-card:hover {
+    border-left-color: #059669;
+}
+
+/* "Lerne ich" Cards */
+.learning-card {
+    border-left-color: #f59e0b !important;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.learning-card:hover {
+    border-left-color: #d97706 !important;
+}
+
+/* "Plane ich" Cards */
+.planned-card {
+    border-left-color: #8b5cf6 !important;
+    background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%);
+}
+
+.planned-card:hover {
+    border-left-color: #7c3aed !important;
+}
+
+/* Skill Header */
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.skill-header h3 {
+    font-size: 1.3rem;
+    color: #1f2937;
+    margin: 0;
+}
+
+/* Skill Level Bars */
+.skill-level {
+    width: 100px;
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.level-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    transition: width 0.8s ease;
+    border-radius: 4px;
+}
+
+/* Progress Indicators */
+.progress-indicator {
+    display: flex;
+    align-items: center;
+}
+
+.progress-text {
+    background-color: #f59e0b;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.timeline {
+    background-color: #8b5cf6;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Skill Description */
+.skill-card p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+/* Learning Status */
+.learning-status {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.learning-status small {
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Lernphilosophie */
+.learning-philosophy {
+    background-color: #f8fafc;
+    padding: 4rem 0;
+    margin-top: 3rem;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.philosophy-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.philosophy-item:hover {
+    transform: translateY(-3px);
+}
+
+.philosophy-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
+}
+
+.philosophy-item p {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* Animationen für Skill Bars */
+@keyframes loadBar {
+    from {
+        width: 0%;
+    }
+}
+
+.level-bar {
+    animation: loadBar 1.5s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .skill-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .skill-level {
+        width: 150px;
+    }
+    
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .skills-intro {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}

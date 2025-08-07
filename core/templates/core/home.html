@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Portfolio [Dein Name]{% endblock %}
+
+{% block meta_description %}Frontend Developer mit Django Backend-Kenntnissen. Spezialisiert auf HTML, CSS, JavaScript und moderne Web-Entwicklung.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Hi, ich bin <span class="highlight">Martin Freimuth</span></h1>
+            <h2 class="hero-subtitle">Frontend Developer & Backend Enthusiast</h2>
+            <p class="hero-description">
+                Ich entwickle moderne Webanwendungen mit HTML, CSS und JavaScript. 
+                Aktuell arbeite ich mich in Django ein, um Full-Stack Developer zu werden. 
+                Nächstes Jahr plane ich den Einstieg in Machine Learning.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">Meine Projekte</a>
+                <a href="{% url 'core:contact' %}" class="btn btn-secondary">Kontakt aufnehmen</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="placeholder-avatar">
+                <!-- Hier später dein Foto -->
+                <span>👨‍💻</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Teaser -->
+    <section class="skills-teaser section">
+        <h2 class="section-title">Meine Technologien</h2>
+        <div class="skills-grid">
+            <div class="skill-item current">
+                <span class="skill-icon">🎨</span>
+                <h3>Frontend</h3>
+                <p>HTML, CSS, JavaScript</p>
+            </div>
+            <div class="skill-item learning">
+                <span class="skill-icon">⚙️</span>
+                <h3>Backend</h3>
+                <p>Django (aktuell am lernen)</p>
+            </div>
+            <div class="skill-item planned">
+                <span class="skill-icon">🤖</span>
+                <h3>Machine Learning</h3>
+                <p>Python, TensorFlow (geplant 2025)</p>
+            </div>
+        </div>
+        <div class="skills-link">
+            <a href="{% url 'core:skills' %}" class="btn btn-secondary">Alle Skills ansehen</a>
+        </div>
+    </section>
+
+    <!-- Projekt Highlights -->
+    <section id="projects" class="projects-highlight section">
+        <h2 class="section-title">Ausgewählte Projekte</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="placeholder-image">🌐</div>
+                </div>
+                <div class="project-info">
+                    <h3>Portfolio Website</h3>
+                    <p>Responsive Django-Anwendung mit modernem Design</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="placeholder-image">📱</div>
+                </div>
+                <div class="project-info">
+                    <h3>Responsive Web App</h3>
+                    <p>Mobile-first Webanwendung mit JavaScript</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS Grid</span>
+                        <span class="tech-tag">API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="projects-link">
+            <a href="#" class="btn btn-primary">Alle Projekte ansehen</a>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Lassen Sie uns zusammenarbeiten!</h2>
+            <p>Suchen Sie einen motivierten Developer? Ich freue mich auf Ihre Nachricht.</p>
+            <a href="{% url 'core:contact' %}" class="btn btn-primary">Kontakt aufnehmen</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

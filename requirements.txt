@@ -1,0 +1,7 @@
+
+# requirements.txt
+
+Django>=5.0,<5.1
+gunicorn>=21.2.0
+whitenoise>=6.6.0
+django-environ>=0.11.2

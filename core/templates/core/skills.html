@@ -1,0 +1,179 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Skills - Portfolio
+[Dein Name]{% endblock %} {% block meta_description %}Übersicht meiner
+technischen Fähigkeiten: Frontend, Backend und geplante Skills in Machine
+Learning.{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/skills.css' %}" />
+{% endblock %} {% block content %}
+<div class="container">
+  <section class="skills-header section">
+    <h1 class="section-title">Meine Skills & Lernreise</h1>
+    <p class="skills-intro">
+      Von Frontend-Entwicklung über Backend bis hin zu Machine Learning - hier
+      ist mein aktueller Stand und meine Lernziele.
+    </p>
+  </section>
+
+  <!-- Kann ich -->
+  <section class="skills-category">
+    <h2 class="category-title can-do">
+      <span class="category-icon">✅</span>
+      Kann ich
+    </h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>HTML5</h3>
+          <div class="skill-level">
+            <div class="level-bar" style="width: 90%"></div>
+          </div>
+        </div>
+        <p>Semantisches HTML, Accessibility, SEO-optimiert</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>CSS3</h3>
+          <div class="skill-level">
+            <div class="level-bar" style="width: 75%"></div>
+          </div>
+        </div>
+        <p>Flexbox, Grid, Responsive Design, Animations</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>JavaScript</h3>
+          <div class="skill-level">
+            <div class="level-bar" style="width: 85%"></div>
+          </div>
+        </div>
+        <p>ES6+, DOM Manipulation, Async/Await, APIs</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>Git</h3>
+          <div class="skill-level">
+            <div class="level-bar" style="width: 70%"></div>
+          </div>
+        </div>
+        <p>Versionskontrolle, Branching, GitHub</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lerne ich -->
+  <section class="skills-category">
+    <h2 class="category-title learning">
+      <span class="category-icon">📚</span>
+      Lerne ich gerade
+    </h2>
+    <div class="skills-grid">
+      <div class="skill-card learning-card">
+        <div class="skill-header">
+          <h3>TypeScript</h3>
+          <div class="progress-indicator">
+            <span class="progress-text">Intermediate</span>
+          </div>
+        </div>
+        <p>Type Safety, Interfaces, besseres JavaScript</p>
+        <div class="learning-status">
+          <small>Nächster Schritt nach Java Script</small>
+        </div>
+      </div>
+
+      <div class="skill-card learning-card">
+        <div class="skill-header">
+          <h3>Python</h3>
+          <div class="progress-indicator">
+            <span class="progress-text">Vertiefung</span>
+          </div>
+        </div>
+        <p>OOP, Web Development, Django Framework</p>
+        <div class="learning-status">
+          <small>Fokus: Web Development mit Django</small>
+        </div>
+      </div>
+      <div class="skill-card learning-card">
+        <div class="skill-header">
+          <h3>Django</h3>
+          <div class="progress-indicator">
+            <span class="progress-text">In Bearbeitung</span>
+          </div>
+        </div>
+        <p>
+          MVT Pattern, Models, Views, Templates, Admin, Authentication & User
+          Roles, Testing
+        </p>
+        <div class="learning-status">
+          <small
+            >Aktuelles Projekt: Portfolio Website mit User-Management</small
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plane ich -->
+  <section class="skills-category">
+    <h2 class="category-title planned">
+      <span class="category-icon">🎯</span>
+      Plane ich für 2025 / 2026
+    </h2>
+    <div class="skills-grid">
+      <div class="skill-card planned-card">
+        <div class="skill-header">
+          <h3>React</h3>
+          <div class="timeline">Q3 2025</div>
+        </div>
+        <p>Komponenten-basierte Frontend-Entwicklung</p>
+      </div>
+
+      <div class="skill-card planned-card">
+        <div class="skill-header">
+          <h3>Angular</h3>
+          <div class="timeline">Q3 2025</div>
+        </div>
+        <p>Enterprise Frontend Framework</p>
+      </div>
+
+      <div class="skill-card planned-card">
+        <div class="skill-header">
+          <h3>Machine Learning</h3>
+          <div class="timeline">Q1 2026</div>
+        </div>
+        <p>Python, TensorFlow, Data Science</p>
+      </div>
+
+      <div class="skill-card planned-card">
+        <div class="skill-header">
+          <h3>Docker</h3>
+          <div class="timeline">Q3 2025</div>
+        </div>
+        <p>Containerisierung, Deployment</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lernphilosophie -->
+  <section class="learning-philosophy section">
+    <h2 class="section-title">Meine Lernphilosophie</h2>
+    <div class="philosophy-grid">
+      <div class="philosophy-item">
+        <h3>🎯 Fokussiert</h3>
+        <p>
+          Ich konzentriere mich auf eine Technologie, bis ich sie gut beherrsche
+        </p>
+      </div>
+      <div class="philosophy-item">
+        <h3>🛠️ Praxisorientiert</h3>
+        <p>Lernen durch echte Projekte, nicht nur Tutorials</p>
+      </div>
+      <div class="philosophy-item">
+        <h3>📈 Kontinuierlich</h3>
+        <p>Jeden Tag etwas Neues lernen und anwenden</p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

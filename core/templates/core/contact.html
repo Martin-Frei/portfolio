@@ -1,0 +1,203 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kontakt - Portfolio Martin{% endblock %}
+
+{% block meta_description %}Nehmen Sie Kontakt mit mir auf. Ich freue mich auf Ihre Nachricht und neue berufliche Möglichkeiten.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Header -->
+    <section class="contact-header section">
+        <h1 class="section-title">Kontakt</h1>
+        <p class="contact-intro">
+            Sie haben ein spannendes Projekt oder eine berufliche Möglichkeit? 
+            Ich freue mich auf Ihre Nachricht!
+        </p>
+    </section>
+
+  <div class="contact-wrapper">
+    <!-- Kontaktformular -->
+    <section class="contact-form-section">
+      <h2>Nachricht senden</h2>
+      <form class="contact-form" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-Mail *</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="company">Unternehmen</label>
+          <input type="text" id="company" name="company" />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Betreff *</label>
+          <select id="subject" name="subject" required>
+            <option value="">Bitte wählen...</option>
+            <option value="job">Stellenangebot</option>
+            <option value="project">Projekt-Anfrage</option>
+            <option value="collaboration">Zusammenarbeit</option>
+            <option value="other">Sonstiges</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Nachricht *</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            placeholder="Erzählen Sie mir von Ihrem Projekt oder Ihrer Stellenausschreibung..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="privacy" required />
+            <span class="checkbox-custom"></span>
+            Ich habe die Datenschutzerklärung gelesen und stimme der
+            Verarbeitung meiner Daten zu. *
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-submit">
+          Nachricht senden
+        </button>
+      </form>
+    </section>
+
+    <!-- Kontaktinformationen -->
+    <section class="contact-info-section">
+      <h2>Weitere Kontaktmöglichkeiten</h2>
+
+      <div class="contact-info">
+        <div class="info-item">
+          <div class="info-icon">📧</div>
+          <div class="info-content">
+            <h3>E-Mail</h3>
+            <a href="mailto:deine.email@domain.de">deine.email@domain.de</a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">💼</div>
+          <div class="info-content">
+            <h3>LinkedIn</h3>
+            <a
+              href="https://linkedin.com/in/deinprofil"
+              target="_blank"
+              rel="noopener"
+            >
+              LinkedIn Profil
+            </a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">🐙</div>
+          <div class="info-content">
+            <h3>GitHub</h3>
+            <a
+              href="https://github.com/deinusername"
+              target="_blank"
+              rel="noopener"
+            >
+              GitHub Portfolio
+            </a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <h3>Standort</h3>
+            <p>
+              Rosenheim, Bayern<br />Nach 1 Jahr im Office ist auch
+              Remote-Arbeit möglich
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verfügbarkeit -->
+      <div class="availability">
+        <h3>Verfügbarkeit</h3>
+        <div class="availability-status">
+          <span class="status-indicator available"></span>
+          <span>Offen für neue Möglichkeiten</span>
+        </div>
+        <p class="availability-note">
+          Ich bin aktuell auf der Suche nach einer Position als Frontend/Junior
+          Full-Stack Developer. Sowohl Festanstellung als auch freiberufliche
+          Projekte sind interessant.
+        </p>
+      </div>
+
+      <!-- Was Sie erwarten können -->
+      <div class="expectations">
+        <h3>Was Sie erwarten können</h3>
+        <ul class="expectations-list">
+          <li>✅ Antwort innerhalb von 24 Stunden</li>
+          <li>✅ Ehrliche Einschätzung meiner Fähigkeiten</li>
+          <li>✅ Motivation und Lernbereitschaft</li>
+          <li>✅ Zuverlässige Kommunikation</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <!-- FAQ Sektion -->
+  <section class="contact-faq section">
+    <h2 class="section-title">Häufige Fragen</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>Sind Sie bereit für Remote-Arbeit?</h3>
+        <p>
+          Ja, nachdem ich ein "Praxisjahr" im Team absolviert habe, bin ich sehr
+          offen für Remote-Positionen. Als ehemaliger Unternehmer habe ich
+          bereits Erfahrung mit selbstständigem Arbeiten.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>Welche Art von Projekten interessieren Sie?</h3>
+        <p>
+          Besonders Web-Anwendungen, E-Commerce, und Projekte wo ich Frontend
+          und Backend kombinieren kann.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>Können Sie auch in einem Team arbeiten?</h3>
+        <p>
+          Definitiv! Ich lerne gerne von erfahrenen Entwicklern und trage gerne
+          zum Teamerfolg bei.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>Was ist Ihr nächster Lernschritt?</h3>
+        <p>
+          Nachdem ich Python, Django und Angular beherrsche, möchte ich React,
+          Docker, Kubernetes und SQL lernen und später in Machine Learning und
+          KI einsteigen.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/contact.js' %}"></script>
+{% endblock %}

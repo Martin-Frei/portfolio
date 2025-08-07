@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+{% endblock %}
+
+{% block title %}Projekte - Portfolio Martin{% endblock %}
+
+{% block content %}
+<div class="container">
+  <section class="projects-header section">
+    <h1 class="section-title">Meine Projekte</h1>
+    <p class="projects-intro">
+      Eine Auswahl meiner Entwicklungsprojekte - von JavaScript-Anwendungen bis
+      hin zu Django-Backend-Lösungen.
+    </p>
+  </section>
+
+  <section class="projects-grid-section">
+    {% if projects %}
+      <div class="projects-grid">
+        {% for project in projects %}
+          <div class="project-card">
+            <!-- Thumbnail -->
+            <div class="project-thumbnail">
+              {% if project.thumbnail %}
+                <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" class="project-image">
+              {% else %}
+                <div class="placeholder-thumbnail">
+                  <span class="placeholder-icon">🚀</span>
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Projekt Info -->
+            <div class="project-info">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-description">{{ project.description|truncatewords:20 }}</p>
+              
+              <!-- Technologien -->
+              <div class="project-technologies">
+                <span class="tech-tag">{{ project.technologies }}</span>
+              </div>
+
+              <!-- Buttons -->
+              <div class="project-actions">
+                {% if project.is_public_demo %}
+                  <a href="{% url 'projects:detail' project.pk %}" class="btn btn-primary">
+                    Live Demo
+                  </a>
+                {% else %}
+                  <a href="{% url 'projects:detail' project.pk %}" class="btn btn-secondary">
+                    Details (Login required)
+                  </a>
+                {% endif %}
+                
+                {% if project.github_url %}
+                  <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="btn btn-outline">
+                    GitHub
+                  </a>
+                {% endif %}
+              </div>
+
+              <!-- Status Badge -->
+              {% if project.is_public_demo %}
+                <div class="status-badge public">
+                  <span class="status-dot"></span>
+                  Öffentlich verfügbar
+                </div>
+              {% else %}
+                <div class="status-badge private">
+                  <span class="status-dot"></span>
+                  Nur für eingeloggte User sichtbar 
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="no-projects">
+        <h3>Noch keine Projekte</h3>
+        <p>Projekte werden bald hinzugefügt!</p>
+      </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
