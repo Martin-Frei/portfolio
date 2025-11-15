@@ -200,6 +200,86 @@ body {
     color: #1f2937;
 }
 
+/* ===== USER GREETING IN NAVIGATION ===== */
+.user-greeting {
+  color: #666;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.user-greeting strong {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Verhindert Hover-Effekt auf User-Greeting (kein Link) */
+.nav-menu li.user-greeting:hover {
+  background: transparent;
+  cursor: default;
+}
+
+/* ===== LOGOUT FORM STYLING ===== */
+/* Macht den Logout-Button wie einen normalen Nav-Link aussehen */
+
+.logout-form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.logout-form form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 10px 15px;
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Gleicher Hover-Effekt wie andere Nav-Links */
+.nav-menu li.logout-form:hover .logout-button {
+  color: #007bff;
+}
+
+/* Responsive - für mobile Navigation */
+@media (max-width: 768px) {
+  .logout-button {
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .user-greeting {
+    display: block;
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding: 15px;
+    background: #f9f9f9;
+    white-space: normal;
+  }
+  
+  .user-greeting strong {
+    display: block;
+    margin-top: 5px;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {

@@ -38,14 +38,23 @@
           <li><a href="{% url 'projects:list' %}">Projekte</a></li>
           <li><a href="{% url 'core:about' %}">Über mich</a></li>
           <li><a href="{% url 'core:contact' %}">Kontakt</a></li>
+
           {% if user.is_authenticated %}
-          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li class="user-greeting">
+            👤 Eingeloggt als: <strong>{{ user.username }}</strong>
+          </li>
+          <li class="logout-form">
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="logout-button">Logout</button>
+            </form>
+          </li>
           {% else %}
+          <li><a href="{% url 'accounts:register' %}">Registrieren</a></li>
           <li><a href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </ul>
 
-        
         <button class="mobile-menu-btn" id="mobileMenuBtn">
           <span></span>
           <span></span>
