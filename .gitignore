@@ -1,0 +1,27 @@
+@'
+# Virtualenv
+venv/
+env/
+.venv/
+
+# Django
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+db.sqlite3-journal
+*.backup
+
+# Staticfiles (Production)
+staticfiles/
+
+# Media (User-Uploads)
+media/
+
+# Sonstiges
+.env
+.DS_Store
+*.log
+'@ > .gitignore

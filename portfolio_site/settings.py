@@ -24,11 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q2j6gb!5&yoi=at&9ib!ch@mk8!s238*4wnys7kh9n^ok$k$3t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
-# ALLOWED_HOSTS = []
-DEBUG = False
-ALLOWED_HOSTS = ['matfrei.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = []
+
+# For pruduction use this
+# DEBUG = False
+# ALLOWED_HOSTS = ['matfrei.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 
@@ -135,6 +137,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    # Falls du static auch in deinen Apps hast (core/static, projects/static etc.):
+    # BASE_DIR / "core" / "static",
+    # BASE_DIR / "projects" / "static",
+]
 
 # WhiteNoise Configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
