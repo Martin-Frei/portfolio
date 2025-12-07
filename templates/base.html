@@ -1,44 +1,62 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="de" class="dark">
+<html lang="de" class="scroll-smooth" x-init-theme>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Martin Freimuth – Portfolio{% endblock %}</title>
-    <meta
-      name="description"
-      content="{% block meta_description %}Full Stack Django & React Developer{% endblock %}"
-    />
 
-    <!-- DAS IST DIE EINZIGE ZEILE, DIE ALLES ZAUBERT -->
+    <!-- 1. TAILWIND ZUERST -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
 
-    <!-- Optional: hübscherer Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
-    <link
-      rel="shortcut icon"
-      href="{% static 'favicon.ico' %}"
-      type="image/x-icon"
-    />
-    <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}" />
+    <!-- 2. DANN DARK MODE SCRIPT -->
+   <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { 
+        darkMode: 'class',
+        corePlugins: { preflight: false }  // verhindert Konflikte
+    }
+</script>
 
+<!-- DIESE ZEILE IST DER GAMECHANGER -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class' }
+</script>
+
+    <!-- Rest -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
     <style>
       body {
         font-family: "Inter", sans-serif;
       }
     </style>
-
-    {% block extra_css %}{% endblock %}
   </head>
+  <script>
+    // FÜGT DIE KLASSE 'DARK' ZUR VERHINDERUNG VON BLITZEN HINZU
+    const htmlTag = document.querySelector("html[x-init-theme]");
+    if (htmlTag) {
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
 
-  <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
-    <!-- ==== HEADER ==== -->
+      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+        htmlTag.classList.add("dark");
+      } else {
+        htmlTag.classList.remove("dark");
+      }
+      htmlTag.removeAttribute("x-init-theme");
+    }
+  </script>
+ <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 ...">
+  
+    <!-- HEADER -->
     <header
-      class="border-b border-gray-800 sticky top-0 bg-gray-950/95 backdrop-blur z-50"
+      class="sticky top-0 z-50 border-b border-gray-800 bg-gray-950 dark:bg-black backdrop-blur"
     >
       <nav
         class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center"
@@ -75,42 +93,231 @@
           <a
             href="{% url 'projects:secret_lab' %}"
             class="text-red-500 font-black text-2xl animate-pulse hover:scale-110 transition"
+            >SECRET LAB</a
           >
-            SECRET LAB
-          </a>
           <a
             href="{% url 'account_logout' %}"
             class="bg-red-900/70 hover:bg-red-800 px-5 py-2 rounded-lg transition"
+            >Logout</a
           >
-            Logout
-          </a>
           {% else %}
           <a
             href="{% url 'account_login' %}"
-            class="bg-gradient-to-r from-purple-600 to-pink-600 ..."
+            class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-8 py-3 rounded-full font-bold shadow-lg transition"
+            >Login → Secret Lab</a
           >
-            Login → Secret Lab
-          </a>
           {% endif %}
         </div>
+
+        <div class="flex items-center gap-4 lg:hidden">
+          <button id="mobile-menu-btn" class="p-2">
+            <svg
+              class="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <button
+          id="theme-toggle"
+          class="fixed top-5 right-5 z-50 p-3 bg-gray-800/90 dark:bg-gray-900/90 backdrop-blur rounded-full hover:bg-gray-700 dark:hover:bg-gray-700 transition"
+        >
+          <svg
+            id="sun"
+            class="w-7 h-7 text-yellow-400 hidden"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+            />
+          </svg>
+          <svg
+            id="moon"
+            class="w-7 h-7 text-purple-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+            />
+          </svg>
+        </button>
       </nav>
+
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-gray-950/95 dark:bg-black/95 backdrop-blur border-b border-gray-800"
+      >
+        <div class="px-6 py-8 space-y-6 text-center text-xl">
+          <a href="{% url 'core:home' %}" class="block hover:text-purple-400"
+            >Home</a
+          >
+          <a href="{% url 'core:skills' %}" class="block hover:text-purple-400"
+            >Skills</a
+          >
+          <a
+            href="{% url 'projects:public_list' %}"
+            class="block hover:text-purple-400 font-bold"
+            >Projekte</a
+          >
+          <a href="{% url 'core:about' %}" class="block hover:text-purple-400"
+            >Über mich</a
+          >
+          <a href="{% url 'core:contact' %}" class="block hover:text-purple-400"
+            >Kontakt</a
+          >
+          {% if user.is_authenticated %}
+          <div class="pt-6 border-t border-gray-700">
+            <p class="text-green-400 font-bold">Hi {{ user.email }}!</p>
+            <a
+              href="{% url 'projects:secret_lab' %}"
+              class="block mt-4 text-red-500 font-black text-3xl animate-pulse"
+              >SECRET LAB</a
+            >
+            <a
+              href="{% url 'account_logout' %}"
+              class="block mt-4 bg-red-900/70 hover:bg-red-800 px-8 py-3 rounded-lg"
+              >Logout</a
+            >
+          </div>
+          {% else %}
+          <a
+            href="{% url 'account_login' %}"
+            class="block mt-8 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-8 py-4 rounded-full font-bold text-xl"
+            >Login → Secret Lab</a
+          >
+          {% endif %}
+        </div>
+      </div>
     </header>
 
-    <!-- ==== MAIN ==== -->
-    <main class="w-full flex flex-col items-center">
-      <div
-        class="w-full max-w-7xl px-6 flex flex-col gap-12 md:gap-20 lg:gap-28"
-      >
-        {% block content %} {% endblock %}
+    <main class="flex-1">
+      <div class="max-w-7xl mx-auto px-6 py-12">
+        {% block content %}{% endblock %}
       </div>
     </main>
 
-    <!-- ==== FOOTER ==== -->
-    <footer class="py-10 text-center text-gray-500 text-sm">
-      © 2025 Martin Freimuth – Built with Django, blood & caffeine
-      <a href="{% url 'legal:impressum' %}">Impressum</a> •
-      <a href="{% url 'legal:datenschutz' %}">Datenschutz</a>
+    <footer
+      class="py-10 text-center text-gray-500 text-sm border-t border-gray-800 bg-gray-950 dark:bg-black dark:border-gray-700 transition-colors duration-500"
+    >
+      © 2025 Martin Freimuth – Built with Django, blood & caffeine •
+      <a
+        href="{% url 'legal:impressum' %}"
+        class="hover:text-white dark:hover:text-purple-400"
+        >Impressum</a
+      >
+      •
+      <a
+        href="{% url 'legal:datenschutz' %}"
+        class="hover:text-white dark:hover:text-purple-400"
+        >Datenschutz</a
+      >
     </footer>
+
+    <!-- DARK MODE + MOBILE MENU SCRIPT -->
+    {% comment %} <script>
+      // Wir warten, bis die komplette Seite geladen ist (WICHTIG!)
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("Script gestartet..."); // Test im Browser-Konsole (F12)
+
+        const toggleBtn = document.getElementById("theme-toggle");
+        const sunIcon = document.getElementById("sun"); // Achte auf diese ID im HTML
+        const moonIcon = document.getElementById("moon"); // Achte auf diese ID im HTML
+
+        // Sicherheits-Check: Existieren die Elemente?
+        if (!toggleBtn || !sunIcon || !moonIcon) {
+          console.error(
+            "Fehler: Buttons nicht gefunden! Überprüfe die IDs im HTML."
+          );
+          return;
+        }
+
+        // Funktion: Icons basierend auf Modus umschalten
+        function refreshIcons() {
+          // Checken, ob 'dark' Klasse im HTML Tag sitzt
+          const isDark = document.documentElement.classList.contains("dark");
+
+          if (isDark) {
+            // Dunkler Modus: Mond weg, Sonne zeigen
+            moonIcon.classList.add("hidden");
+            sunIcon.classList.remove("hidden");
+          } else {
+            // Heller Modus: Sonne weg, Mond zeigen
+            sunIcon.classList.add("hidden");
+            moonIcon.classList.remove("hidden");
+          }
+        }
+
+        // 1. Beim Laden einmal ausführen
+        refreshIcons();
+
+        // 2. Beim Klick ausführen
+        toggleBtn.addEventListener("click", function () {
+          console.log("Button geklickt");
+
+          // Dark Mode toggeln
+          document.documentElement.classList.toggle("dark");
+
+          // Speichern
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+
+          // Icons aktualisieren
+          refreshIcons();
+        });
+
+        // --- Mobile Menu Teil ---
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+          });
+        }
+      });
+    </script> {% endcomment %}
+
+   <script>
+    // Dark Mode Toggle – DIE EINZIGE VERSION, DIE IMMER FUNKTIONIERT
+    const toggle = document.getElementById('theme-toggle');
+    
+    toggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        const isDark = document.documentElement.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Beim Laden: richtiges Theme setzen
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+    }
+
+    // Icon richtig anzeigen
+    const sun = document.getElementById('sun');
+    const moon = document.getElementById('moon');
+    
+    if (document.documentElement.classList.contains('dark')) {
+        sun.classList.add('hidden');
+        moon.classList.remove('hidden');
+    } else {
+        sun.classList.remove('hidden');
+        moon.classList.add('hidden');
+    }
+</script>
 
     {% block extra_js %}{% endblock %}
   </body>

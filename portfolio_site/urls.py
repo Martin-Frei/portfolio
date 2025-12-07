@@ -31,7 +31,9 @@ urlpatterns = [
     # 2. Projekte unter /projects/
     path('projects/', include('projects.urls')),  # ← /projects/ + /projects/secret-lab/
     path('', include('legal.urls')),
-    path('bmi/', include('bmi_app.urls')),  # ← BMI Rechner unter /bmi/
+    path('bmi/', include('bmi_app.urls')),
+    path('rps/', include('rps_app.urls')),
+    path('legal/', include('legal.urls')),
 ]
 
 if settings.DEBUG:

@@ -4,6 +4,7 @@ Django settings for portfolio_site project – FINAL SECRET LAB VERSION
 
 from pathlib import Path
 import os
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,12 +31,13 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google', # später aktivierbar
     # 'allauth.socialaccount.providers.github',  # später aktivierbar
 
-    # Deine Apps
+    # my Apps
     'core',
     'projects',
     'accounts',
     'legal',
     'bmi_app',
+    'rps_app',
 ]
 
 MIDDLEWARE = [
@@ -130,10 +132,12 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False # Session läuft nicht beim Schließen a
 # Für Entwicklung: E-Mails nur in Konsole anzeigen
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Falls du später echten Mail-Versand willst:
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'deine@gmail.com'
-# EMAIL_HOST_PASSWORD = 'dein-app-password'
+
+# E-Mail mit Resend – 100 % sicher
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.resend.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'resend'
+EMAIL_HOST_PASSWORD = config('RESEND_API_KEY')        # ← sicher aus .env
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')     # ← z. B. hi@martin-freimuth.dev
