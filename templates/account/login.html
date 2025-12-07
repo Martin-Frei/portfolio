@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login → Secret Lab{% endblock %}
+
+{% block content %}
+<div class="w-full min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="max-w-md w-full">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-7xl md:text-9xl font-black bg-gradient-to-r from-red-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent animate-pulse">
+                SECRET LAB
+            </h1>
+            <p class="text-2xl text-gray-300 mt-6">Zugang nur für Auserwählte</p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-purple-600/50 shadow-2xl shadow-purple-600/30">
+            <form method="post" class="space-y-8">
+                {% csrf_token %}
+                
+                <div>
+                    <label class="block text-gray-300 text-sm font-bold mb-2">E-Mail</label>
+                    <input type="email" name="login" required
+                           class="w-full px-6 py-4 bg-gray-800/70 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition"
+                           placeholder="deine@email.de">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 text-sm font-bold mb-2">Passwort</label>
+                    <input type="password" name="password" required
+                           class="w-full px-6 py-4 bg-gray-800/70 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition">
+                </div>
+
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center text-gray-400">
+                        <input type="checkbox" name="remember" class="mr-2">
+                        Angemeldet bleiben
+                    </label>
+                    <a href="{% url 'account_reset_password' %}" class="text-purple-400 hover:underline">
+                        Passwort vergessen?
+                    </a>
+                </div>
+
+                <button type="submit"
+                        class="w-full py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-black text-2xl hover:scale-105 transition shadow-2xl">
+                    EINLASS GEWÄHREN
+                </button>
+            </form>
+
+            <!-- Signup Link -->
+            <div class="mt-10 text-center">
+                <p class="text-gray-400">Noch keinen Zugang?</p>
+                <a href="{% url 'account_signup' %}"
+                   class="inline-block mt-4 px-10 py-4 bg-gray-800/70 rounded-xl hover:bg-gray-700 transition font-bold text-purple-400 border border-purple-600/30">
+                    Zugang beantragen
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

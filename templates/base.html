@@ -1,87 +1,117 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Martin Freimuth – Portfolio{% endblock %}</title>
     <meta
       name="description"
-      content="{% block meta_description %}Portfolio von Martin - Frontend Developer mit Backend Ambitionen{% endblock %}"
+      content="{% block meta_description %}Full Stack Django & React Developer{% endblock %}"
     />
 
-    <title>{% block title %}Portfolio - Martin{% endblock %}</title>
+    <!-- DAS IST DIE EINZIGE ZEILE, DIE ALLES ZAUBERT -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Base CSS -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <!-- Optional: hübscherer Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'favicon.ico' %}"
+      type="image/x-icon"
+    />
+    <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}" />
 
-    <!-- Block für zusätzliche CSS -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+
     {% block extra_css %}{% endblock %}
   </head>
-  <body>
-    <!-- Header mit Navigation -->
-    <header class="header">
-      <nav class="nav-container">
-        <div class="nav-brand">
-          <a href="{% url 'core:home' %}" class="brand-link">
-            <img
-              src="{% static 'img/logo.jpeg' %}"
-              alt="CodeWithMartin Logo"
-              class="logo"
-            />
-            <span class="brand-text">CodeWithMartin</span>
-          </a>
-        </div>
 
-        <ul class="nav-menu">
-          <li><a href="{% url 'core:home' %}">Home</a></li>
-          <li><a href="{% url 'core:skills' %}">Skills</a></li>
-          <li><a href="{% url 'projects:list' %}">Projekte</a></li>
-          <li><a href="{% url 'core:about' %}">Über mich</a></li>
-          <li><a href="{% url 'core:contact' %}">Kontakt</a></li>
+  <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
+    <!-- ==== HEADER ==== -->
+    <header
+      class="border-b border-gray-800 sticky top-0 bg-gray-950/95 backdrop-blur z-50"
+    >
+      <nav
+        class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center"
+      >
+        <div class="hidden lg:flex items-center gap-8 text-lg">
+          <a
+            href="{% url 'core:home' %}"
+            class="hover:text-purple-400 transition"
+            >Home</a
+          >
+          <a
+            href="{% url 'core:skills' %}"
+            class="hover:text-purple-400 transition"
+            >Skills</a
+          >
+          <a
+            href="{% url 'projects:public_list' %}"
+            class="hover:text-purple-400 font-bold transition"
+            >Projekte</a
+          >
+          <a
+            href="{% url 'core:about' %}"
+            class="hover:text-purple-400 transition"
+            >Über mich</a
+          >
+          <a
+            href="{% url 'core:contact' %}"
+            class="hover:text-purple-400 transition"
+            >Kontakt</a
+          >
 
           {% if user.is_authenticated %}
-          <li class="user-greeting">
-            👤 Eingeloggt als: <strong>{{ user.username }}</strong>
-          </li>
-          <li class="logout-form">
-            <form method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="logout-button">Logout</button>
-            </form>
-          </li>
+          <span class="text-green-400 font-bold">Hi {{ user.email }}!</span>
+          <a
+            href="{% url 'projects:secret_lab' %}"
+            class="text-red-500 font-black text-2xl animate-pulse hover:scale-110 transition"
+          >
+            SECRET LAB
+          </a>
+          <a
+            href="{% url 'account_logout' %}"
+            class="bg-red-900/70 hover:bg-red-800 px-5 py-2 rounded-lg transition"
+          >
+            Logout
+          </a>
           {% else %}
-          <li><a href="{% url 'accounts:register' %}">Registrieren</a></li>
-          <li><a href="{% url 'login' %}">Login</a></li>
+          <a
+            href="{% url 'account_login' %}"
+            class="bg-gradient-to-r from-purple-600 to-pink-600 ..."
+          >
+            Login → Secret Lab
+          </a>
           {% endif %}
-        </ul>
-
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        </div>
       </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">{% block content %} {% endblock %}</main>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <p>&copy; 2025 Martin. Alle Rechte vorbehalten.</p>
-        <div class="social-links">
-          <a href="#" class="social-link">GitHub</a>
-          <a href="#" class="social-link">LinkedIn</a>
-          <a href="#" class="social-link">Email</a>
-        </div>
+    <!-- ==== MAIN ==== -->
+    <main class="w-full flex flex-col items-center">
+      <div
+        class="w-full max-w-7xl px-6 flex flex-col gap-12 md:gap-20 lg:gap-28"
+      >
+        {% block content %} {% endblock %}
       </div>
+    </main>
+
+    <!-- ==== FOOTER ==== -->
+    <footer class="py-10 text-center text-gray-500 text-sm">
+      © 2025 Martin Freimuth – Built with Django, blood & caffeine
+      <a href="{% url 'legal:impressum' %}">Impressum</a> •
+      <a href="{% url 'legal:datenschutz' %}">Datenschutz</a>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="{% static 'js/base.js' %}"></script>
-
-    <!-- Block für zusätzliches JavaScript -->
     {% block extra_js %}{% endblock %}
   </body>
 </html>

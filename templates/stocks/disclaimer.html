@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Haftungsausschluss - Stock Prediction{% endblock %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto py-20">
+    
+    <!-- ZURÜCK BUTTON -->
+    <div class="mb-8">
+        <a 
+            href="{% url 'projects:secret_lab' %}" 
+            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300"
+        >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Zurück zum Secret Lab
+        </a>
+    </div>
+
+    <!-- DISCLAIMER CARD -->
+    <div class="bg-gray-900 rounded-2xl border-2 border-red-500 overflow-hidden shadow-2xl">
+        
+        <!-- HEADER -->
+        <div class="bg-gradient-to-r from-red-600 to-orange-600 px-8 py-6 text-center">
+            <h1 class="text-4xl font-bold text-white mb-2">
+                ⚠️ WICHTIGER HAFTUNGSAUSSCHLUSS
+            </h1>
+            <p class="text-red-100">
+                Bitte lesen Sie diesen Text aufmerksam durch
+            </p>
+        </div>
+
+        <!-- DISCLAIMER TEXT -->
+        <div class="px-8 py-10 space-y-6 text-gray-300 max-h-[500px] overflow-y-auto">
+            
+            <div class="bg-red-900/20 border border-red-500 p-6 rounded-lg">
+                <h3 class="text-xl font-bold text-white mb-3">
+                    📢 Zweck dieser Anwendung
+                </h3>
+                <p>
+                    Diese Anwendung dient <strong class="text-white">ausschließlich zu Bildungs- und 
+                    Demonstrationszwecken</strong> als Teil meines Software-Entwickler-Portfolios.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-white mb-3">
+                    🚫 KEINE Finanzberatung
+                </h3>
+                <p class="leading-relaxed">
+                    Die bereitgestellten Vorhersagen, Analysen und Informationen stellen 
+                    <strong class="text-red-400">KEINE Anlageberatung, Finanzberatung oder Empfehlung 
+                    zum Kauf oder Verkauf</strong> von Wertpapieren, Aktien oder anderen Finanzinstrumenten dar.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-white mb-3">
+                    ⚠️ Keine Gewährleistung
+                </h3>
+                <p class="leading-relaxed">
+                    Die Vorhersagen basieren auf historischen Daten und Machine Learning Modellen 
+                    (ARIMA, LSTM, Prophet). Es wird <strong class="text-red-400">KEINE Garantie für 
+                    die Richtigkeit, Vollständigkeit, Aktualität oder Zuverlässigkeit</strong> gegeben.
+                </p>
+                <p class="mt-3 text-sm text-red-400 font-semibold">
+                    Vergangene Wertentwicklungen sind KEIN verlässlicher Indikator für zukünftige Ergebnisse!
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-white mb-3">
+                    💰 Erhebliche Risiken
+                </h3>
+                <p class="leading-relaxed">
+                    Der Handel mit Wertpapieren birgt erhebliche Risiken einschließlich des 
+                    <strong class="text-red-400">möglichen Totalverlusts des eingesetzten Kapitals</strong>. 
+                    Die Kurse können stark schwanken.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-white mb-3">
+                    👤 Eigenverantwortung
+                </h3>
+                <p class="leading-relaxed">
+                    Jede Investitionsentscheidung erfolgt <strong class="text-white">auf Ihr eigenes Risiko</strong>. 
+                    Konsultieren Sie vor Investitionen einen zugelassenen und qualifizierten Finanzberater.
+                </p>
+            </div>
+
+            <div class="bg-gray-800 border border-gray-700 p-6 rounded-lg">
+                <h3 class="text-xl font-bold text-white mb-3">
+                    🛡️ Haftungsausschluss
+                </h3>
+                <p class="leading-relaxed">
+                    Der Betreiber (Martin Freimuth) übernimmt <strong class="text-red-400">KEINE Haftung</strong> 
+                    für Verluste, Schäden oder andere Nachteile, die aus der Nutzung dieser Anwendung 
+                    oder den bereitgestellten Informationen entstehen.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-white mb-3">
+                    📧 Bestätigungs-Email
+                </h3>
+                <p class="leading-relaxed">
+                    Nach Akzeptierung erhalten Sie eine Email an <strong class="text-purple-400">{{ user.email }}</strong> 
+                    mit einer Kopie dieses Haftungsausschlusses für Ihre Unterlagen.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- FORMULAR -->
+        <div class="px-8 py-8 bg-gray-800 border-t border-gray-700">
+            <form method="post" action="{% url 'stocks:accept_disclaimer' %}">
+                {% csrf_token %}
+                
+                <!-- CHECKBOX -->
+                <div class="flex items-start gap-4 mb-6">
+                    <input 
+                        type="checkbox" 
+                        id="accept" 
+                        name="accept" 
+                        required 
+                        class="mt-1 w-5 h-5 bg-gray-700 border-gray-600 rounded focus:ring-purple-500"
+                    />
+                    <label for="accept" class="text-gray-300 text-sm leading-relaxed">
+                        Ich habe den Haftungsausschluss vollständig gelesen und verstanden. 
+                        Ich bestätige, dass ich die Anwendung ausschließlich zu Bildungszwecken nutze 
+                        und keine Investitionsentscheidungen auf Basis der Vorhersagen treffe. 
+                        Ich akzeptiere, dass jegliche Haftung ausgeschlossen ist.
+                    </label>
+                </div>
+
+                <!-- EMAIL HINWEIS -->
+                <div class="bg-blue-900/20 border border-blue-500 p-4 rounded-lg mb-6">
+                    <p class="text-blue-300 text-sm flex items-start gap-2">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Eine Bestätigungs-Email mit dem vollständigen Haftungsausschluss wird an 
+                        <strong>{{ user.email }}</strong> gesendet.
+                    </p>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="flex gap-4">
+                    <button 
+                        type="submit"
+                        class="flex-1 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-lg rounded-lg hover:from-green-500 hover:to-emerald-500 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        ✅ Ich akzeptiere - Zur App
+                    </button>
+                    
+                    <a 
+                        href="{% url 'projects:secret_lab' %}" 
+                        class="flex-1 py-4 bg-gray-700 text-white font-bold text-lg rounded-lg text-center hover:bg-gray-600 transition-all duration-300"
+                    >
+                        ❌ Ablehnen & Zurück
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

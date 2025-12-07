@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Datenschutzerklärung{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-6 py-20">
+    <h1 class="text-6xl font-black mb-10">Datenschutzerklärung</h1>
+    <div class="prose prose-invert">
+        <h2>1. Verantwortlicher</h2>
+        <p>Martin Freimuth – Kontaktdaten siehe Impressum.</p>
+
+        <h2>2. Login & Secret Lab</h2>
+        <p>Beim Login werden folgende Daten gespeichert:<br>
+           • E-Mail-Adresse<br>
+           • Zeitpunkt des Logins<br>
+           • IP-Adresse (zur Missbrauchserkennung)<br>
+           Diese Daten dienen ausschließlich der Zugangskontrolle zum geschützten Bereich und werden nicht an Dritte weitergegeben.</p>
+
+        <h2>3. Cookies / Session</h2>
+        <p>Django verwendet technisch notwendige Session-Cookies. Diese werden nach max. 24 Stunden.</p>
+
+        <h2>4. Keine Tracking-Tools</h2>
+        <p>Es werden keine Analyse-Tools (Google Analytics o. Ä.) eingesetzt.</p>
+
+        <p class="mt-10 text-sm text-gray-500">
+            Erstellt mit <a href="https://datenschutz-generator.de" class="underline">datenschutz-generator.de</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

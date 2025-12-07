@@ -14,19 +14,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# portfolio_site/urls.py
 from django.contrib import admin
-from django.urls import path, include  
-from django.contrib.auth import views as auth_views
-from django.conf import settings 
-from django.conf.urls.static import static 
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),
-    path('projects/', include('projects.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('accounts/', include('allauth.urls')),
+
+    # 1. Home + About/Skills/Contact direkt im Root
+    path('', include('core.urls')),            # ← Home, about/, skills/, contact/
+
+    # 2. Projekte unter /projects/
+    path('projects/', include('projects.urls')),  # ← /projects/ + /projects/secret-lab/
+    path('', include('legal.urls')),
+    path('bmi/', include('bmi_app.urls')),  # ← BMI Rechner unter /bmi/
 ]
 
 if settings.DEBUG:

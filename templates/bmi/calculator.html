@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}BMI Calculator - Secret Lab{% endblock %}
+
+{% block extra_css %}
+<script src="https://unpkg.com/htmx.org@2.0.3"></script>
+{% endblock %}
+
+{% block content %}
+
+<!-- ZURÜCK ZUM LAB -->
+<div class="w-full max-w-2xl mx-auto mt-8 mb-6">
+    <a 
+        href="{% url 'projects:secret_lab' %}" 
+        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+    >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Zurück zum Secret Lab
+    </a>
+</div>
+
+<!-- BMI CALCULATOR CARD -->
+<div class="w-full max-w-2xl mx-auto mb-20">
+    <div class="bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 overflow-hidden">
+        
+        <!-- HEADER -->
+        <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-6 text-center">
+            <h2 class="text-3xl font-bold text-white mb-2">
+                📊 BMI Calculator with AI
+            </h2>
+            <p class="text-purple-100 text-sm">
+                Berechne deinen Body Mass Index und erhalte personalisierte Gesundheitstipps
+            </p>
+        </div>
+
+        <!-- FORM -->
+        <div class="px-8 py-10">
+            <form id="bmiForm" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- NAME INPUT -->
+                <div>
+                    <label class="block text-gray-300 font-semibold mb-2 text-sm">
+                        👤 Dein Name
+                    </label>
+                    <input 
+                        type="text" 
+                        name="name" 
+                        placeholder="z.B. Martin"
+                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                        required 
+                    />
+                </div>
+
+                <!-- AGE INPUT -->
+                <div>
+                    <label class="block text-gray-300 font-semibold mb-2 text-sm">
+                        🎂 Alter
+                    </label>
+                    <input 
+                        type="number" 
+                        name="age" 
+                        placeholder="z.B. 35"
+                        min="10"
+                        max="120"
+                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                        required 
+                    />
+                </div>
+
+                <!-- WEIGHT INPUT -->
+                <div>
+                    <label class="block text-gray-300 font-semibold mb-2 text-sm">
+                        ⚖️ Gewicht (kg)
+                    </label>
+                    <input 
+                        type="number" 
+                        name="weight" 
+                        placeholder="z.B. 75.5"
+                        step="0.1"
+                        min="20"
+                        max="300"
+                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                        required 
+                    />
+                </div>
+
+                <!-- HEIGHT INPUT -->
+                <div>
+                    <label class="block text-gray-300 font-semibold mb-2 text-sm">
+                        📏 Größe (cm)
+                    </label>
+                    <input 
+                        type="number" 
+                        name="height" 
+                        placeholder="z.B. 175"
+                        step="0.1"
+                        min="100"
+                        max="250"
+                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                        required 
+                    />
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <button
+                    type="button"
+                    class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                    hx-post="{% url 'bmi:get_input' %}"
+                    hx-include="[name='name'], [name='age'], [name='weight'], [name='height']"
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    hx-target="#gptResponse"
+                    hx-indicator=".loading"
+                >
+                    🚀 BMI Berechnen & KI-Tipps erhalten
+                </button>
+
+                <!-- LOADING INDICATOR -->
+                <div class="loading hidden">
+                    <div class="flex items-center justify-center gap-3 text-purple-400 font-semibold py-6">
+                        <svg class="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Berechnung läuft und KI-Tipps werden erstellt...</span>
+                    </div>
+                </div>
+
+                <!-- RESPONSE CONTAINER -->
+                <div id="gptResponse"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .htmx-request .loading {
+        display: block !important;
+    }
+    
+    #gptResponse > div {
+        animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { 
+            opacity: 0; 
+            transform: translateY(10px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+</style>
+
+{% endblock %}
