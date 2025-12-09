@@ -18,7 +18,7 @@ db.sqlite3-journal
 staticfiles/
 
 # Media (User-Uploads)
-media/
+# media/
 
 # Sonstiges
 .env
