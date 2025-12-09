@@ -148,5 +148,9 @@ else:
 # CSRF für Railway
 CSRF_TRUSTED_ORIGINS = [
     'https://*.railway.app',
-    'https://portfolio-7zh0.onrender.com',
+    'https://portfolio-production-f4bf.up.railway.app',
 ]
+
+# Falls du später Custom Domain hast:
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS.append('https://martin-freimuth.dev')
