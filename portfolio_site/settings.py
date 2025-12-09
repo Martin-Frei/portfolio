@@ -1,18 +1,23 @@
 """
-Django settings for portfolio_site project – FINAL SECRET LAB VERSION
+Django settings for portfolio_site project – PRODUCTION READY
 """
 
 from pathlib import Path
 import os
 from decouple import config
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = 'django-insecure-q2j6gb!5&yoi=at&9ib!ch@mk8!s238*4wnys7kh9n^ok$k$3t'
-DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 'portfolio-7zh0.onrender.com']
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-q2j6gb!5&yoi=at&9ib!ch@mk8!s238*4wnys7kh9n^ok$k$3t')
+DEBUG = config('DEBUG', default=True, cast=bool)
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.railway.app',
+    'portfolio-7zh0.onrender.com',
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -24,13 +29,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # WICHTIG – allauth muss hier stehen!
-    'django.contrib.sites',                    # <-- Pflicht für allauth
+    'django.contrib.sites',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google', # später aktivierbar
-    # 'allauth.socialaccount.providers.github',  # später aktivierbar
 
     # my Apps
     'core',
@@ -51,7 +54,6 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # allauth middleware ist automatisch dabei
 ]
 
 ROOT_URLCONF = 'portfolio_site.urls'
@@ -64,7 +66,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',   # allauth braucht das!
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -74,12 +76,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio_site.wsgi.application'
 
-# Database
+# Database - Railway PostgreSQL oder lokal SQLite
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 # Password validation
@@ -117,28 +120,33 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-LOGIN_REDIRECT_URL = '/projects/secret-lab/'         # Nach Login direkt ins Lab!
+LOGIN_REDIRECT_URL = '/projects/secret-lab/'
 LOGOUT_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_ON_GET = True                # Logout per Klick (kein POST nötig)
+ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False           # Nur E-Mail reicht
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
-ACCOUNT_SESSION_REMEMBER = None          # "Merken" optional machen
+ACCOUNT_SESSION_REMEMBER = None
 
-SESSION_COOKIE_AGE = 86400  # 1 Tag in Sekunden
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False # Session läuft nicht beim Schließen ab
+SESSION_COOKIE_AGE = 86400
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-# Für Entwicklung: E-Mails nur in Konsole anzeigen
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# E-Mail Backend - automatisch wechselnd
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.resend.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = 'resend'
+    EMAIL_HOST_PASSWORD = config('RESEND_API_KEY', default='')
+    DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@example.com')
 
-
-# E-Mail mit Resend – 100 % sicher
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.resend.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'resend'
-EMAIL_HOST_PASSWORD = config('RESEND_API_KEY')        # ← sicher aus .env
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')     # ← z. B. hi@martin-freimuth.dev
+# CSRF für Railway
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app',
+    'https://portfolio-7zh0.onrender.com',
+]
