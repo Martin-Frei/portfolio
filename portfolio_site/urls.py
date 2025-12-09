@@ -33,7 +33,6 @@ urlpatterns = [
     path('legal/', include('legal.urls')),
     path('bmi/', include('bmi_app.urls')),
     path('rps/', include('rps_app.urls')),
-    path('legal/', include('legal.urls')),
 ]
 
 if settings.DEBUG:
