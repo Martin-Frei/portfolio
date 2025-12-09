@@ -50,7 +50,7 @@ def get_input(request):
             <p><strong>Dein BMI:</strong> {bmi} → <strong>{category}</strong></p>
             <p>Alter: {int(age)} | Gewicht: {weight}kg | Größe: {height}cm</p>
             <hr>
-            <div style="background:white; padding:20px; border-radius:10px; margin-top:15px;">
+            <div >
                 <strong>KI-Tipps für dich:</strong><br><br>
                 {ai_tips.replace('\n', '<br>')}
             </div>
