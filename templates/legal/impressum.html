@@ -1,20 +1,67 @@
 {% extends 'base.html' %}
-{% block title %}Impressum{% endblock %}
+{% load static %}
+
+{% block title %}Impressum – Martin Freimuth{% endblock %}
+
 {% block content %}
-<div class="max-w-4xl mx-auto px-6 py-20">
-    <h1 class="text-6xl font-black mb-10">Impressum</h1>
-    <div class="prose prose-invert">
-        <p><strong>Angaben gemäß § 5 TMG</strong></p>
-        <p>Martin Freimuth<br>
-           Tulpenstraße 12<br>
-           831365 Schechen</p>
-        <p><strong>Kontakt</strong><br>
-           E-Mail: mat.frei(at)gmx.de</p>
-        <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong><br>
-           Martin Freimuth</p>
-        <p class="mt-10 text-sm text-gray-500">
-            Quelle: <a href="https://www.e-recht24.de" class="underline">e-recht24.de</a>
+<div class="w-full max-w-4xl mx-auto px-6 py-20">
+    
+    <!-- Header -->
+    <div class="text-center mb-16">
+        <h1 class="text-6xl md:text-7xl font-black mb-6 
+                   text-gray-900 dark:text-white">
+            Impressum
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+            Angaben gemäß § 5 TMG
         </p>
+    </div>
+
+    <!-- Content -->
+    <div class="bg-white dark:bg-gray-800/50 backdrop-blur 
+                rounded-3xl p-10 
+                border border-gray-300 dark:border-gray-700 
+                shadow-xl">
+        
+        <div class="prose prose-lg max-w-none
+                    prose-headings:text-gray-900 dark:prose-headings:text-white
+                    prose-p:text-gray-700 dark:prose-p:text-gray-300
+                    prose-strong:text-gray-900 dark:prose-strong:text-white
+                    prose-a:text-purple-600 dark:prose-a:text-purple-400">
+            
+            <h3>Angaben gemäß § 5 TMG</h3>
+            <p>
+                <strong>Martin Freimuth</strong><br>
+                Tulpenstraße 12<br>
+                83135 Schechen<br>
+                Deutschland
+            </p>
+
+            <h3 class="mt-8">Kontakt</h3>
+            <p>
+                <strong>Telefon:</strong> +49 176 32600610<br>
+                <strong>E-Mail:</strong> <a href="mailto:mat.frei@gmx.de">mat.frei@gmx.de</a>
+            </p>
+
+            <h3 class="mt-8">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+            <p>
+                Martin Freimuth<br>
+                Tulpenstraße 12<br>
+                83135 Schechen
+            </p>
+
+            <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <strong>Haftungsausschluss:</strong><br>
+                    Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. 
+                    Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+                </p>
+                
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
+                    Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener" class="underline">e-recht24.de</a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

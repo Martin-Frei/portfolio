@@ -1,52 +1,225 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Zugang zum Secret Lab beantragen{% endblock %}
+{% block title %}Registrierung – Martin Freimuth{% endblock %}
 
 {% block content %}
-<div class="w-full min-h-screen flex items-center justify-center px-6 py-20">
-    <div class="max-w-md w-full">
-        <div class="text-center mb-12">
-            <h1 class="text-6xl md:text-8xl font-black bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
-                Zugang beantragen
+<div class="min-h-screen flex items-center justify-center px-6 py-20 
+            bg-gradient-to-br from-gray-50 to-gray-100 
+            dark:from-gray-900 dark:to-black">
+    
+    <div class="w-full max-w-md">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <div class="text-6xl mb-6">🔓</div>
+            <h1 class="text-4xl md:text-5xl font-black mb-4 
+                       bg-gradient-to-r from-cyan-400 to-purple-600 
+                       bg-clip-text text-transparent">
+                Zugang zum Secret Lab
             </h1>
-            <p class="text-xl text-gray-300 mt-6">
-                Ich prüfe jede Anfrage persönlich – du hörst in < 24h von mir!
+            <p class="text-lg text-gray-700 dark:text-gray-300">
+                Registriere dich für Zugang zu allen Projekten, Code-Demos und experimentellen Features!
             </p>
         </div>
 
-        <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-cyan-600/40 shadow-2xl">
-            <form method="post" class="space-y-8">
+        <!-- Signup Form Card -->
+        <div class="bg-white dark:bg-gray-800/50 backdrop-blur 
+                    rounded-3xl p-10 
+                    border-2 border-gray-200 dark:border-gray-700 
+                    shadow-2xl">
+            
+            <!-- Error Messages -->
+            {% if form.errors %}
+            <div class="mb-8 p-5 
+                        bg-red-50 dark:bg-red-900/30 
+                        border-2 border-red-500 
+                        rounded-xl">
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <strong class="text-red-700 dark:text-red-400 font-bold block mb-2">
+                            Registrierung fehlgeschlagen
+                        </strong>
+                        <ul class="text-red-600 dark:text-red-300 text-sm space-y-1">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Form -->
+            <form method="post" class="space-y-6">
                 {% csrf_token %}
 
+                <!-- Email Field -->
                 <div>
-                    <label class="block text-gray-300 text-sm font-bold mb-2">E-Mail *</label>
-                    <input type="email" name="email" required maxlength="150"
-                           class="w-full px-6 py-4 bg-gray-800/70 border border-gray-700 rounded-xl focus:border-cyan-500 focus:outline-none transition">
+                    <label for="{{ form.email.id_for_label }}" 
+                           class="block mb-2 font-bold text-gray-900 dark:text-white">
+                        E-Mail *
+                    </label>
+                    <input type="email" 
+                           name="email" 
+                           id="{{ form.email.id_for_label }}"
+                           required
+                           maxlength="150"
+                           class="w-full px-4 py-3 
+                                  bg-gray-50 dark:bg-gray-900/70 
+                                  border-2 border-gray-300 dark:border-gray-600 
+                                  rounded-xl 
+                                  text-gray-900 dark:text-white
+                                  placeholder-gray-500 dark:placeholder-gray-400
+                                  focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20
+                                  focus:outline-none transition"
+                           placeholder="deine@email.com">
+                    {% if form.email.errors %}
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            {{ form.email.errors }}
+                        </p>
+                    {% endif %}
                 </div>
 
+                <!-- Password1 Field -->
                 <div>
-                    <label class="block text-gray-300 text-sm font-bold mb-2">Passwort *</label>
-                    <input type="password" name="password1" required
-                           class="w-full px-6 py-4 bg-gray-800/70 border border-gray-700 rounded-xl focus:border-cyan-500 focus:outline-none transition">
+                    <label for="{{ form.password1.id_for_label }}" 
+                           class="block mb-2 font-bold text-gray-900 dark:text-white">
+                        Passwort *
+                    </label>
+                    <input type="password" 
+                           name="password1" 
+                           id="{{ form.password1.id_for_label }}"
+                           required
+                           class="w-full px-4 py-3 
+                                  bg-gray-50 dark:bg-gray-900/70 
+                                  border-2 border-gray-300 dark:border-gray-600 
+                                  rounded-xl 
+                                  text-gray-900 dark:text-white
+                                  placeholder-gray-500 dark:placeholder-gray-400
+                                  focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20
+                                  focus:outline-none transition"
+                           placeholder="••••••••">
+                    {% if form.password1.errors %}
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            {{ form.password1.errors }}
+                        </p>
+                    {% endif %}
+                    <p class="mt-2 text-xs text-gray-600 dark:text-gray-400">
+                        Mindestens 8 Zeichen, nicht zu einfach
+                    </p>
                 </div>
 
+                <!-- Password2 Field -->
                 <div>
-                    <label class="block text-gray-300 text-sm font-bold mb-2">Passwort wiederholen *</label>
-                    <input type="password" name="password2" required
-                           class="w-full px-6 py-4 bg-gray-800/70 border border-gray-700 rounded-xl focus:border-cyan-500 focus:outline-none transition">
+                    <label for="{{ form.password2.id_for_label }}" 
+                           class="block mb-2 font-bold text-gray-900 dark:text-white">
+                        Passwort wiederholen *
+                    </label>
+                    <input type="password" 
+                           name="password2" 
+                           id="{{ form.password2.id_for_label }}"
+                           required
+                           class="w-full px-4 py-3 
+                                  bg-gray-50 dark:bg-gray-900/70 
+                                  border-2 border-gray-300 dark:border-gray-600 
+                                  rounded-xl 
+                                  text-gray-900 dark:text-white
+                                  placeholder-gray-500 dark:placeholder-gray-400
+                                  focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20
+                                  focus:outline-none transition"
+                           placeholder="••••••••">
+                    {% if form.password2.errors %}
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            {{ form.password2.errors }}
+                        </p>
+                    {% endif %}
                 </div>
 
-                <button type="submit"
-                        class="w-full py-5 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-black text-2xl hover:scale-105 transition shadow-2xl">
-                    ANFRAGE SENDEN
+                <!-- Info Box -->
+                <div class="p-4 
+                            bg-cyan-50 dark:bg-cyan-900/20 
+                            border-2 border-cyan-500 
+                            rounded-xl">
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">ℹ️</span>
+                        <div class="text-sm text-gray-700 dark:text-gray-300">
+                            <strong class="block mb-1 text-gray-900 dark:text-white">
+                                Was erwartet dich?
+                            </strong>
+                            <ul class="space-y-1 list-disc list-inside">
+                                <li>Zugang zu allen Projekten</li>
+                                <li>Secret Lab mit experimentellen Features</li>
+                                <li>Code-Demos & Tutorials</li>
+                                <li>Exklusiver Content</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" 
+                        class="w-full py-4 
+                               bg-gradient-to-r from-cyan-500 to-purple-600 
+                               hover:from-cyan-400 hover:to-purple-500
+                               text-white font-bold text-lg rounded-xl 
+                               transition shadow-xl hover:shadow-2xl 
+                               hover:scale-105">
+                    🚀 Jetzt registrieren & Secret Lab freischalten
                 </button>
             </form>
 
-            <p class="text-center text-gray-500 text-sm mt-8">
-                Nach der Anfrage bekommst du eine Bestätigungs-E-Mail<br>
-                (erscheint in der Konsole, weil wir console-Backend nutzen)
-            </p>
+            <!-- Privacy Notice -->
+            <div class="mt-6 p-4 
+                        bg-gray-50 dark:bg-gray-900/50 
+                        border border-gray-300 dark:border-gray-700 
+                        rounded-xl">
+                <p class="text-xs text-gray-600 dark:text-gray-400 text-center">
+                    🔒 Deine Daten werden sicher gespeichert und nicht an Dritte weitergegeben. 
+                    Mit der Registrierung akzeptierst du unsere 
+                    <a href="{% url 'legal:datenschutz' %}" 
+                       class="text-purple-600 dark:text-purple-400 underline">
+                        Datenschutzerklärung
+                    </a>.
+                </p>
+            </div>
+
+            <!-- Divider -->
+            <div class="relative my-8">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300 dark:border-gray-700"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-4 bg-white dark:bg-gray-800 
+                                 text-gray-600 dark:text-gray-400">
+                        Schon registriert?
+                    </span>
+                </div>
+            </div>
+
+            <!-- Login Link -->
+            <div class="text-center">
+                <a href="{% url 'account_login' %}" 
+                   class="inline-flex items-center gap-2 px-8 py-3 
+                          bg-gray-200 dark:bg-gray-700 
+                          hover:bg-gray-300 dark:hover:bg-gray-600
+                          text-gray-900 dark:text-white
+                          font-bold rounded-xl 
+                          transition shadow-lg">
+                    ← Zum Login
+                </a>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="text-center mt-8">
+            <a href="{% url 'core:home' %}" 
+               class="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 
+                      font-medium transition">
+                ← Zurück zur Startseite
+            </a>
         </div>
     </div>
 </div>

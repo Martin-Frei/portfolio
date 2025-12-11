@@ -1,227 +1,180 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Login - Portfolio Martin{% endblock %}
-
-{% block meta_description %}Melden Sie sich an um Zugriff auf alle Projekte und Features zu erhalten.{% endblock %}
-
-{% block extra_css %}
-<style>
-    /* Login Page Styling */
-    .login-container {
-        max-width: 450px;
-        margin: 100px auto;
-        padding: 40px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .login-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .login-header h1 {
-        font-size: 2rem;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .login-header p {
-        color: #666;
-        font-size: 1rem;
-    }
-
-    .login-form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .form-group label {
-        font-weight: 600;
-        color: #333;
-        font-size: 0.95rem;
-    }
-
-    .form-group input {
-        padding: 12px;
-        border: 2px solid #e0e0e0;
-        border-radius: 5px;
-        font-size: 1rem;
-        transition: border-color 0.3s;
-    }
-
-    .form-group input:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    .form-errors {
-        background: #fee;
-        border: 1px solid #fcc;
-        border-radius: 5px;
-        padding: 10px;
-        color: #c33;
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-    }
-
-    .form-errors ul {
-        margin: 0;
-        padding-left: 20px;
-    }
-
-    .btn-login {
-        padding: 14px;
-        background: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.3s;
-        margin-top: 10px;
-    }
-
-    .btn-login:hover {
-        background: #0056b3;
-    }
-
-    .login-footer {
-        text-align: center;
-        margin-top: 25px;
-        padding-top: 20px;
-        border-top: 1px solid #e0e0e0;
-        color: #666;
-    }
-
-    .login-footer a {
-        color: #007bff;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    .login-footer a:hover {
-        text-decoration: underline;
-    }
-
-    .login-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-        font-size: 0.9rem;
-    }
-
-    .remember-me {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .forgot-password {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .forgot-password:hover {
-        text-decoration: underline;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-        .login-container {
-            margin: 40px 20px;
-            padding: 30px 20px;
-        }
-
-        .login-options {
-            flex-direction: column;
-            gap: 15px;
-        }
-    }
-</style>
-{% endblock %}
+{% block title %}Login – Martin Freimuth{% endblock %}
+{% block meta_description %}Melden Sie sich an um Zugriff auf alle Projekte und das Secret Lab zu erhalten.{% endblock %}
 
 {% block content %}
-<div class="login-container">
-    <!-- Header -->
-    <div class="login-header">
-        <h1>Willkommen zurück!</h1>
-        <p>Melden Sie sich an um alle Projekte zu sehen</p>
-    </div>
+<div class="min-h-screen flex items-center justify-center px-6 py-20 
+            bg-gradient-to-br from-gray-50 to-gray-100 
+            dark:from-gray-900 dark:to-black">
+    
+    <div class="w-full max-w-md">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <div class="text-6xl mb-6">🔐</div>
+            <h1 class="text-4xl md:text-5xl font-black mb-4 
+                       text-gray-900 dark:text-white">
+                Willkommen zurück!
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">
+                Melde dich an um das <span class="text-red-600 dark:text-red-400 font-bold">Secret Lab</span> zu betreten
+            </p>
+        </div>
 
-    <!-- Error Messages (wenn Login fehlschlägt) -->
-    {% if form.errors %}
-    <div class="form-errors">
-        <strong>⚠️ Login fehlgeschlagen</strong>
-        <ul>
-            {% if form.non_field_errors %}
-                {{ form.non_field_errors }}
-            {% else %}
-                <li>Bitte überprüfen Sie Ihren Benutzernamen und Ihr Passwort.</li>
-            {% endif %}
-        </ul>
-    </div>
-    {% endif %}
-
-    <!-- Login Form -->
-    <form method="post" class="login-form">
-        {% csrf_token %}
-
-        <!-- Username Field -->
-        <div class="form-group">
-            <label for="{{ form.username.id_for_label }}">Benutzername</label>
-            {{ form.username }}
-            {% if form.username.errors %}
-                <div class="form-errors">
-                    {{ form.username.errors }}
+        <!-- Login Form Card -->
+        <div class="bg-white dark:bg-gray-800/50 backdrop-blur 
+                    rounded-3xl p-10 
+                    border-2 border-gray-200 dark:border-gray-700 
+                    shadow-2xl">
+            
+            <!-- Error Messages -->
+            {% if form.errors %}
+            <div class="mb-8 p-5 
+                        bg-red-50 dark:bg-red-900/30 
+                        border-2 border-red-500 
+                        rounded-xl">
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <strong class="text-red-700 dark:text-red-400 font-bold block mb-2">
+                            Login fehlgeschlagen
+                        </strong>
+                        {% if form.non_field_errors %}
+                            <p class="text-red-600 dark:text-red-300">
+                                {{ form.non_field_errors }}
+                            </p>
+                        {% else %}
+                            <p class="text-red-600 dark:text-red-300">
+                                Bitte überprüfe deinen Benutzernamen und dein Passwort.
+                            </p>
+                        {% endif %}
+                    </div>
                 </div>
+            </div>
             {% endif %}
-        </div>
 
-        <!-- Password Field -->
-        <div class="form-group">
-            <label for="{{ form.password.id_for_label }}">Passwort</label>
-            {{ form.password }}
-            {% if form.password.errors %}
-                <div class="form-errors">
-                    {{ form.password.errors }}
+            <!-- Form -->
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+
+                <!-- Username Field -->
+                <div>
+                    <label for="{{ form.login.id_for_label }}" 
+                           class="block mb-2 font-bold text-gray-900 dark:text-white">
+                        Benutzername oder E-Mail
+                    </label>
+                    <input type="text" 
+                           name="login" 
+                           id="{{ form.login.id_for_label }}"
+                           required
+                           class="w-full px-4 py-3 
+                                  bg-gray-50 dark:bg-gray-900/70 
+                                  border-2 border-gray-300 dark:border-gray-600 
+                                  rounded-xl 
+                                  text-gray-900 dark:text-white
+                                  placeholder-gray-500 dark:placeholder-gray-400
+                                  focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20
+                                  focus:outline-none transition"
+                           placeholder="deine@email.com">
+                    {% if form.login.errors %}
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            {{ form.login.errors }}
+                        </p>
+                    {% endif %}
                 </div>
-            {% endif %}
+
+                <!-- Password Field -->
+                <div>
+                    <label for="{{ form.password.id_for_label }}" 
+                           class="block mb-2 font-bold text-gray-900 dark:text-white">
+                        Passwort
+                    </label>
+                    <input type="password" 
+                           name="password" 
+                           id="{{ form.password.id_for_label }}"
+                           required
+                           class="w-full px-4 py-3 
+                                  bg-gray-50 dark:bg-gray-900/70 
+                                  border-2 border-gray-300 dark:border-gray-600 
+                                  rounded-xl 
+                                  text-gray-900 dark:text-white
+                                  placeholder-gray-500 dark:placeholder-gray-400
+                                  focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20
+                                  focus:outline-none transition"
+                           placeholder="••••••••">
+                    {% if form.password.errors %}
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            {{ form.password.errors }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Remember Me -->
+                <div class="flex items-center">
+                    <input type="checkbox" 
+                           name="remember" 
+                           id="remember"
+                           class="w-4 h-4 text-purple-600 
+                                  bg-gray-100 dark:bg-gray-700
+                                  border-gray-300 dark:border-gray-600
+                                  rounded focus:ring-purple-500 focus:ring-2">
+                    <label for="remember" 
+                           class="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                        Angemeldet bleiben
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" 
+                        class="w-full py-4 
+                               bg-gradient-to-r from-purple-600 to-pink-600 
+                               hover:from-purple-500 hover:to-pink-500
+                               text-white font-bold text-lg rounded-xl 
+                               transition shadow-xl hover:shadow-2xl 
+                               hover:scale-105">
+                    🚀 Anmelden & Secret Lab betreten
+                </button>
+
+                <!-- Hidden Redirect -->
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+
+            <!-- Divider -->
+            <div class="relative my-8">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300 dark:border-gray-700"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-4 bg-white dark:bg-gray-800 
+                                 text-gray-600 dark:text-gray-400">
+                        Noch kein Account?
+                    </span>
+                </div>
+            </div>
+
+            <!-- Register Link -->
+            <div class="text-center">
+                <a href="{% url 'account_signup' %}" 
+                   class="inline-flex items-center gap-2 px-8 py-3 
+                          bg-gray-200 dark:bg-gray-700 
+                          hover:bg-gray-300 dark:hover:bg-gray-600
+                          text-gray-900 dark:text-white
+                          font-bold rounded-xl 
+                          transition shadow-lg">
+                    ✨ Jetzt kostenlos registrieren
+                </a>
+            </div>
         </div>
 
-        <!-- Remember Me & Forgot Password -->
-        <div class="login-options">
-            <label class="remember-me">
-                <input type="checkbox" name="remember_me">
-                <span>Angemeldet bleiben</span>
-            </label>
-            <!-- Password Reset kommt später -->
-            <!-- <a href="#" class="forgot-password">Passwort vergessen?</a> -->
+        <!-- Back to Home -->
+        <div class="text-center mt-8">
+            <a href="{% url 'core:home' %}" 
+               class="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 
+                      font-medium transition">
+                ← Zurück zur Startseite
+            </a>
         </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn-login">
-            Anmelden
-        </button>
-
-        <!-- Hidden field for redirect -->
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
-
-    <!-- Footer -->
-    <div class="login-footer">
-        <p>Noch kein Account? <a href="{% url 'accounts:register' %}">Jetzt registrieren</a></p>
     </div>
 </div>
 {% endblock %}
