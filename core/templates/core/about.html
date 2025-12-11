@@ -1,41 +1,358 @@
-{% extends 'base.html' %}
-{% block title %}Über mich – Martin Freimuth{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}Über mich – Martin
+Freimuth{% endblock %} {% block content %}
 <div class="w-full max-w-5xl mx-auto px-6 py-20 space-y-24">
-    <!-- Header -->
-    <div class="text-center">
-        <h1 class="text-6xl md:text-8xl font-black mb-8 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
-            Über mich
-        </h1>
-        <p class="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Von 20 Jahren Business-Erfahrung zum Backend & Full-Stack Developer – 
-            eine Reise, die Business-Verständnis mit technischer Leidenschaft verbindet
+  <!-- Header -->
+  <div class="text-center">
+    <h1
+      class="text-6xl md:text-8xl font-black mb-8 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"
+    >
+      Über mich
+    </h1>
+    <p
+      class="text-2xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
+    >
+      Von 20 Jahren Business-Erfahrung zum Full-Stack Developer – eine Reise,
+      die Business-Verständnis mit technischer Leidenschaft verbindet
+    </p>
+    <!-- FOTO -->
+    <div class="mt-12 mb-8">
+      <img
+        src="{% static 'img/profile/martin-freimuth.jpg' %}"
+        alt="Martin Freimuth"
+        class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover hover:ring-purple-500/50 transition duration-300"
+      />
+    </div>
+  </div>
+
+  <!-- Haupttext -->
+  <div
+    class="text-xl text-gray-800 dark:text-gray-300 space-y-8 leading-relaxed"
+  >
+    <!-- Paragraph 1: Background -->
+    <p>
+      Nach
+      <strong class="text-gray-900 dark:text-white"
+        >20 Jahren Berufserfahrung</strong
+      >
+      in Einkauf, Organisation und Bestandsmanagement, kombiniert mit meinem
+      <strong class="text-gray-900 dark:text-white">BWL-Studium (VWA)</strong>,
+      habe ich meine wahre Leidenschaft in der
+      <strong class="text-gray-900 dark:text-white">Softwareentwicklung</strong>
+      entdeckt. Als Unternehmer hatte ich bereits früh IT-Lösungen für
+      Routenplanung und Kundendokumentation eingesetzt – diese praktische
+      Erfahrung hat mein tiefes Interesse an der professionellen Entwicklung
+      geweckt.
+    </p>
+
+    <!-- Paragraph 2: Tech Journey mit Preply -->
+    <p>
+      Meine technische Reise begann im
+      <strong class="text-gray-900 dark:text-white"
+        >April 2024 auf Preply</strong
+      >
+      mit Python-Grundlagen. Ende 2024 erweiterte ich meinen Stack um
+      <strong class="text-gray-900 dark:text-white"
+        >HTML, CSS und JavaScript</strong
+      >. Anfang 2025 vertiefte ich meine Frontend-Skills mit
+      <strong class="text-gray-900 dark:text-white"
+        >React, TypeScript und Angular</strong
+      >
+      sowie meine Backend-Kenntnisse in
+      <strong class="text-gray-900 dark:text-white">Python und Django</strong>.
+      Parallel dazu lernte ich
+      <strong class="text-gray-900 dark:text-white">SQL, PostgreSQL</strong> und
+      verschiedene
+      <strong class="text-gray-900 dark:text-white">Python-Libraries</strong>
+      für Data Science und Web Development. Diese selbstfinanzierte, intensive
+      Weiterbildung mit
+      <strong class="text-gray-900 dark:text-white"
+        >internationalen Tutoren auf Preply</strong
+      >
+      ermöglicht mir flexibles, zielgerichtetes Lernen –
+      <strong class="text-gray-900 dark:text-white"
+        >komplett in englischer Sprache</strong
+      >.
+    </p>
+
+    <!-- Paragraph 3: Umschulung -->
+    <p>
+      Seit
+      <strong class="text-gray-900 dark:text-white">Januar 2025</strong>
+      absolviere ich parallel eine offizielle
+      <strong class="text-gray-900 dark:text-white"
+        >Fullstack Developer Umschulung</strong
+      >
+      bei der Developer Akademie München. Diese Kombination aus strukturierter
+      Umschulung und individueller Preply-Weiterbildung gibt mir sowohl
+      theoretisches Fundament als auch praktische Tiefe in modernen Technologien
+      wie
+      <strong class="text-gray-900 dark:text-white"
+        >Django, REST APIs, PostgreSQL</strong
+      >
+      und agilen Development-Praktiken. Mein Ziel:
+      <strong class="text-gray-900 dark:text-white"
+        >Enterprise-Softwarelösungen entwickeln, die echte Geschäftsprobleme
+        lösen.</strong
+      >
+    </p>
+
+    <!-- Paragraph 4: Machine Learning -->
+    <p>
+      Seit
+      <strong class="text-gray-900 dark:text-white">Mitte 2025</strong> bereite
+      ich mich mit einer
+      <strong class="text-gray-900 dark:text-white"
+        >Master of Science-Absolventin aus Pakistan</strong
+      >
+      gezielt auf
+      <strong class="text-gray-900 dark:text-white">Machine Learning</strong>
+      vor – mein nächstes großes Ziel für 2026. Ich arbeite bereits praktisch
+      mit
+      <strong class="text-gray-900 dark:text-white"
+        >realen Datasets von Kaggle</strong
+      >
+      und verschiedenen ML-Algorithmen:
+      <strong class="text-gray-900 dark:text-white"
+        >Linear Regression, Logistic Regression, KNN Classification, Decision
+        Trees, Random Forest und XGBoost</strong
+      >. Ich lerne nicht nur die Theorie, sondern verstehe, wie diese Modelle
+      rechnen, wann welcher Algorithmus optimal ist und wie man sie für echte
+      Business-Cases einsetzt. Die Kombination aus
+      <strong class="text-gray-900 dark:text-white"
+        >Full Stack Development und Machine Learning</strong
+      >
+      wird 2026 meine technische Bandbreite komplett machen.
+    </p>
+  </div>
+
+  <!-- Timeline -->
+  <div
+    class="bg-white/80 dark:bg-gray-800/30 backdrop-blur rounded-3xl p-10 border border-gray-300 dark:border-gray-700 shadow-lg"
+  >
+    <h2
+      class="text-4xl font-black mb-10 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+    >
+      🚀 Meine Tech-Reise
+    </h2>
+    <div class="space-y-6 text-lg">
+      <div class="flex items-start gap-6">
+        <div
+          class="text-purple-600 dark:text-purple-400 font-bold min-w-[140px]"
+        >
+          Apr 2024
+        </div>
+        <div class="text-gray-800 dark:text-gray-300">
+          Python Basics & erste ML-Schritte (Preply Start)
+        </div>
+      </div>
+      <div class="flex items-start gap-6">
+        <div
+          class="text-purple-600 dark:text-purple-400 font-bold min-w-[140px]"
+        >
+          Ende 2024
+        </div>
+        <div class="text-gray-800 dark:text-gray-300">
+          HTML, CSS, JavaScript Grundlagen
+        </div>
+      </div>
+      <div class="flex items-start gap-6">
+        <div
+          class="text-purple-600 dark:text-purple-400 font-bold min-w-[140px]"
+        >
+          Jan 2025
+        </div>
+        <div class="text-gray-800 dark:text-gray-300">
+          <strong class="text-gray-900 dark:text-white"
+            >Developer Akademie München Start</strong
+          >
+          + React, TypeScript, Angular, Django, SQL intensiv
+        </div>
+      </div>
+      <div class="flex items-start gap-6">
+        <div
+          class="text-purple-600 dark:text-purple-400 font-bold min-w-[140px]"
+        >
+          Mitte 2025
+        </div>
+        <div class="text-gray-800 dark:text-gray-300">
+          Machine Learning Deep Dive (Linear/Logistic Regression, KNN, Trees,
+          Random Forest, XGBoost) mit MSc-Tutorin
+        </div>
+      </div>
+      <div class="flex items-start gap-6">
+        <div
+          class="text-purple-600 dark:text-purple-400 font-bold min-w-[140px]"
+        >
+          Dez 2025
+        </div>
+        <div class="text-gray-800 dark:text-gray-300">
+          Java & Spring Boot für Enterprise-Projekte
+        </div>
+      </div>
+      <div class="flex items-start gap-6">
+        <div
+          class="text-purple-600 dark:text-purple-400 font-bold min-w-[140px]"
+        >
+          Ziel 2026
+        </div>
+        <div class="text-gray-800 dark:text-gray-300">
+          <strong class="text-gray-900 dark:text-white"
+            >Full Stack + Machine Learning Integration</strong
+          >
+          – Enterprise-Lösungen mit KI-Power
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div
+      class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 text-center shadow-lg hover:shadow-xl transition"
+    >
+      <div
+        class="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3"
+      >
+        6+
+      </div>
+      <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
+        Internationale Tutoren (Preply)
+      </div>
+    </div>
+    <div
+      class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 text-center shadow-lg hover:shadow-xl transition"
+    >
+      <div
+        class="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3"
+      >
+        100%
+      </div>
+      <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
+        Englische Trainings
+      </div>
+    </div>
+    <div
+      class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 text-center shadow-lg hover:shadow-xl transition"
+    >
+      <div
+        class="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3"
+      >
+        8+
+      </div>
+      <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
+        Live-Projekte
+      </div>
+    </div>
+    <div
+      class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 text-center shadow-lg hover:shadow-xl transition"
+    >
+      <div
+        class="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3"
+      >
+        5
+      </div>
+      <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
+        Programmiersprachen
+      </div>
+    </div>
+  </div>
+
+  <!-- Was mich auszeichnet -->
+  <div>
+    <h2
+      class="text-4xl font-black mb-10 text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+    >
+      💪 Was mich auszeichnet
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition shadow-lg hover:shadow-xl"
+      >
+        <div class="text-4xl mb-4">🎯</div>
+        <h3 class="text-xl font-bold mb-3 text-purple-600 dark:text-purple-400">
+          Effizientes Onboarding
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300">
+          Fokus auf Framework-Specifics statt Basics – ich verstehe
+          Programmierkonzepte und lerne neue Technologien schnell
         </p>
-        <div class="mt-12 text-9xl">Martin</div>
-    </div>
+      </div>
 
-    <!-- Dein kompletter Text bleibt – nur Tailwind -->
-    <div class="text-xl text-gray-300 space-y-8 leading-relaxed text-justify">
-        <p>Nach 20 Jahren Berufserfahrung in <strong>Einkauf, Organisation und Bestandsmanagement</strong> kombiniert mit meinem <strong>BWL-Studium</strong> habe ich meine wahre Leidenschaft in der IT-Entwicklung entdeckt. Als Unternehmer hatte ich bereits früh IT-Lösungen für Routenplanung und Kundendokumentation eingesetzt – diese Erfahrung hat mein Interesse an der Softwareentwicklung geweckt.</p>
-        <p>Meine Reise begann mit <strong>HTML, CSS und JavaScript</strong>, doch schnell wurde mir klar, dass meine wahre Stärke im <strong>Backend mit Python und Django</strong> liegt. Durch meine langjährige Arbeit mit ERP-Systemen und mein <strong>betriebswirtschaftliches Verständnis</strong> verstehe ich, wie wichtig saubere Datenmodellierung und durchdachte Geschäftslogik für echte Unternehmensprozesse sind.</p>
-        <p>Seit Januar 2025 absolviere ich eine intensive <strong>Fullstack Developer Retraining</strong> bei der Developer Akademie München und vertiefe täglich meine Kenntnisse in Django, REST APIs, PostgreSQL und modernen Development-Praktiken. Mein Ziel: Softwarelösungen entwickeln, die echte Geschäftsprobleme lösen.</p>
-    </div>
+      <div
+        class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition shadow-lg hover:shadow-xl"
+      >
+        <div class="text-4xl mb-4">🌍</div>
+        <h3 class="text-xl font-bold mb-3 text-purple-600 dark:text-purple-400">
+          International Ready
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300">
+          Alle Trainings auf Englisch – ready für internationale Teams und
+          Tech-Dokumentation von Tag 1
+        </p>
+      </div>
 
-    <!-- Was mich auszeichnet -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-700">BWL + IT Expertise · Ich verstehe Unternehmensprozesse und entwickle Software, die echten Business-Value schafft</div>
-        <div class="bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-700">Prozessoptimierung · Durch ERP-Erfahrung baue ich Workflows, die wirklich effizienter machen</div>
-        <div class="bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-700">Datenverständnis · Ich weiß, welche Daten Unternehmen brauchen</div>
-        <div class="bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-700">Business-Tech Bridge · Ich spreche beide Sprachen</div>
-        <div class="bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-700">Finanzmarkt-Verständnis · Aktien & Optionen schärfen mein analytisches Denken</div>
-    </div>
+      <div
+        class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition shadow-lg hover:shadow-xl"
+      >
+        <div class="text-4xl mb-4">💼</div>
+        <h3 class="text-xl font-bold mb-3 text-purple-600 dark:text-purple-400">
+          Business-Verständnis
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300">
+          20 Jahre ERP-Erfahrung – ich weiß, wie Software in echten
+          Unternehmensprozessen funktionieren muss
+        </p>
+      </div>
 
-    <!-- CTA -->
-    <div class="text-center py-20">
-        <a href="{% url 'core:contact' %}" class="inline-block px-16 py-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-3xl font-black hover:scale-110 transition shadow-2xl">
-            Jetzt Kontakt aufnehmen
-        </a>
+      <div
+        class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition shadow-lg hover:shadow-xl"
+      >
+        <div class="text-4xl mb-4">🚀</div>
+        <h3 class="text-xl font-bold mb-3 text-purple-600 dark:text-purple-400">
+          Selbstfinanzierte Weiterbildung
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300">
+          Investition in meine Skills seit April 2024 – Commitment und
+          Eigenverantwortung für meine Karriere
+        </p>
+      </div>
+
+      <div
+        class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition shadow-lg hover:shadow-xl"
+      >
+        <div class="text-4xl mb-4">🤖</div>
+        <h3 class="text-xl font-bold mb-3 text-purple-600 dark:text-purple-400">
+          ML-Ready für 2026
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300">
+          Praktische Erfahrung mit 7+ ML-Algorithmen und Kaggle-Datasets – Full
+          Stack + KI-Integration
+        </p>
+      </div>
+
+      <div
+        class="bg-white/90 dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl border border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition shadow-lg hover:shadow-xl"
+      >
+        <div class="text-4xl mb-4">🏢</div>
+        <h3 class="text-xl font-bold mb-3 text-purple-600 dark:text-purple-400">
+          Unternehmerische Denkweise
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300">
+          Lösungen für echte Probleme, nicht nur Code – Fokus auf Business-Value
+          und ROI
+        </p>
+      </div>
     </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="text-center py-20">
+    <a
+      href="{% url 'core:contact' %}"
+      class="inline-block px-16 py-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-3xl font-black text-white hover:scale-110 transition shadow-2xl"
+    >
+      Jetzt Kontakt aufnehmen →
+    </a>
+  </div>
 </div>
 {% endblock %}

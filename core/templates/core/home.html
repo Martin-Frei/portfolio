@@ -2,113 +2,259 @@
 {% load static %}
 
 {% block title %}Martin Freimuth – Full Stack Developer{% endblock %}
-{% block meta_description %}Frontend Developer mit Django & Python | Auf dem Weg zum Full-Stack & Machine Learning Engineer{% endblock %}
+{% block meta_description %}Full Stack Developer mit Django & React | Career Changer mit 20 Jahren Business-Erfahrung{% endblock %}
 
 {% block content %}
 
 <!-- HERO -->
 <section class="min-h-screen flex items-center justify-center px-6 -mt-20">
-    <div class="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20 px-6">
-        <!-- Text -->
-        <div class="text-center lg:text-left">
-            <h1 class="text-6xl md:text-8xl font-black mb-6">
-                Hi, ich bin <span class="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Martin</span>
-            </h1>
-            <h2 class="text-3xl md:text-5xl font-bold text-gray-300 mb-8">
-                Frontend Developer → Full Stack → <span class="text-cyan-400">Machine Learning</span>
-            </h2>
-            <p class="text-xl text-gray-400 mb-10 max-w-2xl">
-                Ich baue moderne Webanwendungen mit HTML, CSS, JavaScript und Django.<br>
-                Aktuell erobere ich das Backend – 2026 kommt Machine Learning.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+    <div class="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        
+        <!-- Text Links -->
+        <div class="text-center lg:text-left space-y-8">
+            <div class="space-y-6">
+                <div class="text-sm font-bold tracking-[0.2em] text-purple-600 dark:text-purple-400 uppercase">
+                    Full Stack Developer
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl lg:text-8xl font-black leading-tight">
+                    <span class="block text-gray-900 dark:text-white">Martin</span>
+                    <span class="block bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                        Freimuth
+                    </span>
+                </h1>
+                
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-700 dark:text-gray-300">
+                    Career Changer mit 20 Jahren Business-Erfahrung
+                </h2>
+                
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    Backend-Spezialist (<strong class="text-gray-900 dark:text-white">Python/Django</strong>) 
+                    mit Full-Stack Skills (<strong class="text-gray-900 dark:text-white">React/TypeScript</strong>). 
+                    Ready für Enterprise-Software.
+                </p>
+            </div>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <a href="{% url 'projects:public_list' %}" 
-                   class="px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-bold text-xl hover:scale-105 transition shadow-xl shadow-purple-500/50">
-                    Meine Projekte
+                   class="px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 
+                          hover:from-purple-500 hover:to-pink-500
+                          text-white rounded-full font-bold text-xl 
+                          hover:scale-105 transition shadow-xl">
+                    Projekte ansehen
                 </a>
                 <a href="{% url 'core:contact' %}" 
-                   class="px-10 py-5 border-2 border-gray-600 rounded-full font-bold text-xl hover:border-purple-500 hover:text-purple-400 transition">
+                   class="px-10 py-5 
+                          border-2 border-gray-300 dark:border-gray-600 
+                          text-gray-900 dark:text-white
+                          rounded-full font-bold text-xl 
+                          hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400
+                          transition">
                     Kontakt aufnehmen
                 </a>
             </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-3 justify-center lg:justify-start pt-4">
+                <span class="px-4 py-2 bg-gray-200 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Python
+                </span>
+                <span class="px-4 py-2 bg-gray-200 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Django
+                </span>
+                <span class="px-4 py-2 bg-gray-200 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">
+                    React
+                </span>
+                <span class="px-4 py-2 bg-gray-200 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">
+                    TypeScript
+                </span>
+                <span class="px-4 py-2 bg-gray-200 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-700 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">
+                    PostgreSQL
+                </span>
+            </div>
         </div>
 
-        <!-- Avatar -->
-        <div class="flex justify-center">
-            <div class="w-80 h-80 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-9xl shadow-2xl ring-8 ring-purple-500/30">
-                Martin
+        <!-- Foto Rechts (oder Platzhalter) -->
+        <div class="relative flex justify-center lg:justify-end">
+            <div class="relative z-10">
+                <!-- OPTION 1: MIT FOTO   static\img\profile\martin-freimuth.jpg.jpg  -->
+                <img src="{% static 'img/profile/martin-freimuth.jpg' %}" 
+                     alt="Martin Freimuth - Full Stack Developer"
+                     class="rounded-3xl w-full max-w-md mx-auto shadow-2xl 
+                            ring-4 ring-purple-500/20 hover:ring-purple-500/40 
+                            transition duration-300"> 
+                
+                <!---OPTION 2: OHNE FOTO (AUSKOMMENTIEREN WENN FOTO DA IST) 
+                <div class="w-80 h-80 bg-gradient-to-br from-purple-600 to-pink-600 
+                            rounded-3xl flex items-center justify-center text-white text-9xl 
+                            shadow-2xl ring-8 ring-purple-500/30">
+                    💻
+                </div> -->
+                
             </div>
+            <!-- Gradient Glow -->
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 
+                        rounded-3xl blur-3xl opacity-20 -z-10"></div>
         </div>
     </div>
 </section>
 
 <!-- SKILLS TEASER -->
-<section class="pt-6 pb-24 px-6 bg-gray-900/50">
+<section class="py-24 px-6 bg-gray-50 dark:bg-gray-900/50">
     <div class="max-w-7xl mx-auto text-center">
-        <h2 class="text-5xl font-black mb-16">Meine Reise</h2>
-        <div class="grid md:grid-cols-3 gap-12">
-            <div class="bg-gray-800/50 backdrop-blur p-10 rounded-3xl border border-gray-700 hover:border-green-500 transition">
-                <span class="text-6xl mb-4 block">Frontend</span>
-                <h3 class="text-2xl font-bold text-green-400">Aktuell: Fortgeschrittener</h3>
-                <p class="text-gray-400 mt-4">HTML · CSS · JavaScript · Responsive Design · API · React · Angular</p>
+        <h2 class="text-5xl md:text-6xl font-black mb-4 text-gray-900 dark:text-white">
+            Meine Tech-Journey
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-16 max-w-3xl mx-auto">
+            Von Frontend über Backend bis zu Machine Learning – ich entwickle mich kontinuierlich weiter
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Backend (Hauptstärke!) -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-10 rounded-3xl 
+                        border-2 border-green-500 hover:shadow-2xl hover:shadow-green-500/20 transition">
+                <span class="text-6xl mb-4 block">🐍</span>
+                <h3 class="text-2xl font-bold text-green-600 dark:text-green-400 mb-2">
+                    Backend
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    Meine Hauptstärke
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Python · Django · REST APIs · PostgreSQL · HTMX
+                </p>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-10 rounded-3xl border border-gray-700 hover:border-yellow-500 transition">
-                <span class="text-6xl mb-4 block">Backend</span>
-                <h3 class="text-2xl font-bold text-yellow-400">Aktuell: <br>Wird täglich besser</h3>
-                <p class="text-gray-400 mt-4">Django · Python · PostgreSQL · APIs · HTMX</p>
+
+            <!-- Frontend -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-10 rounded-3xl 
+                        border-2 border-cyan-500 hover:shadow-2xl hover:shadow-cyan-500/20 transition">
+                <span class="text-6xl mb-4 block">⚛️</span>
+                <h3 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400 mb-2">
+                    Frontend
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    Produktionsreif
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    React · TypeScript · Angular · Tailwind CSS · Responsive
+                </p>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-10 rounded-3xl border border-gray-700 hover:border-cyan-500 transition">
-                <span class="text-6xl mb-4 block">Machine Learning</span>
-                <h3 class="text-2xl font-bold text-cyan-400">Aktuell: <br>Erste Projekte laufen schon</h3>
-                <p class="text-gray-400 mt-4">TensorFlow · Python · scikit-learn · pandas · seaborn</p>
+
+            <!-- Machine Learning -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-10 rounded-3xl 
+                        border-2 border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition">
+                <span class="text-6xl mb-4 block">🤖</span>
+                <h3 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+                    Machine Learning
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    In Vorbereitung (2026)
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Scikit-learn · TensorFlow · XGBoost · Kaggle Projects
+                </p>
             </div>
         </div>
-        <a href="{% url 'core:skills' %}" class="mt-12 inline-block px-8 py-4 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+        
+        <a href="{% url 'core:skills' %}" 
+           class="mt-12 inline-block px-8 py-4 
+                  bg-gray-200 dark:bg-gray-800 
+                  hover:bg-gray-300 dark:hover:bg-gray-700 
+                  text-gray-900 dark:text-white
+                  rounded-full font-bold
+                  transition shadow-lg">
             Alle Skills ansehen →
         </a>
     </div>
 </section>
 
 <!-- PROJEKT HIGHLIGHTS -->
-<section class="py-24 px-6">
+<section class="py-24 px-6 bg-white dark:bg-transparent">
     <div class="max-w-7xl mx-auto text-center">
-        <h2 class="text-5xl font-black mb-16">Ausgewählte Projekte</h2>
+        <h2 class="text-5xl md:text-6xl font-black mb-4 text-gray-900 dark:text-white">
+            Featured Projects
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-16 max-w-3xl mx-auto">
+            Eine Auswahl meiner besten Arbeiten
+        </p>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div class="bg-gray-800/50 backdrop-blur rounded-3xl overflow-hidden border border-gray-700 hover:border-purple-500 transition hover:scale-105">
-                <div class="h-64 bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-9xl">
-                    Django
+            <!-- Project 1 -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur rounded-3xl overflow-hidden 
+                        border-2 border-gray-200 dark:border-gray-700 
+                        hover:border-purple-500 transition hover:scale-105 shadow-xl">
+                <div class="h-64 bg-gradient-to-br from-purple-600 to-blue-600 
+                            flex items-center justify-center text-white text-8xl">
+                    🐍
                 </div>
                 <div class="p-8">
-                    <h3 class="text-3xl font-bold mb-4">Dieses Portfolio</h3>
-                    <p class="text-gray-400 mb-6">Django · allauth · Tailwind · Secret Lab mit Login</p>
-                    <span class="text-purple-400 font-bold">Live jetzt!</span>
+                    <h3 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+                        Dieses Portfolio
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Django · Allauth · Tailwind CSS · Secret Lab mit Login
+                    </p>
+                    <span class="inline-block px-4 py-2 bg-green-100 dark:bg-green-900/30 
+                                 text-green-700 dark:text-green-400 font-bold rounded-full">
+                        ✅ Live!
+                    </span>
                 </div>
             </div>
 
-            <div class="bg-gray-800/50 backdrop-blur rounded-3xl overflow-hidden border border-gray-700 hover:border-pink-500 transition hover:scale-105">
-                <div class="h-64 bg-gradient-to-br from-pink-600 to-purple-600 flex items-center justify-center text-9xl">
-                    JS
+            <!-- Project 2 -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur rounded-3xl overflow-hidden 
+                        border-2 border-gray-200 dark:border-gray-700 
+                        hover:border-pink-500 transition hover:scale-105 shadow-xl">
+                <div class="h-64 bg-gradient-to-br from-pink-600 to-purple-600 
+                            flex items-center justify-center text-white text-8xl">
+                    ⚛️
                 </div>
                 <div class="p-8">
-                    <h3 class="text-3xl font-bold mb-4">Pexels Gallery React</h3>
-                    <p class="text-gray-400 mb-6">React · API · Responsive Grid · Dark Mode</p>
-                    <span class="text-pink-400 font-bold">Im Secret Lab versteckt</span>
+                    <h3 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+                        React Gallery
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        React · Pexels API · Responsive Grid · Dark Mode
+                    </p>
+                    <span class="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-900/30 
+                                 text-purple-700 dark:text-purple-400 font-bold rounded-full">
+                        🔐 Secret Lab
+                    </span>
                 </div>
             </div>
         </div>
-        <a href="{% url 'projects:public_list' %}" class="mt-12 inline-block px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-bold text-xl hover:scale-105 transition shadow-xl">
+        
+        <a href="{% url 'projects:public_list' %}" 
+           class="mt-12 inline-block px-10 py-5 
+                  bg-gradient-to-r from-purple-600 to-pink-600 
+                  hover:from-purple-500 hover:to-pink-500
+                  text-white rounded-full font-bold text-xl 
+                  hover:scale-105 transition shadow-xl">
             Alle Projekte ansehen →
         </a>
     </div>
 </section>
 
-<!-- CTA -->
-<section class="py-24 px-6 bg-gradient-to-b from-transparent to-purple-900/20">
+<!-- CTA FINAL -->
+<section class="py-24 px-6 bg-gradient-to-br 
+                from-purple-50 to-pink-50 
+                dark:from-purple-900/20 dark:to-pink-900/20">
     <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-6xl font-black mb-8">Lass uns zusammen etwas Großes bauen!</h2>
-        <p class="text-2xl text-gray-300 mb-12">Ich bin bereit für dein nächstes Projekt.</p>
-        <a href="{% url 'core:contact' %}" class="inline-block px-12 py-6 bg-white text-black font-black text-2xl rounded-full hover:bg-gray-200 transition hover:scale-110 shadow-2xl">
-            Jetzt Kontakt aufnehmen
+        <h2 class="text-5xl md:text-6xl font-black mb-8 text-gray-900 dark:text-white">
+            Lass uns zusammen etwas Großes bauen!
+        </h2>
+        <p class="text-2xl text-gray-700 dark:text-gray-300 mb-12">
+            Verfügbar ab <strong class="text-green-600 dark:text-green-400">Januar 2026</strong> 
+            für Festanstellung oder spannende Projekte.
+        </p>
+        <a href="{% url 'core:contact' %}" 
+           class="inline-block px-12 py-6 
+                  bg-gradient-to-r from-purple-600 to-pink-600
+                  hover:from-purple-500 hover:to-pink-500
+                  text-white font-black text-2xl rounded-full 
+                  hover:scale-110 transition shadow-2xl">
+            Jetzt Kontakt aufnehmen →
         </a>
     </div>
 </section>

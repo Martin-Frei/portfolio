@@ -1,94 +1,425 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Skills – Martin Freimuth{% endblock %}
 
 {% block content %}
 <div class="w-full max-w-6xl mx-auto px-6 py-20">
 
+    <!-- Header -->
     <div class="text-center mb-20">
         <h1 class="text-6xl md:text-8xl font-black mb-8 bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">
             Meine Skills
         </h1>
-        <p class="text-2xl text-gray-300">Aktueller Stand · Lernreise · Zukunftspläne</p>
+        <p class="text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+            Aktueller Stand · Lernreise · Zukunftspläne
+        </p>
     </div>
 
-    <!-- KANN ICH -->
-    <div class="mb-20">
-        <h2 class="text-4xl font-black mb-10 text-green-400">Kann ich sicher</h2>
+    <!-- KANN ICH SICHER - PRODUKTIONSREIF -->
+    <div class="mb-24">
+        <div class="flex items-center gap-4 mb-10">
+            <div class="text-5xl">✅</div>
+            <h2 class="text-4xl md:text-5xl font-black text-green-600 dark:text-green-400">
+                Produktionsreif
+            </h2>
+        </div>
+        
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-gray-700">
-                <h3 class="text-2xl font-bold mb-3">HTML5</h3>
-                <div class="w-full bg-gray-700 rounded-full h-6 mb-4"><div class="bg-green-500 h-6 rounded-full w-11/12"></div></div>
-                <p class="text-gray-400">Semantisches HTML · Accessibility · SEO</p>
+            <!-- HTML5 -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">HTML5</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-11/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Semantisches HTML · Accessibility · SEO · Forms
+                </p>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-gray-700">
-                <h3 class="text-2xl font-bold mb-3">CSS3</h3>
-                <div class="w-full bg-gray-700 rounded-full h-6 mb-4"><div class="bg-green-500 h-6 rounded-full w-9/12"></div></div>
-                <p class="text-gray-400">Flexbox · Grid · Tailwind · Animationen</p>
+
+            <!-- CSS3 / Tailwind -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">CSS3 / Tailwind</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-10/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Flexbox · Grid · Tailwind CSS · Animationen · Responsive
+                </p>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-gray-700">
-                <h3 class="text-2xl font-bold mb-3">JavaScript</h3>
-                <div class="w-full bg-gray-700 rounded-full h-6 mb-4"><div class="bg-green-500 h-6 rounded-full w-10/12"></div></div>
-                <p class="text-gray-400">ES6+ · DOM · APIs · Async/Await</p>
+
+            <!-- JavaScript -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">JavaScript</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-11/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    ES6+ · DOM · Async/Await · Fetch API · Event Handling
+                </p>
+            </div>
+
+            <!-- React -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">React</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-7/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Hooks · useState · useEffect · Components · Props
+                </p>
+            </div>
+
+            <!-- Python -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Python</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-10/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    OOP · Data Structures · Libraries · Web Development
+                </p>
+            </div>
+
+            <!-- Django -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Django</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-10/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Models · Views · Auth · REST APIs · Deployment
+                </p>
+            </div>
+
+            <!-- PostgreSQL -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">PostgreSQL / SQL</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-7/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Queries · Relations · Migrations · Database Design
+                </p>
+            </div>
+
+            <!-- Git -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Git / GitHub</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-10/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Version Control · Branching · Pull Requests · Collaboration
+                </p>
+            </div>
+
+            <!-- HTMX -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">HTMX</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-8/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    AJAX · Hypermedia · Django Integration · Interactive UIs
+                </p>
+            </div>
+
+            <!-- API Integration -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">REST APIs</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-9/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Django REST Framework · API Integration · Gemini AI · Pexels
+                </p>
+            </div>
+
+            <!-- PowerBI -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Power BI</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-7/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Reports · Dashboards · Data Visualization · Business Intelligence
+                </p>
+            </div>
+
+            <!-- Deployment -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-green-500 shadow-lg hover:shadow-green-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Deployment</h3>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-4">
+                    <div class="bg-green-500 h-6 rounded-full w-8/12"></div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Railway · Render · Vercel · GitHub Pages
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- LERNE ICH GERADE -->
-    <div class="mb-20">
-        <h2 class="text-4xl font-black mb-10 text-yellow-400">Lerne ich gerade intensiv</h2>
+    <!-- LERNE ICH GERADE / VERTIEFUNG -->
+    <div class="mb-24">
+        <div class="flex items-center gap-4 mb-10">
+            <div class="text-5xl">🔥</div>
+            <h2 class="text-4xl md:text-5xl font-black text-yellow-600 dark:text-yellow-400">
+                In Vertiefung / Aktiv am Lernen
+            </h2>
+        </div>
+        
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-yellow-600/50">
-                <h3 class="text-2xl font-bold mb-3">Python</h3>
-                <div class="text-yellow-400 font-bold text-xl">Vertiefung</div>
-                <p class="text-gray-400 mt-4">OOP · Web · Data Science Grundlagen</p>
+            <!-- TypeScript -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-yellow-500 shadow-lg hover:shadow-yellow-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">TypeScript</h3>
+                <div class="text-yellow-600 dark:text-yellow-400 font-bold text-xl mb-4">
+                    🎯 Vertiefung
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Interface · Type · Generics · Readonly · Enum · as
+                </p>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-yellow-600/50">
-                <h3 class="text-2xl font-bold mb-3">Django</h3>
-                <div class="text-yellow-400 font-bold text-xl">Vertiefung</div>
-                <p class="text-gray-400 mt-4">Models · Views · Auth · REST APIs · Deployment</p>
+
+            <!-- Angular -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-yellow-500 shadow-lg hover:shadow-yellow-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Angular</h3>
+                <div class="text-yellow-600 dark:text-yellow-400 font-bold text-xl mb-4">
+                    🎯 Vertiefung
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    RxJS · @Component · [(ngModel)] · Standalone · Services
+                </p>
             </div>
-             <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-yellow-600/50">
-                <h3 class="text-2xl font-bold mb-3">React</h3>
-                <div class="text-yellow-400 font-bold text-xl">Vertiefung</div>
-                <p class="text-gray-400 mt-4">ustState · useEffect · useRef</p>
+
+            <!-- Django Advanced -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-yellow-500 shadow-lg hover:shadow-yellow-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Django Advanced</h3>
+                <div class="text-yellow-600 dark:text-yellow-400 font-bold text-xl mb-4">
+                    🎯 Vertiefung
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Signals · Middleware · Caching · Optimization · Testing
+                </p>
             </div>
-             <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-yellow-600/50">
-                <h3 class="text-2xl font-bold mb-3">Type Script</h3>
-                <div class="text-yellow-400 font-bold text-xl">Vertiefung</div>
-                <p class="text-gray-400 mt-4">interface · type · | & ? · readonly · private / public / protected · as · enum</p>
+
+            <!-- Java / Spring Boot -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-orange-500 shadow-lg hover:shadow-orange-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Java / Spring Boot</h3>
+                <div class="text-orange-600 dark:text-orange-400 font-bold text-xl mb-4">
+                    🆕 Neu gestartet (Dez 2024)
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    OOP · Spring Boot · REST APIs · Hibernate/JPA
+                </p>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-yellow-600/50">
-                <h3 class="text-2xl font-bold mb-3">Agular</h3>
-                <div class="text-yellow-400 font-bold text-xl">In Bearbeitung</div>
-                <p class="text-gray-400 mt-4">RxJS · @components · [{ngModel}] · standalone:true</p>
+
+            <!-- SQL Advanced -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-yellow-500 shadow-lg hover:shadow-yellow-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">SQL Advanced</h3>
+                <div class="text-yellow-600 dark:text-yellow-400 font-bold text-xl mb-4">
+                    🎯 Vertiefung
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    JOINs · Subqueries · Optimization · Indexing · Transactions
+                </p>
             </div>
-             <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl border border-yellow-600/50">
-                <h3 class="text-2xl font-bold mb-3">SQL</h3>
-                <div class="text-yellow-400 font-bold text-xl">In Bearbeitung</div>
-                <p class="text-gray-400 mt-4"></p>
+
+            <!-- Node.js -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-yellow-500 shadow-lg hover:shadow-yellow-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Node.js</h3>
+                <div class="text-yellow-600 dark:text-yellow-400 font-bold text-xl mb-4">
+                    🎯 Basics
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Express · NPM · Backend JavaScript · VS Code Integration
+                </p>
+            </div>
+
+            <!-- ML Basics -->
+            <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl 
+                        border-2 border-purple-500 shadow-lg hover:shadow-purple-500/20 transition">
+                <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">Machine Learning</h3>
+                <div class="text-purple-600 dark:text-purple-400 font-bold text-xl mb-4">
+                    📚 Nebenbei (seit Mitte 2024)
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Scikit-learn · XGBoost · Linear/Logistic Regression · Decision Trees · Kaggle
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- PLANE ICH -->
-    <div>
-        <h2 class="text-4xl font-black mb-10 text-cyan-400">Plane ich für 2026</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center border border-cyan-600/30">
-                <div class="text-4xl mb-4">LLM</div>
-                <p class="text-cyan-400 font-bold">Q1 2026</p>
+    <!-- PLANE ICH FÜR 2026 -->
+    <div class="mb-20">
+        <div class="flex items-center gap-4 mb-10">
+            <div class="text-5xl">🎯</div>
+            <h2 class="text-4xl md:text-5xl font-black text-cyan-600 dark:text-cyan-400">
+                Roadmap 2026
+            </h2>
+        </div>
+
+        <!-- Q1 2026 -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                📅 Q1 2026 (Jan-Mär)
+            </h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-cyan-500/50 shadow-lg hover:shadow-cyan-500/20 transition">
+                    <div class="text-5xl mb-4">🤖</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">LangChain</h4>
+                    <p class="text-cyan-600 dark:text-cyan-400 font-bold text-sm">AI Agents</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-cyan-500/50 shadow-lg hover:shadow-cyan-500/20 transition">
+                    <div class="text-5xl mb-4">☁️</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">AWS Basics</h4>
+                    <p class="text-cyan-600 dark:text-cyan-400 font-bold text-sm">EC2, S3, Lambda</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-cyan-500/50 shadow-lg hover:shadow-cyan-500/20 transition">
+                    <div class="text-5xl mb-4">🐳</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Docker</h4>
+                    <p class="text-cyan-600 dark:text-cyan-400 font-bold text-sm">Containerization</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-cyan-500/50 shadow-lg hover:shadow-cyan-500/20 transition">
+                    <div class="text-5xl mb-4">🍃</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Spring Boot</h4>
+                    <p class="text-cyan-600 dark:text-cyan-400 font-bold text-sm">Enterprise Java</p>
+                </div>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center border border-cyan-600/30">
-                <div class="text-4xl mb-4">Docker</div>
-                <p class="text-cyan-400 font-bold">Q1 2026</p>
+        </div>
+
+        <!-- Q2 2026 -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                📅 Q2 2026 (Apr-Jun)
+            </h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-purple-500/50 shadow-lg hover:shadow-purple-500/20 transition">
+                    <div class="text-5xl mb-4">🧠</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">ML Deep Dive</h4>
+                    <p class="text-purple-600 dark:text-purple-400 font-bold text-sm">TensorFlow, PyTorch</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-purple-500/50 shadow-lg hover:shadow-purple-500/20 transition">
+                    <div class="text-5xl mb-4">☸️</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Kubernetes</h4>
+                    <p class="text-purple-600 dark:text-purple-400 font-bold text-sm">Orchestration</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-purple-500/50 shadow-lg hover:shadow-purple-500/20 transition">
+                    <div class="text-5xl mb-4">🔄</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">CI/CD</h4>
+                    <p class="text-purple-600 dark:text-purple-400 font-bold text-sm">GitHub Actions</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center 
+                            border-2 border-purple-500/50 shadow-lg hover:shadow-purple-500/20 transition">
+                    <div class="text-5xl mb-4">🚀</div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Full Stack + ML</h4>
+                    <p class="text-purple-600 dark:text-purple-400 font-bold text-sm">Integration</p>
+                </div>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center border border-cyan-600/30">
-                <div class="text-4xl mb-4">HTMX</div>
-                <p class="text-cyan-400 font-bold">Q1 2026</p>
+        </div>
+    </div>
+
+    <!-- Soft Skills / Business -->
+    <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 
+                rounded-3xl p-12 border-2 border-purple-500">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-black mb-4 text-gray-900 dark:text-white">
+                💼 Business & Soft Skills
+            </h2>
+            <p class="text-gray-700 dark:text-gray-300">
+                Mein Unique Selling Point als Career Changer
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="text-center">
+                <div class="text-4xl mb-3">🏢</div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">
+                    20 Jahre Business
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Einkauf, Organisation, Controlling
+                </p>
             </div>
-            <div class="bg-gray-800/50 backdrop-blur p-8 rounded-2xl text-center border border-cyan-600/30">
-                <div class="text-4xl mb-4">Machine Learning</div>
-                <p class="text-cyan-400 font-bold">Q1 2026</p>
+            
+            <div class="text-center">
+                <div class="text-4xl mb-3">👥</div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">
+                    Team-Führung
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    5 Mitarbeiter geführt als Unternehmer
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-4xl mb-3">📊</div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">
+                    ERP-Systeme
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Langjährige Anwender-Erfahrung
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-4xl mb-3">🌍</div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">
+                    International Ready
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Alle Trainings auf Englisch (Preply)
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-4xl mb-3">🚀</div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">
+                    Unternehmerisches Denken
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    ROI-fokussiert, Business-Value
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-4xl mb-3">📚</div>
+                <h3 class="font-bold text-gray-900 dark:text-white mb-2">
+                    Autodidakt
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Selbstfinanziert, 6+ Tutoren
+                </p>
             </div>
         </div>
     </div>

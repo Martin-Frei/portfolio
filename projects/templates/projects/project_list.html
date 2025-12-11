@@ -1,89 +1,201 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/projects.css' %}">
-{% endblock %}
-
-{% block title %}Projekte - Portfolio Martin{% endblock %}
+{% block title %}{{ project.title }} – Martin Freimuth{% endblock %}
 
 {% block content %}
-<div class="container">
-  <section class="projects-header section">
-    <h1 class="section-title">Meine Projekte</h1>
-    <p class="projects-intro">
-      Eine Auswahl meiner Entwicklungsprojekte - von JavaScript-Anwendungen bis
-      hin zu Django-Backend-Lösungen.
-    </p>
-  </section>
+<div class="w-full max-w-6xl mx-auto px-6 py-20">
+    
+    <!-- Back Button -->
+    <div class="mb-10">
+        <a href="{% if user.is_authenticated %}{% url 'projects:secret_lab' %}{% else %}{% url 'projects:public_list' %}{% endif %}" 
+           class="inline-flex items-center gap-2 px-6 py-3 
+                  bg-gray-200 dark:bg-gray-800 
+                  hover:bg-gray-300 dark:hover:bg-gray-700
+                  text-gray-900 dark:text-white
+                  rounded-full font-medium transition">
+            ← Zurück zu Projekten
+        </a>
+    </div>
 
-  <section class="projects-grid-section">
-    {% if projects %}
-      <div class="projects-grid">
-        {% for project in projects %}
-          <div class="project-card">
-            <!-- Thumbnail -->
-            <div class="project-thumbnail">
-              {% if project.thumbnail %}
-                <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" class="project-image">
-              {% else %}
-                <div class="placeholder-thumbnail">
-                  <span class="placeholder-icon">🚀</span>
-                </div>
-              {% endif %}
+    <!-- Project Header -->
+    <div class="mb-16">
+        <h1 class="text-5xl md:text-7xl font-black mb-6 
+                   text-gray-900 dark:text-white">
+            {{ project.title }}
+        </h1>
+        
+        <!-- Status Badge -->
+        {% if project.is_public_demo %}
+        <div class="inline-flex items-center gap-2 px-4 py-2 
+                    bg-green-100 dark:bg-green-900/30 
+                    border-2 border-green-500 
+                    rounded-full">
+            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span class="text-green-700 dark:text-green-400 font-bold text-sm">
+                Öffentlich verfügbar
+            </span>
+        </div>
+        {% else %}
+        <div class="inline-flex items-center gap-2 px-4 py-2 
+                    bg-red-100 dark:bg-red-900/30 
+                    border-2 border-red-500 
+                    rounded-full">
+            <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+            <span class="text-red-700 dark:text-red-400 font-bold text-sm">
+                🔐 Nur für eingeloggte User
+            </span>
+        </div>
+        {% endif %}
+        
+        <!-- Description -->
+        <p class="text-xl text-gray-700 dark:text-gray-300 mt-6 leading-relaxed">
+            {{ project.description }}
+        </p>
+    </div>
+
+    <!-- Thumbnail -->
+    {% if project.thumbnail %}
+    <div class="mb-16 rounded-3xl overflow-hidden shadow-2xl 
+                border-2 border-gray-200 dark:border-gray-700">
+        <img src="{{ project.thumbnail.url }}" 
+             alt="{{ project.title }}"
+             class="w-full h-auto object-cover">
+    </div>
+    {% else %}
+    <div class="mb-16 rounded-3xl overflow-hidden 
+                bg-gradient-to-br from-purple-600 to-pink-600 
+                h-96 flex items-center justify-center">
+        <span class="text-9xl">🚀</span>
+    </div>
+    {% endif %}
+
+    <!-- Info Grid -->
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+        
+        <!-- Technologies -->
+        <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl 
+                    border border-gray-300 dark:border-gray-700 shadow-lg">
+            <h3 class="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-400">
+                🛠️ Technologien
+            </h3>
+            <div class="flex flex-wrap gap-3">
+                {% for tech in project.technologies.split %}
+                <span class="px-4 py-2 
+                             bg-purple-100 dark:bg-purple-900/30 
+                             text-purple-700 dark:text-purple-300 
+                             border border-purple-300 dark:border-purple-700
+                             rounded-full text-sm font-medium">
+                    {{ tech }}
+                </span>
+                {% endfor %}
             </div>
+        </div>
 
-            <!-- Projekt Info -->
-            <div class="project-info">
-              <h3 class="project-title">{{ project.title }}</h3>
-              <p class="project-description">{{ project.description|truncatewords:20 }}</p>
-              
-              <!-- Technologien -->
-              <div class="project-technologies">
-                <span class="tech-tag">{{ project.technologies }}</span>
-              </div>
-
-              <!-- Buttons -->
-              <div class="project-actions">
-                {% if project.is_public_demo %}
-                  <a href="{% url 'projects:detail' project.pk %}" class="btn btn-primary">
+        <!-- Links -->
+        <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-8 rounded-3xl 
+                    border border-gray-300 dark:border-gray-700 shadow-lg">
+            <h3 class="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">
+                🔗 Links
+            </h3>
+            <div class="space-y-4">
+                {% if project.live_url %}
+                <a href="{{ project.live_url }}" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="flex items-center gap-3 px-6 py-3 
+                          bg-gradient-to-r from-purple-600 to-pink-600 
+                          hover:from-purple-500 hover:to-pink-500
+                          text-white rounded-xl font-bold 
+                          transition shadow-lg">
+                    <span class="text-xl">🚀</span>
                     Live Demo
-                  </a>
-                {% else %}
-                  <a href="{% url 'projects:detail' project.pk %}" class="btn btn-secondary">
-                    Details (Login required)
-                  </a>
+                </a>
                 {% endif %}
                 
                 {% if project.github_url %}
-                  <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="btn btn-outline">
+                <a href="{{ project.github_url }}" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="flex items-center gap-3 px-6 py-3 
+                          bg-gray-200 dark:bg-gray-700 
+                          hover:bg-gray-300 dark:hover:bg-gray-600
+                          text-gray-900 dark:text-white
+                          rounded-xl font-bold 
+                          transition shadow-lg">
+                    <span class="text-xl">🐙</span>
                     GitHub
-                  </a>
+                </a>
                 {% endif %}
-              </div>
-
-              <!-- Status Badge -->
-              {% if project.is_public_demo %}
-                <div class="status-badge public">
-                  <span class="status-dot"></span>
-                  Öffentlich verfügbar
-                </div>
-              {% else %}
-                <div class="status-badge private">
-                  <span class="status-dot"></span>
-                  Nur für eingeloggte User sichtbar 
-                </div>
-              {% endif %}
             </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="no-projects">
-        <h3>Noch keine Projekte</h3>
-        <p>Projekte werden bald hinzugefügt!</p>
-      </div>
+        </div>
+    </div>
+
+    <!-- Long Description -->
+    {% if project.long_description %}
+    <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-10 rounded-3xl 
+                border border-gray-300 dark:border-gray-700 shadow-lg mb-16">
+        <h3 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+            📖 Über das Projekt
+        </h3>
+        <div class="prose prose-lg dark:prose-invert max-w-none 
+                    text-gray-700 dark:text-gray-300 leading-relaxed">
+            {{ project.long_description|linebreaks }}
+        </div>
+    </div>
     {% endif %}
-  </section>
+
+    <!-- Key Features -->
+    {% if project.key_features %}
+    <div class="bg-white dark:bg-gray-800/50 backdrop-blur p-10 rounded-3xl 
+                border border-gray-300 dark:border-gray-700 shadow-lg mb-16">
+        <h3 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+            ✨ Key Features
+        </h3>
+        <ul class="space-y-4">
+            {% for feature in project.key_features.splitlines %}
+            <li class="flex items-start gap-4">
+                <span class="text-2xl text-green-500">✓</span>
+                <span class="text-lg text-gray-700 dark:text-gray-300">
+                    {{ feature }}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Challenges & Learnings -->
+    {% if project.challenges_learnings %}
+    <div class="bg-gradient-to-br from-yellow-50 to-orange-50 
+                dark:from-yellow-900/20 dark:to-orange-900/20
+                p-10 rounded-3xl 
+                border-2 border-yellow-500 shadow-lg mb-16">
+        <h3 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+            🎓 Challenges & Learnings
+        </h3>
+        <div class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            {{ project.challenges_learnings|linebreaks }}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- CTA -->
+    <div class="text-center py-16">
+        <div class="inline-block">
+            <p class="text-xl text-gray-700 dark:text-gray-300 mb-6">
+                Interessiert an mehr?
+            </p>
+            <a href="{% url 'core:contact' %}" 
+               class="inline-block px-12 py-5 
+                      bg-gradient-to-r from-purple-600 to-pink-600 
+                      hover:from-purple-500 hover:to-pink-500
+                      text-white font-bold text-xl rounded-full 
+                      hover:scale-105 transition shadow-2xl">
+                Kontakt aufnehmen →
+            </a>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
