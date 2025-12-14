@@ -1,5 +1,5 @@
 """
-Django settings for portfolio_site project – PRODUCTION READY
+Django settings for portfolio_site project – FINAL PRODUCTION READY VERSION
 """
 
 from pathlib import Path
@@ -9,17 +9,40 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY
+# ==================== SECURITY & ENV ====================
 SECRET_KEY = config("SECRET_KEY")
-DEBUG = config("DEBUG", default=True, cast=bool)
+DEBUG = config("DEBUG", default=False, cast=bool)
+
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     ".railway.app",
-    "portfolio-7zh0.onrender.com",
+    "martin-freimuth.dev",
+    "www.martin-freimuth.dev",  # falls jemand www benutzt
 ]
 
-# Application definition
+# CSRF für Railway + Custom Domain
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.railway.app",
+    "https://martin-freimuth.dev",
+    "https://www.martin-freimuth.dev",
+]
+
+# Production Security (nur wenn DEBUG = False)
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = "DENY"
+
+    # HSTS – grünes Schloss + extra Sicherheit
+    SECURE_HSTS_SECONDS = 31536000  # 1 Jahr
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+# ==================== APPLICATIONS ====================
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -27,12 +50,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # WICHTIG – allauth muss hier stehen!
     "django.contrib.sites",
+
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    # my Apps
+
     "core",
     "projects",
     "accounts",
@@ -73,45 +96,41 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "portfolio_site.wsgi.application"
 
-# Database - Railway PostgreSQL oder lokal SQLite
+# ==================== DATABASE ====================
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL", default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600,
         conn_health_checks=True,
     )
 }
 
-# Password validation
+# ==================== PASSWORD VALIDATION ====================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# Internationalization
+# ==================== INTERNATIONALIZATION ====================
 LANGUAGE_CODE = "de-de"
 TIME_ZONE = "Europe/Berlin"
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# ==================== STATIC & MEDIA ====================
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Media files
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# Default primary key
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# ==================== ALLAUTH SETTINGS ====================
+# ==================== ALLAUTH ====================
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
@@ -128,11 +147,12 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_SESSION_REMEMBER = None
+ACCOUNT_SIGNUP_OPEN = True  # Fremde können sich registrieren
 
 SESSION_COOKIE_AGE = 86400
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-# E-Mail Backend - automatisch wechselnd
+# ==================== E-MAIL ====================
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 else:
@@ -141,16 +161,7 @@ else:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_HOST_USER = "resend"
-    EMAIL_HOST_PASSWORD = config("RESEND_API_KEY", default="")    
-    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="webmaster@localhost")
-    SERVER_EMAIL = config("SERVER_EMAIL", default="webmaster@localhost")
+    EMAIL_HOST_PASSWORD = config("RESEND_API_KEY")
 
-# CSRF für Railway
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.railway.app",
-    "https://portfolio-production-f4bf.up.railway.app",
-]
-
-# Falls du später Custom Domain hast:
-if not DEBUG:
-    CSRF_TRUSTED_ORIGINS.append("https://martin-freimuth.dev")
+    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="Martin Freimuth <hi@martin-freimuth.dev>")
+    SERVER_EMAIL = config("SERVER_EMAIL", default="Martin Freimuth <hi@martin-freimuth.dev>")
