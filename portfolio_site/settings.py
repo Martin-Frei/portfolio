@@ -126,7 +126,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_ROOT = BASE_DIR / "media" # nur benötigt für Local File Uploads
+MEDIA_ROOT = '/app/media'  # ← dein Volume-Mount-Path auf Railway
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
