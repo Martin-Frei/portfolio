@@ -187,10 +187,14 @@ if DEBUG:
 else:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_HOST = "smtp.resend.com"
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
+    # Port 465 + SSL ist bei Resend/Railway oft zuverlässiger als 587/TLS
+    EMAIL_PORT = 465
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
+    
     EMAIL_HOST_USER = "resend"
     EMAIL_HOST_PASSWORD = config("RESEND_API_KEY")
 
-    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="Martin Freimuth <hi@martin-freimuth.dev>")
-    SERVER_EMAIL = config("SERVER_EMAIL", default="Martin Freimuth <hi@martin-freimuth.dev>")
+    # Wichtig: Der Name sollte in Anführungszeichen stehen, wenn Sonderzeichen/Leerzeichen drin sind
+    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default='"Martin Freimuth" <hi@martin-freimuth.dev>')
+    SERVER_EMAIL = config("SERVER_EMAIL", default="hi@martin-freimuth.dev")
