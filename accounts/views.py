@@ -139,7 +139,7 @@ def guest_login_attempt(request):
             response = HttpResponse(
                 '<span class="text-cyan-400 font-black uppercase text-xl animate-pulse">Zugang gewährt...</span>'
             )
-            response["HX-Redirect"] = "/"
+            response["HX-Redirect"] = "/projects/"
             return response
         except Exception as e:
             return HttpResponse(
