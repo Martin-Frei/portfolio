@@ -78,12 +78,21 @@
         <!-- Foto Rechts (oder Platzhalter) -->
         <div class="relative flex justify-center lg:justify-end">
             <div class="relative z-10">
-                <!-- OPTION 1: MIT FOTO   static\img\profile\martin-freimuth.jpg.jpg  -->
-                <img src="{% static 'img/profile/martin-freimuth.jpg' %}" 
-                     alt="Martin Freimuth - Full Stack Developer"
-                     class="rounded-3xl w-full max-w-md mx-auto shadow-2xl 
-                            ring-4 ring-purple-500/20 hover:ring-purple-500/40 
-                            transition duration-300"> 
+                {% if profile and profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}" 
+                        alt="{{ profile.name }} - Full Stack Developer"
+                        class="rounded-3xl w-full max-w-md mx-auto shadow-2xl 
+                                ring-4 ring-purple-500/20 hover:ring-purple-500/40 
+                                transition duration-300">
+                {% else %}
+                    <img src="{% static 'img/profile/martin-freimuth.jpg' %}" 
+                        alt="Martin Freimuth - Full Stack Developer"
+                        class="rounded-3xl w-full max-w-md mx-auto shadow-2xl 
+                                ring-4 ring-purple-500/20 hover:ring-purple-500/40 
+                                transition duration-300 opacity-80">
+                {% endif %}
+            </div>
+        </div>
                 
                 <!---OPTION 2: OHNE FOTO (AUSKOMMENTIEREN WENN FOTO DA IST) 
                 <div class="w-80 h-80 bg-gradient-to-br from-purple-600 to-pink-600 

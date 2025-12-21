@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth-custom/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('allauth.urls')),
 
     # 1. Home + About/Skills/Contact direkt im Root

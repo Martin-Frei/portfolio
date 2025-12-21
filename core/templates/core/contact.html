@@ -8,12 +8,21 @@
     <!-- Header -->
     <div class="text-center mb-20">
         <!-- Foto (optional) -->
-        <div class="mb-8">
-            <img src="{% static 'img/profile/martin-freimuth.jpg' %}" 
-                 alt="Martin Freimuth"
-                 class="w-24 h-24 rounded-full mx-auto shadow-xl 
-                        ring-4 ring-purple-500/30 object-cover">
-        </div>
+       <div class="mt-12 mb-8">
+  {% if profile and profile.profile_image %}
+    <img
+      src="{{ profile.profile_image.url }}"
+      alt="{{ profile.name }}"
+      class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover hover:ring-purple-500/50 transition duration-300"
+    />
+  {% else %}
+    <img
+      src="{% static 'img/profile/martin-freimuth.jpg' %}"
+      alt="Martin Freimuth"
+      class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover opacity-80"
+    />
+  {% endif %}
+</div>
         
         <h1 class="text-6xl md:text-8xl font-black mb-8 bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent">
             Lass uns reden!

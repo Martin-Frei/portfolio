@@ -2,15 +2,28 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.conf import settings
+from projects.models import Project
+from .models import Profile
 
 def home(request):
-    return render(request, 'core/home.html')
+    profile = Profile.objects.first()
+    featured_projects = Project.objects.filter(is_public_demo=True)[:2]
+    return render(request, 'core/home.html', {'profile': profile, 'featured_projects': featured_projects})
+
 
 def about(request):
-    return render(request, 'core/about.html')
+    profile = Profile.objects.first()
+    return render(request, 'core/about.html', {'profile': profile})
+
+
+def contact(request):
+    profile = Profile.objects.first()
+    return render(request, 'core/contact.html', {'profile': profile})
+
 
 def skills(request):
     return render(request, 'core/skills.html')
+
 
 def contact(request):
     if request.method == 'POST':
@@ -116,3 +129,4 @@ Falls du diese Nachricht nicht erwartet hast, kannst du sie einfach ignorieren.
             print(f"Contact form error: {e}")  # Für Logs
     
     return render(request, 'core/contact.html')
+

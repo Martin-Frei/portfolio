@@ -1,62 +1,110 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Login → Secret Lab{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}Login → Secret
+Lab{% endblock %} {% block content %}
 <div class="w-full min-h-screen flex items-center justify-center px-6 py-20">
-    <div class="max-w-md w-full">
-        <!-- Header -->
-        <div class="text-center mb-12">
-            <h1 class="text-7xl md:text-9xl font-black bg-gradient-to-r from-red-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent animate-pulse">
-                SECRET LAB
-            </h1>
-            <p class="text-2xl text-gray-300 mt-6">Zugang nur für Auserwählte</p>
-        </div>
-
-        <!-- Login Form -->
-        <div class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-purple-600/50 shadow-2xl shadow-purple-600/30">
-            <form method="post" class="space-y-8">
-                {% csrf_token %}
-                
-                <div>
-                    <label class="block text-gray-300 text-sm font-bold mb-2">E-Mail</label>
-                    <input type="email" name="login" required
-                           class="w-full px-6 py-4 bg-gray-800/70 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition"
-                           placeholder="deine@email.de">
-                </div>
-
-                <div>
-                    <label class="block text-gray-300 text-sm font-bold mb-2">Passwort</label>
-                    <input type="password" name="password" required
-                           class="w-full px-6 py-4 bg-gray-800/70 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition">
-                </div>
-
-                <div class="flex items-center justify-between text-sm">
-                    <label class="flex items-center text-gray-400">
-                        <input type="checkbox" name="remember" class="mr-2">
-                        Angemeldet bleiben
-                    </label>
-                    <a href="{% url 'account_reset_password' %}" class="text-purple-400 hover:underline">
-                        Passwort vergessen?
-                    </a>
-                </div>
-
-                <button type="submit"
-                        class="w-full py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-black text-2xl hover:scale-105 transition shadow-2xl">
-                    EINLASS GEWÄHREN
-                </button>
-            </form>
-
-            <!-- Signup Link -->
-            <div class="mt-10 text-center">
-                <p class="text-gray-400">Noch keinen Zugang?</p>
-                <a href="{% url 'account_signup' %}"
-                   class="inline-block mt-4 px-10 py-4 bg-gray-800/70 rounded-xl hover:bg-gray-700 transition font-bold text-purple-400 border border-purple-600/30">
-                    Zugang beantragen
-                </a>
-            </div>
-        </div>
+  <div class="max-w-md w-full">
+    <div class="text-center mb-12">
+      <h1
+        class="text-7xl md:text-9xl font-black bg-gradient-to-r from-red-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent animate-pulse"
+      >
+        SECRET LAB
+      </h1>
+      <p class="text-2xl text-gray-300 mt-6 tracking-widest uppercase text-sm">
+        Zugang nur für Auserwählte
+      </p>
     </div>
+
+    <div
+      class="bg-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-purple-600/30 shadow-2xl shadow-purple-900/20"
+    >
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <div>
+          <label
+            class="block text-gray-400 text-xs font-bold mb-2 uppercase tracking-tighter"
+            >E-Mail</label
+          >
+          <input
+            type="email"
+            name="login"
+            required
+            class="w-full px-5 py-3 bg-gray-800/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition text-white"
+            placeholder="Identität eingeben..."
+          />
+        </div>
+
+        <div>
+          <label
+            class="block text-gray-400 text-xs font-bold mb-2 uppercase tracking-tighter"
+            >Passwort</label
+          >
+          <input
+            type="password"
+            name="password"
+            required
+            class="w-full px-5 py-3 bg-gray-800/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition text-white"
+          />
+        </div>
+
+        <div
+          class="flex items-center justify-between text-[11px] uppercase tracking-widest"
+        >
+          <label
+            class="flex items-center text-gray-500 hover:text-gray-300 cursor-pointer transition"
+          >
+            <input
+              type="checkbox"
+              name="remember"
+              class="mr-2 accent-purple-600"
+            />
+            Speichern
+          </label>
+          <a
+            href="{% url 'account_reset_password' %}"
+            class="text-gray-500 hover:text-purple-400 transition"
+          >
+            Vergessen?
+          </a>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-4 bg-gradient-to-r from-purple-700 to-purple-900 rounded-xl font-black text-lg hover:brightness-125 transition shadow-lg uppercase tracking-widest"
+        >
+          EINLASS GEWÄHREN
+        </button>
+      </form>
+
+      <div class="mt-8 pt-6 border-t border-white/5">
+        <div class="text-center">
+          <button
+            type="button"
+            hx-get="{% url 'accounts:get_guest_modal' %}"
+            hx-target="#modal-container"
+            class="text-gray-500 hover:text-cyan-400 text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300"
+          >
+            [ Temporären Gast-Tunnel öffnen (2 Min) ]
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center space-y-6">
+        <br />
+
+        <div class="space-y-2">
+          <p class="text-[16px] text-gray-500 uppercase tracking-[0.2em]">
+            Noch kein Agent im System?
+          </p>
+          <a
+            href="{% url 'account_signup' %}"
+            class="inline-block w-full py-3 bg-transparent border border-purple-500/50 hover:bg-purple-500/10 text-purple-400 rounded-xl font-bold text-sm transition-all duration-300 uppercase tracking-widest shadow-[0_0_15px_rgba(168,85,247,0.1)] hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+          >
+            Zugang beantragen
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="modal-container"></div>
+  </div>
+  {% endblock %}
 </div>
-{% endblock %}

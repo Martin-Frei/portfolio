@@ -14,15 +14,23 @@ Freimuth{% endblock %} {% block content %}
       Von 20 Jahren Business-Erfahrung zum Full-Stack Developer – eine Reise,
       die Business-Verständnis mit technischer Leidenschaft verbindet
     </p>
+    
     <!-- FOTO -->
     <div class="mt-12 mb-8">
-      <img
-        src="{% static 'img/profile/martin-freimuth.jpg' %}"
-        alt="Martin Freimuth"
-        class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover hover:ring-purple-500/50 transition duration-300"
-      />
-    </div>
-  </div>
+  {% if profile and profile.profile_image %}
+    <img
+      src="{{ profile.profile_image.url }}"
+      alt="{{ profile.name }}"
+      class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover hover:ring-purple-500/50 transition duration-300"
+    />
+  {% else %}
+    <img
+      src="{% static 'img/profile/martin-freimuth.jpg' %}"
+      alt="Martin Freimuth"
+      class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover opacity-80"
+    />
+  {% endif %}
+</div>
 
   <!-- Haupttext -->
   <div

@@ -44,6 +44,8 @@ if not DEBUG:
 
 # ==================== APPLICATIONS ====================
 INSTALLED_APPS = [
+    "cloudinary_storage",
+    
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -51,7 +53,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
-
+    
+    "cloudinary",
+    
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -89,6 +93,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'accounts.views.guest_timer',
             ],
         },
     },
@@ -123,13 +128,28 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
-# MEDIA_ROOT = BASE_DIR / "media" # nur benötigt für Local File Uploads
-MEDIA_ROOT = '/app/media'  # ← dein Volume-Mount-Path auf Railway
+MEDIA_ROOT = '/app/media' 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Cloudinary Credentials
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
+# Der neue, zentrale Storage-Block (ersetzt STORAGE_STORAGE & DEFAULT_FILE_STORAGE)
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # ==================== ALLAUTH ====================
 SITE_ID = 1

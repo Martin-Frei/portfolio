@@ -1,241 +1,268 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Registrierung - Portfolio Martin{% endblock %}
-
-{% block meta_description %}Erstellen Sie einen Account um Zugriff auf alle Projekte und Features zu erhalten.{% endblock %}
-
-{% block extra_css %}
+{% extends 'base.html' %} {% load static %} {% block title %}Registrierung -
+Portfolio Martin{% endblock %} {% block meta_description %}Erstellen Sie einen
+Account um Zugriff auf alle Projekte und Features zu erhalten.{% endblock %} {%
+block extra_css %}
 <style>
-    /* Registration Page Styling */
+  /* Registration Page Styling */
+  .register-container {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .register-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .register-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .register-header p {
+    color: #666;
+    font-size: 1rem;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+  }
+
+  .form-group input {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  .form-help-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+  }
+
+  .form-errors {
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 5px;
+    padding: 10px;
+    color: #c33;
+    font-size: 0.9rem;
+  }
+
+  .form-errors ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .btn-register {
+    padding: 14px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+  }
+
+  .btn-register:hover {
+    background: #0056b3;
+  }
+
+  .register-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    color: #666;
+  }
+
+  .register-footer a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .register-footer a:hover {
+    text-decoration: underline;
+  }
+
+  .password-requirements {
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+
+  .password-requirements h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .password-requirements ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .password-requirements li {
+    margin: 5px 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
     .register-container {
-        max-width: 500px;
-        margin: 80px auto;
-        padding: 40px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin: 40px 20px;
+      padding: 30px 20px;
     }
-
-    .register-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .register-header h1 {
-        font-size: 2rem;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .register-header p {
-        color: #666;
-        font-size: 1rem;
-    }
-
-    .register-form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .form-group label {
-        font-weight: 600;
-        color: #333;
-        font-size: 0.95rem;
-    }
-
-    .form-group input {
-        padding: 12px;
-        border: 2px solid #e0e0e0;
-        border-radius: 5px;
-        font-size: 1rem;
-        transition: border-color 0.3s;
-    }
-
-    .form-group input:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    .form-help-text {
-        font-size: 0.85rem;
-        color: #666;
-        margin-top: 5px;
-    }
-
-    .form-errors {
-        background: #fee;
-        border: 1px solid #fcc;
-        border-radius: 5px;
-        padding: 10px;
-        color: #c33;
-        font-size: 0.9rem;
-    }
-
-    .form-errors ul {
-        margin: 0;
-        padding-left: 20px;
-    }
-
-    .btn-register {
-        padding: 14px;
-        background: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.3s;
-        margin-top: 10px;
-    }
-
-    .btn-register:hover {
-        background: #0056b3;
-    }
-
-    .register-footer {
-        text-align: center;
-        margin-top: 25px;
-        padding-top: 20px;
-        border-top: 1px solid #e0e0e0;
-        color: #666;
-    }
-
-    .register-footer a {
-        color: #007bff;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    .register-footer a:hover {
-        text-decoration: underline;
-    }
-
-    .password-requirements {
-        background: #f8f9fa;
-        border-left: 4px solid #007bff;
-        padding: 15px;
-        margin-top: 10px;
-        border-radius: 5px;
-    }
-
-    .password-requirements h4 {
-        margin: 0 0 10px 0;
-        font-size: 0.95rem;
-        color: #333;
-    }
-
-    .password-requirements ul {
-        margin: 0;
-        padding-left: 20px;
-        font-size: 0.85rem;
-        color: #666;
-    }
-
-    .password-requirements li {
-        margin: 5px 0;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-        .register-container {
-            margin: 40px 20px;
-            padding: 30px 20px;
-        }
-    }
+  }
 </style>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="register-container">
-    <!-- Header -->
-    <div class="register-header">
-        <h1>Account erstellen</h1>
-        <p>Registrieren Sie sich um Zugriff auf alle Projekte zu erhalten</p>
+  <!-- Header -->
+  <div class="register-header">
+    <h1>Account erstellen</h1>
+    <p>Registrieren Sie sich um Zugriff auf alle Projekte zu erhalten</p>
+  </div>
+
+  <!-- Registration Form -->
+  <form method="post" class="register-form">
+    {% csrf_token %}
+
+    <!-- Username Field -->
+    <div class="form-group">
+      <label for="{{ form.username.id_for_label }}">Benutzername *</label>
+      {{ form.username }} {% if form.username.errors %}
+      <div class="form-errors">{{ form.username.errors }}</div>
+      {% endif %}
+      <small class="form-help-text">
+        Erforderlich. 150 Zeichen oder weniger. Nur Buchstaben, Ziffern und
+        @/./+/-/_ sind erlaubt.
+      </small>
     </div>
 
-    <!-- Registration Form -->
-    <form method="post" class="register-form">
-        {% csrf_token %}
-
-        <!-- Username Field -->
-        <div class="form-group">
-            <label for="{{ form.username.id_for_label }}">Benutzername *</label>
-            {{ form.username }}
-            {% if form.username.errors %}
-                <div class="form-errors">
-                    {{ form.username.errors }}
-                </div>
-            {% endif %}
-            <small class="form-help-text">
-                Erforderlich. 150 Zeichen oder weniger. Nur Buchstaben, Ziffern und @/./+/-/_ sind erlaubt.
-            </small>
-        </div>
-
-        <!-- Email Field -->
-        <div class="form-group">
-            <label for="{{ form.email.id_for_label }}">E-Mail-Adresse *</label>
-            {{ form.email }}
-            {% if form.email.errors %}
-                <div class="form-errors">
-                    {{ form.email.errors }}
-                </div>
-            {% endif %}
-            <small class="form-help-text">
-                Wird für die Account-Verifizierung benötigt.
-            </small>
-        </div>
-
-        <!-- Password1 Field -->
-        <div class="form-group">
-            <label for="{{ form.password1.id_for_label }}">Passwort *</label>
-            {{ form.password1 }}
-            {% if form.password1.errors %}
-                <div class="form-errors">
-                    {{ form.password1.errors }}
-                </div>
-            {% endif %}
-        </div>
-
-        <!-- Password2 Field -->
-        <div class="form-group">
-            <label for="{{ form.password2.id_for_label }}">Passwort bestätigen *</label>
-            {{ form.password2 }}
-            {% if form.password2.errors %}
-                <div class="form-errors">
-                    {{ form.password2.errors }}
-                </div>
-            {% endif %}
-        </div>
-
-        <!-- Password Requirements Info -->
-        <div class="password-requirements">
-            <h4>📝 Passwort-Anforderungen:</h4>
-            <ul>
-                <li>Mindestens 8 Zeichen</li>
-                <li>Nicht zu ähnlich zu persönlichen Informationen</li>
-                <li>Nicht zu gebräuchlich (z.B. "passwort123")</li>
-                <li>Nicht nur aus Zahlen bestehen</li>
-            </ul>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn-register">
-            Registrieren
-        </button>
-    </form>
-
-    <!-- Footer -->
-    <div class="register-footer">
-        <p>Haben Sie bereits einen Account? <a href="{% url 'login' %}">Jetzt anmelden</a></p>
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="{{ form.email.id_for_label }}">E-Mail-Adresse *</label>
+      {{ form.email }} {% if form.email.errors %}
+      <div class="form-errors">{{ form.email.errors }}</div>
+      {% endif %}
+      <small class="form-help-text">
+        Wird für die Account-Verifizierung benötigt.
+      </small>
     </div>
+
+    <!-- Password1 Field -->
+    <div class="form-group">
+      <label for="{{ form.password1.id_for_label }}">Passwort *</label>
+      {{ form.password1 }} {% if form.password1.errors %}
+      <div class="form-errors">{{ form.password1.errors }}</div>
+      {% endif %}
+    </div>
+
+    <!-- Password2 Field -->
+    <div class="form-group">
+      <label for="{{ form.password2.id_for_label }}"
+        >Passwort bestätigen *</label
+      >
+      {{ form.password2 }} {% if form.password2.errors %}
+      <div class="form-errors">{{ form.password2.errors }}</div>
+      {% endif %}
+    </div>
+
+    <!-- Password Requirements Info -->
+    <div class="password-requirements">
+      <h4>📝 Passwort-Anforderungen:</h4>
+      <ul>
+        <li>Mindestens 8 Zeichen</li>
+        <li>Nicht zu ähnlich zu persönlichen Informationen</li>
+        <li>Nicht zu gebräuchlich (z.B. "passwort123")</li>
+        <li>Nicht nur aus Zahlen bestehen</li>
+      </ul>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn-register">Registrieren</button>
+  </form>
+  
+  <!-- Guest Zugang -->
+  <div class="guest-shortcut-container" style="margin-top: 30px">
+    <div style="display: flex; align-items: center; margin-bottom: 20px">
+      <div style="flex: 1; height: 1px; background: #eee"></div>
+      <span
+        style="
+          padding: 0 15px;
+          color: #999;
+          font-size: 0.9rem;
+          font-weight: bold;
+        "
+        >ODER</span
+      >
+      <div style="flex: 1; height: 1px; background: #eee"></div>
+    </div>
+
+    <div style="text-align: center">
+      <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px">
+        Keine Lust auf ein Formular?
+      </p>
+      <button
+        type="button"
+        hx-get="{% url 'accounts:get_guest_modal' %}"
+        hx-target="#modal-container"
+        style="
+          background: #6c757d;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.3s;
+          width: 100%;
+        "
+      >
+        🚀 Schneller Gast-Zugang (2 Min.)
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="register-footer">
+    <p>
+      Haben Sie bereits einen Account?
+      <a href="{% url 'login' %}">Jetzt anmelden</a>
+    </p>
+  </div>
 </div>
 {% endblock %}
