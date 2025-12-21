@@ -80,6 +80,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+WHITENOISE_MANIFEST_STRICT = False
+
 ROOT_URLCONF = "portfolio_site.urls"
 
 TEMPLATES = [
