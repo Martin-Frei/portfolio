@@ -110,8 +110,9 @@ Fullstack Developer
                 resend_url, headers=headers, json=payload_to_me, timeout=10
             )
 
-            if resp_me.status_code == 201:
-                # 2. Bestätigung an USER (nur wenn die erste Mail geklappt hat)
+            # --- ÄNDERUNG HIER: Wir prüfen auf .ok (Status 200-299) ---
+            if resp_me.ok:
+                # 2. Bestätigung an USER
                 payload_to_user = {
                     "from": settings.DEFAULT_FROM_EMAIL,
                     "to": email,
@@ -123,13 +124,14 @@ Fullstack Developer
                     resend_url, headers=headers, json=payload_to_user, timeout=10
                 )
 
-                messages.success(request, "✅ Nachricht erfolgreich versendet!")
+                messages.success(request, "✅ Nachricht erfolgreich versendet! Ich melde mich in Kürze.")
             else:
+                # Nur wenn es wirklich schiefgeht (z.B. Status 403, 500)
                 print(f"Resend API Error: {resp_me.text}")
-                messages.error(request, "❌ Resend Fehler: " + resp_me.text)
+                messages.error(request, "❌ Ups, da gab es ein Problem mit dem Mail-Dienst. Bitte versuche es später nochmal.")
 
         except Exception as e:
             print(f"API Connection Error: {e}")
-            messages.error(request, "❌ Verbindung zu Resend fehlgeschlagen (Timeout).")
+            messages.error(request, "❌ Verbindung fehlgeschlagen. Bitte prüfe dein Netzwerk.")
 
     return render(request, "core/contact.html")
