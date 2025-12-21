@@ -189,13 +189,13 @@ else:
     EMAIL_HOST = "smtp.resend.com"
     EMAIL_PORT = 465
     EMAIL_USE_SSL = True
-    EMAIL_USE_TLS = False
+    EMAIL_USE_TLS = False  # Muss bei Port 465 auf False stehen
     EMAIL_HOST_USER = "resend"
     EMAIL_HOST_PASSWORD = config("RESEND_API_KEY")
-    EMAIL_TIMEOUT = 10  # Verhindert, dass die Seite ewig hängt
-    EMAIL_FAIL_SILENTLY = True # WICHTIG: Damit der 500er Fehler weggeht!
     
-
-    # Wichtig: Der Name sollte in Anführungszeichen stehen, wenn Sonderzeichen/Leerzeichen drin sind
-    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default='"Martin Freimuth" <hi@martin-freimuth.dev>')
-    SERVER_EMAIL = config("SERVER_EMAIL", default="hi@martin-freimuth.dev")
+    # Timeout hinzufügen, damit die Seite nicht endlos lädt
+    EMAIL_TIMEOUT = 10 
+    
+    # WICHTIG: Die Absender-Adresse muss exakt so aussehen
+    DEFAULT_FROM_EMAIL = 'Martin Freimuth <hi@martin-freimuth.dev>'
+    SERVER_EMAIL = 'hi@martin-freimuth.dev'
