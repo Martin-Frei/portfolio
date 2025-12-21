@@ -141,18 +141,21 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
 
-# Der neue, zentrale Storage-Block (ersetzt STORAGE_STORAGE & DEFAULT_FILE_STORAGE)
+# Geänderter Block: Wir nutzen jetzt das Standard-Storage für Static Files
+# Das verhindert den "FileNotFoundError" beim Deployment auf Railway
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Wichtig für die Cloudinary-Library Kompatibilität (Legacy-Variablen)
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
 
 # ==================== ALLAUTH ====================
 SITE_ID = 1
