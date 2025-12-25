@@ -185,16 +185,12 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SESSION_COOKIE_AGE = 86400
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-# ==================== E-MAIL (RESEND API VERSION) ====================
+# ==================== E-MAIL (RESEND API) ====================
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 else:
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = "smtp.resend.com"
-    EMAIL_PORT = 465
-    EMAIL_USE_SSL = True
-    EMAIL_HOST_USER = "resend"
-    EMAIL_HOST_PASSWORD = config("RESEND_API_KEY")
+    # API STATT SMTP 
+    EMAIL_BACKEND = "portfolio_site.email_backend.ResendAPIBackend"
 
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="noreply@martin-freimuth.dev")
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
