@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Email bestätigt - Martin Freimuth{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-6 py-20">
+  <div class="max-w-2xl w-full">
+    
+    <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 
+                border-2 border-green-500 rounded-3xl p-12 text-center shadow-2xl">
+      
+      <div class="text-8xl mb-8 animate-bounce">✅</div>
+      
+      <h1 class="text-5xl font-black text-green-600 dark:text-green-400 mb-6">
+        Email bestätigt!
+      </h1>
+      
+      <p class="text-2xl text-gray-700 dark:text-gray-300 mb-8">
+        Dein Account ist jetzt aktiviert.
+      </p>
+      
+      <div class="space-y-4">
+        <a href="{% url 'account_login' %}" 
+           class="block px-12 py-5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 
+                  rounded-xl font-bold text-2xl text-white hover:scale-105 transition shadow-xl hover:shadow-purple-500/50">
+          🚀 Jetzt einloggen
+        </a>
+        
+        <a href="/" 
+           class="block text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition">
+          Zurück zur Startseite
+        </a>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

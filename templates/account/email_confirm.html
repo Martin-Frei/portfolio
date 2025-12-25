@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Email bestätigen - Martin Freimuth{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-6 py-20">
+  <div class="max-w-2xl w-full">
+    
+    {% if confirmation %}
+      <!-- Email-Bestätigung ausstehend -->
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-12 border border-gray-300 dark:border-gray-700 shadow-2xl text-center">
+        
+        <div class="text-8xl mb-8">📧</div>
+        
+        <h1 class="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          Email-Adresse bestätigen
+        </h1>
+        
+        <div class="text-xl text-gray-700 dark:text-gray-300 mb-8">
+          Bitte bestätige deine Email-Adresse:<br>
+          <strong class="text-purple-600 dark:text-purple-400">{{ confirmation.email_address.email }}</strong>
+        </div>
+        
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+          {% csrf_token %}
+          
+          <button type="submit" 
+                  class="px-12 py-5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 
+                         rounded-xl font-bold text-2xl text-white hover:scale-105 transition shadow-xl hover:shadow-purple-500/50">
+            ✅ Email bestätigen
+          </button>
+        </form>
+        
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-8">
+          Durch die Bestätigung wird dein Account aktiviert.
+        </p>
+      </div>
+      
+    {% else %}
+      <!-- Ungültiger oder abgelaufener Link -->
+      <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 rounded-3xl p-12 text-center">
+        
+        <div class="text-8xl mb-8">❌</div>
+        
+        <h1 class="text-4xl font-black text-red-600 dark:text-red-400 mb-6">
+          Ungültiger Link
+        </h1>
+        
+        <p class="text-xl text-gray-700 dark:text-gray-300 mb-8">
+          Dieser Bestätigungs-Link ist ungültig oder bereits abgelaufen.
+        </p>
+        
+        <a href="{% url 'account_signup' %}" 
+           class="inline-block px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl transition">
+          Neu registrieren
+        </a>
+      </div>
+      
+    {% endif %}
+    
+  </div>
+</div>
+{% endblock %}
