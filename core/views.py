@@ -4,7 +4,10 @@ from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.conf import settings
 from projects.models import Project
-from .models import Profile
+from .models import Profile, PortfolioScreenshot
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -31,10 +34,25 @@ def skills(request):
     return render(request, "core/skills.html")
 
 
-import requests  # WICHTIG: Oben hinzufügen!
-from django.conf import settings
-from django.contrib import messages
-from django.shortcuts import render
+@login_required(login_url='/accounts/login/')
+def about_portfolio(request):
+    """
+    Technische Dokumentation mit Screenshots.
+    Nur für eingeloggte User (Guest oder Registered).
+    """
+    # Screenshots nach Sektion gruppieren
+    screenshots = {
+        'overview': PortfolioScreenshot.objects.filter(section='overview'),
+        'architecture': PortfolioScreenshot.objects.filter(section='architecture'),
+        'auth': PortfolioScreenshot.objects.filter(section='auth'),
+        'deployment': PortfolioScreenshot.objects.filter(section='deployment'),
+        'challenges': PortfolioScreenshot.objects.filter(section='challenges'),
+        'apis': PortfolioScreenshot.objects.filter(section='apis'),
+    }
+    
+    return render(request, 'core/about_portfolio.html', {
+        'screenshots': screenshots
+    })
 
 
 def contact(request):
@@ -51,7 +69,7 @@ def contact(request):
             messages.error(request, "❌ Bitte fülle alle Pflichtfelder aus!")
             return render(request, "core/contact.html")
 
-        # Deine schönen Texte (bleiben exakt gleich)
+        # Die schönen Texte 
         email_body_to_you = f"""
 🔔 Neue Kontaktanfrage über dein Portfolio!
 

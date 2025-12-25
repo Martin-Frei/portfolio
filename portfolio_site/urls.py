@@ -26,14 +26,14 @@ urlpatterns = [
     path('auth-custom/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('allauth.urls')),
 
-    # 1. Home + About/Skills/Contact direkt im Root
     path('', include('core.urls')),            # ← Home, about/, skills/, contact/
 
-    # 2. Projekte unter /projects/
     path('projects/', include('projects.urls')),  # ← /projects/ + /projects/secret-lab/
     path('legal/', include('legal.urls')),
     path('bmi/', include('bmi_app.urls')),
     path('rps/', include('rps_app.urls')),
+    
+    path('icon-challenge/', include('icon_challenge.urls')),
 ]
 
 # if settings.DEBUG:

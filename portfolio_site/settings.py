@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "legal",
     "bmi_app",
     "rps_app",
+    "icon_challenge",
 ]
 
 MIDDLEWARE = [
@@ -162,6 +163,8 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 # ==================== ALLAUTH ====================
 SITE_ID = 1
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https" 
+
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -177,7 +180,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_SESSION_REMEMBER = None
 ACCOUNT_SIGNUP_OPEN = True  # Fremde können sich registrieren
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 SESSION_COOKIE_AGE = 86400
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
@@ -186,10 +189,13 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 else:
-    # Wir nutzen das Standard-Backend nur als Fallback, 
-    # da wir in der views.py die API direkt ansteuern.
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.resend.com"
+    EMAIL_PORT = 465
+    EMAIL_USE_SSL = True
+    EMAIL_HOST_USER = "resend"
+    EMAIL_HOST_PASSWORD = config("RESEND_API_KEY")
 
-# Diese Variablen MÜSSEN bleiben, da die views.py darauf zugreift
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="noreply@martin-freimuth.dev")
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 RESEND_API_KEY = config("RESEND_API_KEY")
-DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="Martin Freimuth <hi@martin-freimuth.dev>")

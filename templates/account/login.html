@@ -79,7 +79,7 @@ Lab{% endblock %} {% block content %}
         <div class="text-center">
           <button
             type="button"
-            hx-get="{% url 'accounts:get_guest_modal' %}"
+            hx-get="{{% url 'icon_challenge:start' 'guest' %}"
             hx-target="#modal-container"
             class="text-gray-500 hover:text-cyan-400 text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300"
           >

@@ -1,277 +1,232 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}Kontakt – Martin Freimuth{% endblock %}
 
 {% block content %}
 <div class="w-full max-w-6xl mx-auto px-6 py-20">
+  
+  <!-- Header -->
+  <div class="text-center mb-20">
+    <!-- Foto -->
+    <div class="mt-12 mb-8">
+      {% if profile and profile.profile_image %}
+      <img
+        src="{{ profile.profile_image.url }}"
+        alt="{{ profile.name }}"
+        class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover hover:ring-purple-500/50 transition duration-300"
+      />
+      {% else %}
+      <img
+        src="{% static 'img/profile/martin-freimuth.jpg' %}"
+        alt="Martin Freimuth"
+        class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover opacity-80"
+      />
+      {% endif %}
+    </div>
 
-    <!-- Header -->
-    <div class="text-center mb-20">
-        <!-- Foto (optional) -->
-       <div class="mt-12 mb-8">
-  {% if profile and profile.profile_image %}
-    <img
-      src="{{ profile.profile_image.url }}"
-      alt="{{ profile.name }}"
-      class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover hover:ring-purple-500/50 transition duration-300"
-    />
-  {% else %}
-    <img
-      src="{% static 'img/profile/martin-freimuth.jpg' %}"
-      alt="Martin Freimuth"
-      class="w-40 h-40 md:w-64 md:h-80 rounded-full mx-auto shadow-2xl ring-4 ring-purple-500/30 object-cover opacity-80"
-    />
-  {% endif %}
-</div>
-        
-        <h1 class="text-6xl md:text-8xl font-black mb-8 bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent">
-            Lass uns reden!
-        </h1>
-        <p class="text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-            Ob Job, Projekt, Kaffee oder einfach nur Hallo – ich freue mich riesig auf deine Nachricht.
+    <h1 class="text-6xl md:text-8xl font-black mb-8 bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent">
+      Lass uns reden!
+    </h1>
+    <p class="text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+      Ob Job, Projekt, Kaffee oder einfach nur Hallo – ich freue mich riesig auf deine Nachricht.
+    </p>
+  </div>
+
+  <!-- ✅ GRID: LINKS = FORMULAR, RECHTS = KONTAKT-INFOS -->
+  <div class="grid lg:grid-cols-2 gap-16">
+    
+    <!-- ========== LINKE SPALTE: FORMULAR ========== -->
+    <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-10 border border-gray-300 dark:border-gray-700 shadow-xl">
+      
+      <form method="post" id="contact-form" class="space-y-8">
+        {% csrf_token %}
+
+        <!-- Name & Email -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name *"
+              required
+              maxlength="100"
+              class="w-full px-6 py-4 bg-gray-50 dark:bg-gray-900/70 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none transition"
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="E-Mail *"
+              required
+              maxlength="100"
+              class="w-full px-6 py-4 bg-gray-50 dark:bg-gray-900/70 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none transition"
+            />
+            <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">
+              💡 Du erhältst eine Bestätigung an diese Adresse
+            </p>
+          </div>
+        </div>
+
+        <!-- Company -->
+        <input
+          type="text"
+          name="company"
+          placeholder="Unternehmen (optional)"
+          maxlength="100"
+          class="w-full px-6 py-4 bg-gray-50 dark:bg-gray-900/70 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none transition"
+        />
+
+        <!-- Subject -->
+        <select
+          name="subject"
+          required
+          class="w-full px-6 py-4 bg-gray-50 dark:bg-gray-900/70 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none transition"
+        >
+          <option value="">Betreff wählen...</option>
+          <option>Stellenangebot</option>
+          <option>Projekt-Anfrage</option>
+          <option>Zusammenarbeit / Freelance</option>
+          <option>Technische Frage</option>
+          <option>Nur Hallo sagen</option>
+          <option>Sonstiges</option>
+        </select>
+
+        <!-- Message -->
+        <textarea
+          name="message"
+          rows="6"
+          placeholder="Deine Nachricht..."
+          required
+          maxlength="2000"
+          class="w-full px-6 py-4 bg-gray-50 dark:bg-gray-900/70 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none transition resize-none"
+        ></textarea>
+
+        <!-- Honeypot -->
+        <input
+          type="text"
+          name="website"
+          style="display: none"
+          tabindex="-1"
+          autocomplete="off"
+        />
+
+        <!-- Submit Button -->
+        <button
+          type="button"
+          hx-post="{% url 'icon_challenge:contact_prepare' %}"
+          hx-include="#contact-form"
+          hx-target="#contact-result"
+          hx-swap="innerHTML"
+          class="w-full py-5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 rounded-xl font-bold text-xl text-white hover:scale-105 transition shadow-xl hover:shadow-purple-500/50"
+        >
+          📨 Nachricht senden
+        </button>
+
+        <p class="text-sm text-gray-600 dark:text-gray-400 text-center">
+          🔒 Deine Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.
         </p>
+      </form>
+      
+      <!-- ✅ SUCCESS/ERROR MESSAGES (innerhalb der weißen Box!) -->
+      <div id="contact-result" class="mt-8"></div>
+      
     </div>
+    <!-- ========== ENDE LINKE SPALTE ========== -->
 
-    <div class="grid lg:grid-cols-2 gap-16">
-
-        <!-- Formular -->
-        <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-10 border border-gray-300 dark:border-gray-700 shadow-xl">
-            
-            <!-- Erfolgs/Fehler-Meldungen -->
-            {% if messages %}
-            <div class="mb-8 space-y-4">
-                {% for message in messages %}
-                <div class="p-5 rounded-xl border-2 
-                            {% if message.tags == 'success' %}
-                                bg-green-50 dark:bg-green-900/30 
-                                border-green-500 
-                                text-green-700 dark:text-green-300
-                            {% elif message.tags == 'error' %}
-                                bg-red-50 dark:bg-red-900/30 
-                                border-red-500 
-                                text-red-700 dark:text-red-300
-                            {% else %}
-                                bg-blue-50 dark:bg-blue-900/30 
-                                border-blue-500 
-                                text-blue-700 dark:text-blue-300
-                            {% endif %}">
-                    {{ message }}
-                </div>
-                {% endfor %}
+    <!-- ========== RECHTE SPALTE: KONTAKT-INFOS ========== -->
+    <div class="space-y-10">
+      
+      <!-- Direkt erreichen -->
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-10 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h3 class="text-3xl font-bold mb-8 text-purple-600 dark:text-purple-400">
+          Direkt erreichen
+        </h3>
+        <div class="space-y-6 text-xl">
+          <div class="flex items-center gap-4">
+            <span class="text-2xl">📧</span>
+            <div>
+              <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">Email</div>
+              <a href="mailto:mat.frei@gmx.de" class="text-cyan-600 dark:text-cyan-400 hover:underline font-medium">
+                mat.frei@gmx.de
+              </a>
             </div>
-            {% endif %}
-
-            <form method="post" class="space-y-8">
-                {% csrf_token %}
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            placeholder="Name *" 
-                            required
-                            maxlength="100"
-                            class="w-full px-6 py-4 
-                                   bg-gray-50 dark:bg-gray-900/70 
-                                   border border-gray-300 dark:border-gray-600 
-                                   rounded-xl 
-                                   text-gray-900 dark:text-white
-                                   placeholder-gray-500 dark:placeholder-gray-400
-                                   focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20
-                                   focus:outline-none transition"
-                        >
-                    </div>
-                    <div>
-                        <input 
-                            type="email" 
-                            name="email" 
-                            placeholder="E-Mail *" 
-                            required
-                            maxlength="100"
-                            class="w-full px-6 py-4 
-                                   bg-gray-50 dark:bg-gray-900/70 
-                                   border border-gray-300 dark:border-gray-600 
-                                   rounded-xl 
-                                   text-gray-900 dark:text-white
-                                   placeholder-gray-500 dark:placeholder-gray-400
-                                   focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20
-                                   focus:outline-none transition"
-                        >
-                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">
-                            💡 Du erhältst eine Bestätigung an diese Adresse
-                        </p>
-                    </div>
-                </div>
-                
-                <input 
-                    type="text" 
-                    name="company" 
-                    placeholder="Unternehmen (optional)"
-                    maxlength="100"
-                    class="w-full px-6 py-4 
-                           bg-gray-50 dark:bg-gray-900/70 
-                           border border-gray-300 dark:border-gray-600 
-                           rounded-xl 
-                           text-gray-900 dark:text-white
-                           placeholder-gray-500 dark:placeholder-gray-400
-                           focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20
-                           focus:outline-none transition"
-                >
-                
-                <select 
-                    name="subject" 
-                    required
-                    class="w-full px-6 py-4 
-                           bg-gray-50 dark:bg-gray-900/70 
-                           border border-gray-300 dark:border-gray-600 
-                           rounded-xl 
-                           text-gray-900 dark:text-white
-                           focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20
-                           focus:outline-none transition"
-                >
-                    <option value="">Betreff wählen...</option>
-                    <option>Stellenangebot</option>
-                    <option>Projekt-Anfrage</option>
-                    <option>Zusammenarbeit / Freelance</option>
-                    <option>Technische Frage</option>
-                    <option>Nur Hallo sagen</option>
-                    <option>Sonstiges</option>
-                </select>
-                
-                <textarea 
-                    name="message" 
-                    rows="6" 
-                    placeholder="Deine Nachricht..." 
-                    required
-                    maxlength="2000"
-                    class="w-full px-6 py-4 
-                           bg-gray-50 dark:bg-gray-900/70 
-                           border border-gray-300 dark:border-gray-600 
-                           rounded-xl 
-                           text-gray-900 dark:text-white
-                           placeholder-gray-500 dark:placeholder-gray-400
-                           focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20
-                           focus:outline-none transition resize-none"
-                ></textarea>
-                
-                <button 
-                    type="submit"
-                    class="w-full py-5 
-                           bg-gradient-to-r from-purple-600 to-pink-600 
-                           hover:from-purple-500 hover:to-pink-500
-                           rounded-xl font-bold text-xl text-white
-                           hover:scale-105 transition 
-                           shadow-xl hover:shadow-purple-500/50"
-                >
-                    📨 Nachricht senden
-                </button>
-                
-                <p class="text-sm text-gray-600 dark:text-gray-400 text-center">
-                    🔒 Deine Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.
-                </p>
-            </form>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-2xl">💼</span>
+            <div>
+              <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">LinkedIn</div>
+              <a href="https://www.linkedin.com/in/martin-freimuth-089249359/" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline font-medium">
+                Martin Freimuth
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-2xl">🐙</span>
+            <div>
+              <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">GitHub</div>
+              <a href="https://github.com/Martin-Frei" target="_blank" class="text-cyan-600 dark:text-cyan-400 hover:underline font-medium">
+                github.com/Martin-Frei
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-2xl">📍</span>
+            <div>
+              <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">Location</div>
+              <span class="text-gray-800 dark:text-gray-200 font-medium">
+                Rosenheim, Bayern
+              </span>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Kontakt-Infos -->
-        <div class="space-y-10">
-            <!-- Direkt erreichen -->
-            <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-10 border border-gray-300 dark:border-gray-700 shadow-xl">
-                <h3 class="text-3xl font-bold mb-8 text-purple-600 dark:text-purple-400">
-                    Direkt erreichen
-                </h3>
-                <div class="space-y-6 text-xl">
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">📧</span>
-                        <div>
-                            <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                                Email
-                            </div>
-                            <a href="mailto:mat.frei@gmx.de" 
-                               class="text-cyan-600 dark:text-cyan-400 hover:underline font-medium">
-                                mat.frei@gmx.de
-                            </a>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">💼</span>
-                        <div>
-                            <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                                LinkedIn
-                            </div>
-                            <a href="https://www.linkedin.com/in/martin-freimuth-089249359/" 
-                               target="_blank" 
-                               class="text-cyan-600 dark:text-cyan-400 hover:underline font-medium">
-                                Martin Freimuth
-                            </a>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">🐙</span>
-                        <div>
-                            <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                                GitHub
-                            </div>
-                            <a href="https://github.com/Martin-Frei" 
-                               target="_blank" 
-                               class="text-cyan-600 dark:text-cyan-400 hover:underline font-medium">
-                                github.com/Martin-Frei
-                            </a>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-2xl">📍</span>
-                        <div>
-                            <div class="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                                Location
-                            </div>
-                            <span class="text-gray-800 dark:text-gray-200 font-medium">
-                                Rosenheim, Bayern
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Verfügbarkeit -->
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-2 border-green-500 rounded-3xl p-8 text-center shadow-xl">
+        <div class="text-6xl mb-4">🟢</div>
+        <p class="text-2xl font-bold text-green-700 dark:text-green-400 mb-2">
+          Verfügbar ab Januar 2026
+        </p>
+        <p class="text-gray-700 dark:text-gray-300 font-medium">
+          Festanstellung oder Freelance
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
+          München/Rosenheim Region bevorzugt
+        </p>
+      </div>
 
-            <!-- Verfügbarkeit -->
-            <div class="bg-gradient-to-br 
-                        from-green-50 to-emerald-50 
-                        dark:from-green-900/30 dark:to-emerald-900/30 
-                        border-2 border-green-500 
-                        rounded-3xl p-8 text-center shadow-xl">
-                <div class="text-6xl mb-4">🟢</div>
-                <p class="text-2xl font-bold text-green-700 dark:text-green-400 mb-2">
-                    Verfügbar ab Januar 2026
-                </p>
-                <p class="text-gray-700 dark:text-gray-300 font-medium">
-                    Festanstellung oder Freelance
-                </p>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
-                    München/Rosenheim Region bevorzugt
-                </p>
-            </div>
-            
-            <!-- Antwortzeiten -->
-            <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
-                <h4 class="text-xl font-bold mb-4 text-purple-600 dark:text-purple-400">
-                    ⚡ Antwortzeiten
-                </h4>
-                <div class="space-y-3 text-sm">
-                    <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Dringende Anfragen:</span>
-                        <span class="text-green-600 dark:text-green-400 font-bold">< 24h</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Allgemeine Anfragen:</span>
-                        <span class="text-cyan-600 dark:text-cyan-400 font-bold">1-3 Tage</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Projekt-Anfragen:</span>
-                        <span class="text-purple-600 dark:text-purple-400 font-bold">Innerhalb 1 Woche</span>
-                    </div>
-                </div>
-            </div>
+      <!-- Antwortzeiten -->
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h4 class="text-xl font-bold mb-4 text-purple-600 dark:text-purple-400">
+          ⚡ Antwortzeiten
+        </h4>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Dringende Anfragen:</span>
+            <span class="text-green-600 dark:text-green-400 font-bold">< 24h</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Allgemeine Anfragen:</span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">1-3 Tage</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 dark:text-gray-400">Projekt-Anfragen:</span>
+            <span class="text-purple-600 dark:text-purple-400 font-bold">Innerhalb 1 Woche</span>
+          </div>
         </div>
+      </div>
+      
     </div>
+    <!-- ========== ENDE RECHTE SPALTE ========== -->
+    
+  </div>
+  <!-- ========== ENDE GRID ========== -->
+  
 </div>
+
+<!-- MODAL CONTAINER -->
+<div id="modal-container"></div>
+
 {% endblock %}
