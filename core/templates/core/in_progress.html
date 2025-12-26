@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}In Arbeit - Martin Freimuth{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-6 py-20">
+  <div class="max-w-3xl w-full text-center">
+    
+    <!-- Icon -->
+    <div class="text-9xl mb-8 animate-bounce">🚧</div>
+    
+    <!-- Titel -->
+    <h1 class="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
+      In Arbeit
+    </h1>
+    
+    <!-- Subtitle -->
+    <p class="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 font-bold">
+      Diese Seite wird gerade entwickelt.
+    </p>
+    
+    <!-- Info Box -->
+    <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-2xl mb-10">
+      <div class="text-4xl mb-4">💭</div>
+      <h2 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-4">
+        Meine Gedanken zu dieser Feature
+      </h2>
+      <div class="text-lg text-gray-700 dark:text-gray-300 space-y-3 text-left">
+        <p>
+          📊 <strong>Current Project:</strong> Zeigt mein aktuelles Hauptprojekt mit Live-Progress und Tech-Stack
+        </p>
+        <p>
+          💡 <strong>Next Ideas:</strong> Eine Roadmap meiner geplanten Projekte mit Voting-System
+        </p>
+        <p>
+          📄 <strong>CV:</strong> Interaktiver Lebenslauf mit Timeline, Skills-Visualisierung und PDF-Download
+        </p>
+        <p>
+          📝 <strong>IT Blog:</strong> Technische Artikel, Tutorials und Learnings aus meinen Projekten
+        </p>
+        <p>
+          🎓 <strong>Training Area:</strong> Coding-Challenges, Quiz und interaktive Lern-Tools
+        </p>
+      </div>
+    </div>
+    
+    <!-- Status -->
+    <div class="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-2 border-blue-500 rounded-2xl p-6 mb-10">
+      <div class="text-5xl mb-3">🚀</div>
+      <p class="text-xl text-gray-700 dark:text-gray-300 font-medium">
+        Komm bald wieder vorbei!<br>
+        <span class="text-blue-600 dark:text-blue-400 font-bold">Updates folgen laufend.</span>
+      </p>
+    </div>
+    
+    <!-- Zurück-Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button onclick="history.back()" 
+              class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 
+                     rounded-xl font-bold text-xl text-white transition hover:scale-105 shadow-xl hover:shadow-purple-500/50">
+        ← Zurück
+      </button>
+      
+      <a href="/" 
+         class="px-8 py-4 bg-gray-600 hover:bg-gray-500 
+                rounded-xl font-bold text-xl text-white transition hover:scale-105">
+        Zur Startseite
+      </a>
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

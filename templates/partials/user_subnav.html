@@ -1,0 +1,83 @@
+{% if user.is_authenticated %}
+<!-- User Subnav - About Portfolio Style -->
+<nav class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+  <div class="max-w-7xl mx-auto px-6 py-3">
+    
+    <!-- Flex Layout - Zentriert -->
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      
+      <!-- 1. Secret Lab -->
+      <a href="{% url 'projects:secret_lab' %}" 
+         class="flex items-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 
+                border border-purple-300 dark:border-purple-700 rounded-full text-sm font-semibold 
+                hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-all hover:scale-105"
+         title="Geheime Projekte">
+        <span class="text-base">🔬</span>
+        <span>Secret Lab</span>
+      </a>
+      
+      <!-- 2. About Portfolio -->
+      <a href="{% url 'core:about_portfolio' %}" 
+         class="flex items-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400 
+                border border-cyan-300 dark:border-cyan-700 rounded-full text-sm font-semibold 
+                hover:bg-cyan-200 dark:hover:bg-cyan-900/50 transition-all hover:scale-105"
+         title="Technische Dokumentation">
+        <span class="text-base">📊</span>
+        <span>About Portfolio</span>
+      </a>
+      
+      <!-- 3. Current Project -->
+      <a href="{% url 'core:in_progress' %}" 
+         class="flex items-center gap-2 px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 
+                border border-orange-300 dark:border-orange-700 rounded-full text-sm font-semibold 
+                hover:bg-orange-200 dark:hover:bg-orange-900/50 transition-all hover:scale-105"
+         title="Aktuelles Projekt">
+        <span class="text-base">🚀</span>
+        <span>Current Project</span>
+      </a>
+      
+      <!-- 4. Next Ideas -->
+      <a href="{% url 'core:in_progress' %}" 
+         class="flex items-center gap-2 px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 
+                border border-yellow-300 dark:border-yellow-700 rounded-full text-sm font-semibold 
+                hover:bg-yellow-200 dark:hover:bg-yellow-900/50 transition-all hover:scale-105"
+         title="Projekt-Ideen">
+        <span class="text-base">💡</span>
+        <span>Next Ideas</span>
+      </a>
+      
+      <!-- 5. CV / Lebenslauf -->
+      <a href="{% url 'core:in_progress' %}" 
+         class="flex items-center gap-2 px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 
+                border border-green-300 dark:border-green-700 rounded-full text-sm font-semibold 
+                hover:bg-green-200 dark:hover:bg-green-900/50 transition-all hover:scale-105"
+         title="Lebenslauf">
+        <span class="text-base">📄</span>
+        <span>CV</span>
+      </a>
+      
+      <!-- 6. IT Blog -->
+      <a href="{% url 'core:in_progress' %}" 
+         class="flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 
+                border border-blue-300 dark:border-blue-700 rounded-full text-sm font-semibold 
+                hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all hover:scale-105"
+         title="Tech Blog">
+        <span class="text-base">📝</span>
+        <span>IT Blog</span>
+      </a>
+      
+      <!-- 7. Training Area -->
+      <a href="{% url 'core:in_progress' %}" 
+         class="flex items-center gap-2 px-4 py-2 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-400 
+                border border-pink-300 dark:border-pink-700 rounded-full text-sm font-semibold 
+                hover:bg-pink-200 dark:hover:bg-pink-900/50 transition-all hover:scale-105"
+         title="Lern-Bereich">
+        <span class="text-base">🎓</span>
+        <span>Training</span>
+      </a>
+      
+    </div>
+    
+  </div>
+</nav>
+{% endif %}

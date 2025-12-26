@@ -33,6 +33,12 @@ def contact(request):
 def skills(request):
     return render(request, "core/skills.html")
 
+def in_progress(request):
+    """
+    Generic 'In Progress' page für Features die entwickelt werden
+    """
+    return render(request, 'core/in_progress.html')
+
 
 @login_required(login_url='/accounts/login/')
 def about_portfolio(request):

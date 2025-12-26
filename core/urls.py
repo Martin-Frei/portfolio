@@ -10,4 +10,5 @@ urlpatterns = [
     path('skills/', views.skills, name='skills'),
     path('contact/', views.contact, name='contact'),
     path('about-this-portfolio/', views.about_portfolio, name='about_portfolio'),
+    path('in-progress/', views.in_progress, name='in_progress'),
 ]
