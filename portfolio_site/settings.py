@@ -56,10 +56,6 @@ INSTALLED_APPS = [
     
     "cloudinary",
     
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-
     "core",
     "projects",
     "accounts",
@@ -67,6 +63,10 @@ INSTALLED_APPS = [
     "bmi_app",
     "rps_app",
     "icon_challenge",
+    
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ]
 
 MIDDLEWARE = [
@@ -163,7 +163,7 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 # ==================== ALLAUTH ====================
 SITE_ID = 1
 
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https" 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https" if not DEBUG else "http"
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
