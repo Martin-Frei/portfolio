@@ -1440,6 +1440,158 @@ def ask_gemini_rest(prompt: str) -> str:
     </div>
 
 </div>
+<!-- ============================================================ -->
+  <!-- 12.5 - EMAIL VERIFICATION SYSTEM -->
+  <!-- ============================================================ -->
+  <section id="email-verification" class="mb-20">
+    <h2 class="text-4xl font-black mb-8 text-purple-600 dark:text-purple-400">
+      12.5 📧 Email Verification System
+    </h2>
+    
+    <div class="space-y-6">
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">Resend API Integration</h3>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          Statt Standard-SMTP nutze ich die <strong>Resend API</strong> für Email-Versand. Das ist schneller, 
+          zuverlässiger und benötigt keine DNS-Records.
+        </p>
+        <div class="bg-gray-100 dark:bg-gray-900 rounded-xl p-4 font-mono text-sm">
+          <code class="text-purple-600 dark:text-purple-400">
+            Custom Email Backend → Resend API → ~300ms Latenz ✅<br>
+            vs. SMTP → 800ms+ und Timeout-Probleme ❌
+          </code>
+        </div>
+      </div>
+
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">Django-Allauth Custom Templates</h3>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          Alle Email-Confirmation Seiten sind im Portfolio-Design gestylt:
+        </p>
+        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+          <li>✅ <strong>email_confirm.html</strong> - Bestätigungsseite mit Button</li>
+          <li>✅ <strong>email_confirmed.html</strong> - Erfolgsseite nach Bestätigung</li>
+          <li>✅ <strong>verification_sent.html</strong> - Login-Blockierung ohne Verification</li>
+        </ul>
+      </div>
+
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">Email-Strategie</h3>
+        <p class="text-lg text-gray-700 dark:text-gray-300">
+          📧 <strong>noreply@martin-freimuth.dev</strong> - System-Emails (Verification, Auth)<br>
+          📧 <strong>hi@martin-freimuth.dev</strong> - Persönliche Emails (Contact-Form)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 12.6 - USER NAVIGATION (SUBNAV) -->
+  <!-- ============================================================ -->
+  <section id="user-subnav" class="mb-20">
+    <h2 class="text-4xl font-black mb-8 text-purple-600 dark:text-purple-400">
+      12.6 🎨 User Navigation (Subnav)
+    </h2>
+    
+    <div class="space-y-6">
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">7 Navigation-Buttons</h3>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          Eingeloggte User sehen eine zweite Navigationsleiste mit 7 Buttons im About-Portfolio Style:
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+          <div class="flex items-center gap-2 px-3 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border border-purple-300 dark:border-purple-700 rounded-full text-sm font-semibold">
+            🔬 Secret Lab
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400 border border-cyan-300 dark:border-cyan-700 rounded-full text-sm font-semibold">
+            📊 About
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 border border-orange-300 dark:border-orange-700 rounded-full text-sm font-semibold">
+            🚀 Current
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border border-yellow-300 dark:border-yellow-700 rounded-full text-sm font-semibold">
+            💡 Ideas
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-300 dark:border-green-700 rounded-full text-sm font-semibold">
+            📄 CV
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-300 dark:border-blue-700 rounded-full text-sm font-semibold">
+            📝 Blog
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-400 border border-pink-300 dark:border-pink-700 rounded-full text-sm font-semibold">
+            🎓 Training
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">Mobile Menu (2-Spalten Layout)</h3>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          Das Mobile Menu nutzt ein innovatives 2-Spalten Layout:
+        </p>
+        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+          <li>✅ <strong>Linke Spalte:</strong> Main Navigation (Home, Skills, Projekte, etc.)</li>
+          <li>✅ <strong>Rechte Spalte:</strong> User Subnav Pills (7 Buttons)</li>
+          <li>✅ <strong>Hamburger als Toggle:</strong> Öffnet/schließt Menu mit einem Button</li>
+          <li>✅ <strong>Theme Toggle:</strong> Im Mobile Header integriert</li>
+          <li>✅ <strong>Guest-Timer:</strong> Prominent im Mobile Header sichtbar</li>
+        </ul>
+      </div>
+
+      <div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 border border-gray-300 dark:border-gray-700 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">Sticky Navigation</h3>
+        <p class="text-lg text-gray-700 dark:text-gray-300">
+          Navbar und Subnav sind zusammen in einem <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">sticky</code> 
+          Wrapper, sodass beide beim Scrollen oben fixiert bleiben. Das sorgt für optimale Erreichbarkeit aller Funktionen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 12.7 - RECENT UPDATES (DEZEMBER 2025) -->
+  <!-- ============================================================ -->
+  <section id="recent-updates" class="mb-20">
+    <h2 class="text-4xl font-black mb-8 text-purple-600 dark:text-purple-400">
+      12.7 🆕 Recent Updates (Dezember 2025)
+    </h2>
+    
+    <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-500 rounded-3xl p-8 shadow-xl">
+      <div class="space-y-4 text-lg text-gray-700 dark:text-gray-300">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">📧</span>
+          <div>
+            <strong class="text-green-700 dark:text-green-400">Email-Verification System</strong>
+            <p>Django-Allauth Integration mit Resend API Backend, styled Confirmation Pages</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">🎨</span>
+          <div>
+            <strong class="text-green-700 dark:text-green-400">User Subnav</strong>
+            <p>7 Navigation-Buttons im About-Portfolio Style, sticky Navigation</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">📱</span>
+          <div>
+            <strong class="text-green-700 dark:text-green-400">Mobile Menu Redesign</strong>
+            <p>2-Spalten Layout, Hamburger Toggle, Theme Toggle im Header, Guest-Timer Integration</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">🚧</span>
+          <div>
+            <strong class="text-green-700 dark:text-green-400">In-Progress Pages</strong>
+            <p>Styled Placeholder für kommende Features mit Feature-Roadmap</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- 13.0 - Scroll-to-Top Button -->
 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
