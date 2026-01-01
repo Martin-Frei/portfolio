@@ -1,0 +1,105 @@
+<!-- Updates Liste (für HTMX Replacement) -->
+
+{% for update in updates %}
+<div class="bg-white/90 dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-8 mb-6
+            border border-gray-300 dark:border-gray-700 shadow-xl
+            hover:shadow-2xl transition-all">
+  
+  <!-- Header -->
+  <div class="flex items-start justify-between mb-4">
+    <div class="flex-1">
+      <!-- Type Badge -->
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-2
+                   {% if update.update_type == 'milestone' %}bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400
+                   {% elif update.update_type == 'feature' %}bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400
+                   {% elif update.update_type == 'bugfix' %}bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400
+                   {% else %}bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400{% endif %}">
+        {{ update.get_update_type_display }}
+      </span>
+      
+      <!-- Title -->
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+        {{ update.get_type_emoji }} {{ update.title }}
+      </h3>
+      
+      <!-- Date -->
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        {{ update.created_at|date:"d. M Y, H:i" }} Uhr
+      </p>
+    </div>
+    
+    <!-- Tag Match Indicator -->
+    {% if selected_tags and update.tag_match_count %}
+    <div class="ml-4 px-3 py-1 bg-purple-500 text-white rounded-full text-xs font-bold">
+      {{ update.tag_match_count }}/{{ selected_tags|length }} Match{{ update.tag_match_count|pluralize:"es" }}
+    </div>
+    {% endif %}
+  </div>
+  
+  <!-- Tags -->
+  <div class="flex flex-wrap gap-2 mb-4">
+    {% for tag in update.tags.all %}
+    <span class="px-3 py-1 rounded-full text-xs font-semibold
+                 bg-{{ tag.color }}-100 dark:bg-{{ tag.color }}-900/30 
+                 text-{{ tag.color }}-700 dark:text-{{ tag.color }}-400
+                 border border-{{ tag.color }}-300 dark:border-{{ tag.color }}-700">
+      {{ tag.name }}
+    </span>
+    {% endfor %}
+  </div>
+  
+  <!-- Description (gekürzt) -->
+  <div class="prose prose-lg dark:prose-invert mb-4">
+    <p class="text-gray-700 dark:text-gray-300">
+      {{ update.description|truncatewords:30 }}
+    </p>
+  </div>
+  
+  <!-- Mehr lesen Button -->
+  <button 
+    hx-get="{% url 'core:update_detail_htmx' update.id %}?{{ tag_query|default:'' }}"
+    hx-target="#modal-content"
+    hx-swap="innerHTML"
+    onclick="document.getElementById('modal').classList.remove('hidden')"
+    class="inline-flex items-center gap-2 px-6 py-3 
+           bg-gradient-to-r from-purple-600 to-pink-600 
+           hover:from-purple-500 hover:to-pink-500
+           text-white font-bold rounded-xl 
+           transition-all hover:scale-105 shadow-xl">
+    <span>📖</span>
+    <span>Mehr lesen</span>
+  </button>
+  
+  <!-- Screenshot Preview -->
+  {% if update.screenshot %}
+  <div class="mt-4">
+    <img src="{{ update.screenshot.url }}" 
+         alt="{{ update.title }}"
+         class="rounded-xl max-h-64 object-cover w-full">
+  </div>
+  {% endif %}
+  
+</div>
+
+{% empty %}
+
+<!-- Keine Updates gefunden -->
+<div class="text-center py-20">
+  <div class="text-6xl mb-4">🔍</div>
+  <p class="text-2xl font-bold text-gray-500 dark:text-gray-400 mb-2">
+    Keine Updates gefunden
+  </p>
+  <p class="text-gray-600 dark:text-gray-500 mb-6">
+    Mit den gewählten Tags gibt es keine Updates.
+  </p>
+  <a href="{% url 'core:current_project' %}" 
+     class="inline-flex items-center gap-2 px-6 py-3
+            bg-purple-600 hover:bg-purple-500
+            text-white font-bold rounded-xl
+            transition-all hover:scale-105">
+    <span>✕</span>
+    <span>Filter zurücksetzen</span>
+  </a>
+</div>
+
+{% endfor %}

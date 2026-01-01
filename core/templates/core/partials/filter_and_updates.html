@@ -1,0 +1,34 @@
+<!-- Combined: Filter Pills + Info + Updates -->
+
+<!-- Pills -->
+{% include 'core/partials/filter_pills.html' %}
+
+<!-- Info Row -->
+<div class="flex items-center justify-between mb-6">
+  <div class="text-sm text-gray-600 dark:text-gray-400">
+    {% if selected_tags %}
+    <span class="font-bold text-purple-600 dark:text-purple-400">{{ updates.count }}</span> 
+    Update{{ updates.count|pluralize }} gefunden
+    {% else %}
+    <span class="font-bold">{{ updates.count }}</span> 
+    Update{{ updates.count|pluralize }} gesamt
+    {% endif %}
+  </div>
+  
+  {% if selected_tags %}
+  <a href="{% url 'core:current_project' %}" 
+     class="inline-flex items-center gap-2 px-4 py-2 
+            bg-red-100 dark:bg-red-900/30 
+            text-red-700 dark:text-red-400 
+            border border-red-300 dark:border-red-700 
+            rounded-full text-sm font-semibold 
+            hover:bg-red-200 dark:hover:bg-red-900/50 
+            transition-all hover:scale-105">
+    <span>✕</span>
+    <span>Filter zurücksetzen</span>
+  </a>
+  {% endif %}
+</div>
+
+<!-- Updates List -->
+{% include 'core/partials/update_list.html' %}

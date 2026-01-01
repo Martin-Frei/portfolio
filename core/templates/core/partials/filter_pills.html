@@ -1,0 +1,57 @@
+<!-- Filter Pills (HTMX mit JS Helper) -->
+
+<div class="flex flex-wrap items-center gap-3 mb-4">
+  
+  <!-- ALL PILL -->
+  <a href="{% url 'core:current_project' %}"
+     class="flex items-center gap-2 px-4 py-2 
+            rounded-full text-sm font-semibold 
+            transition-all hover:scale-105
+            {% if not selected_tags %}
+            bg-gradient-to-r from-purple-600 to-pink-600 text-white
+            ring-2 ring-purple-500 shadow-lg
+            {% else %}
+            bg-gray-100 dark:bg-gray-800 
+            text-gray-700 dark:text-gray-300 
+            border border-gray-300 dark:border-gray-700
+            hover:bg-gray-200 dark:hover:bg-gray-700
+            {% endif %}">
+    <span>🌟</span>
+    <span>All</span>
+    {% if not selected_tags %}<span class="text-xs font-bold">✓</span>{% endif %}
+  </a>
+  
+  <!-- TAG PILLS -->
+  {% for tag in all_tags %}
+<label class="flex items-center gap-2 px-4 py-2 
+              rounded-full text-sm font-semibold cursor-pointer
+              transition-all hover:scale-105
+              {% if tag.slug in selected_tags %}
+              bg-{{ tag.color }}-200 dark:bg-{{ tag.color }}-800/50 
+              text-{{ tag.color }}-800 dark:text-{{ tag.color }}-300 
+              ring-2 ring-{{ tag.color }}-500 shadow-lg
+              {% else %}
+              bg-{{ tag.color }}-100 dark:bg-{{ tag.color }}-900/30 
+              text-{{ tag.color }}-700 dark:text-{{ tag.color }}-400 
+              border border-{{ tag.color }}-300 dark:border-{{ tag.color }}-700
+              hover:bg-{{ tag.color }}-200 dark:hover:bg-{{ tag.color }}-900/50
+              {% endif %}">
+  <!-- KEIN ONCLICK MEHR! -->
+  
+  <input type="checkbox" 
+         name="tags" 
+         value="{{ tag.slug }}"
+         {% if tag.slug in selected_tags %}checked{% endif %}
+         input onchange="toggleTagFilter(this)"
+         class="hidden tag-checkbox">
+         <!-- ↑ ONCHANGE statt onclick auf Label! -->
+  
+  <span>{{ tag.name }}</span>
+  
+  {% if tag.slug in selected_tags %}
+  <span class="text-xs font-bold">✓</span>
+  {% endif %}
+</label>
+{% endfor %}
+  
+</div>

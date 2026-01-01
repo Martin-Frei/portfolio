@@ -11,4 +11,9 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('about-this-portfolio/', views.about_portfolio, name='about_portfolio'),
     path('in-progress/', views.in_progress, name='in_progress'),
+     # ========== CURRENT PROJECT (NEU!) ==========
+    path('current-project/', views.current_project, name='current_project'),
+    path('current-project/updates/', views.update_list_htmx, name='update_list_htmx'),
+    path('current-project/update/<int:pk>/', views.update_detail_htmx, name='update_detail_htmx'),
+    
 ]

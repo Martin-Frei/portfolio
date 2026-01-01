@@ -44,7 +44,7 @@ if not DEBUG:
 
 # ==================== APPLICATIONS ====================
 INSTALLED_APPS = [
-    "cloudinary_storage",
+    "cloudinary_storage",  # MUSS vor django.contrib.staticfiles!
     
     "django.contrib.admin",
     "django.contrib.auth",
@@ -56,6 +56,12 @@ INSTALLED_APPS = [
     
     "cloudinary",
     
+    # ========== TAGGIT (NEU!) ==========
+    "taggit",
+    "taggit_autosuggest",
+    # ===================================
+    
+    # Deine Apps:
     "core",
     "projects",
     "accounts",
@@ -64,10 +70,39 @@ INSTALLED_APPS = [
     "rps_app",
     "icon_challenge",
     
+    # Allauth (am Ende):
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
 ]
+
+
+'''
+## 🎯 **WARUM DIESE REIHENFOLGE?**
+
+1. cloudinary_storage    ← VOR staticfiles (Override!)
+2. Django Core Apps      ← Standard Django
+3. cloudinary            ← Nach Core
+4. taggit + autosuggest  ← VOR deinen Apps! ✅
+5. Deine Apps            ← Können taggit nutzen
+6. allauth               ← Am Ende (Templates Override)
+
+---
+
+## ⚠️ **KRITISCH:**
+
+FALSCH ❌:
+core
+projects
+taggit  ← Zu spät!
+
+RICHTIG ✅:
+taggit
+taggit_autosuggest
+core    ← Kann jetzt taggit in models.py importieren!
+projects
+
+'''
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

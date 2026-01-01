@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-6 py-12">
+  
+  <!-- ================================ -->
+  <!-- HEADER -->
+  <!-- ================================ -->
+  <div class="text-center mb-12">
+    <h1 class="text-6xl font-black mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+      🚀 Current Project
+    </h1>
+    <p class="text-xl text-gray-700 dark:text-gray-300">
+      Live-Updates: Stock Prediction ML System
+    </p>
+  </div>
+  
+  <!-- ================================ -->
+  <!-- TAG FILTER + UPDATES -->
+  <!-- ================================ -->
+  <div class="mb-8">
+    <h2 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
+      Filter nach Tags:
+    </h2>
+    
+    <!-- Loading Indicator -->
+    <div id="loading" class="htmx-indicator mb-4 text-center py-4">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-purple-600 border-t-transparent"></div>
+      <span class="ml-3 text-gray-600 dark:text-gray-400">Lädt...</span>
+    </div>
+    
+    <!-- HTMX Swap Container -->
+    <div id="filter-and-updates">
+      {% include 'core/partials/filter_and_updates.html' %}
+    </div>
+    
+  </div>
+  
+</div>
+
+<!-- ================================ -->
+<!-- MODAL -->
+<!-- ================================ -->
+<div id="modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+  <div class="flex items-center justify-center h-full p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div id="modal-content">
+        <!-- Wird von HTMX geladen -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- SCRIPTS -->
+<!-- ================================ -->
+<script>
+  // ========== MODAL FUNCTIONS ==========
+  function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+  }
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+  
+  document.getElementById('modal').addEventListener('click', (e) => {
+    if (e.target.id === 'modal') closeModal();
+  });
+  
+  // ========== TAG FILTER FUNCTION ==========
+  function toggleTagFilter(checkbox) {
+  // checkbox ist schon getoggled! ✅
+  // Kein preventDefault nötig
+  
+  const allCheckboxes = document.querySelectorAll('.tag-checkbox:checked');
+  const selectedSlugs = Array.from(allCheckboxes).map(cb => cb.value);
+  
+  let url = '{% url "core:update_list_htmx" %}';
+  if (selectedSlugs.length > 0) {
+    const params = selectedSlugs.map(slug => `tags=${slug}`).join('&');
+    url += '?' + params;
+  }
+  
+  console.log('🔍 Filter Request:', url);
+  console.log('📋 Selected tags:', selectedSlugs);
+  
+  htmx.ajax('GET', url, {
+    target: '#filter-and-updates',
+    swap: 'innerHTML',
+    indicator: '#loading'
+  });
+}
+</script>
+
+{% endblock %}

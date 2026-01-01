@@ -1,5 +1,5 @@
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -8,6 +8,8 @@ from .models import Profile, PortfolioScreenshot
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count, Q
+from .models import ProjectUpdate, ColoredTag
 
 
 def home(request):
@@ -159,3 +161,91 @@ Fullstack Developer
             messages.error(request, "❌ Verbindung fehlgeschlagen. Bitte prüfe dein Netzwerk.")
 
     return render(request, "core/contact.html")
+
+
+# ==========================================
+# CURRENT PROJECT VIEWS
+# ==========================================
+
+
+
+
+def current_project(request):
+    """Current Project - Full Page"""
+    selected_tags = request.GET.getlist('tags')
+    updates = get_filtered_updates(selected_tags)
+    all_tags = ColoredTag.objects.all().order_by('name')
+    
+    context = {
+        'updates': updates,
+        'all_tags': all_tags,
+        'selected_tags': selected_tags,
+    }
+    
+    return render(request, 'core/current_project.html', context)
+
+
+def update_list_htmx(request):
+    """HTMX Partial: Filter Pills + Updates"""
+    selected_tags = request.GET.getlist('tags')
+    updates = get_filtered_updates(selected_tags)
+    all_tags = ColoredTag.objects.all().order_by('name')
+    
+    # Tag query für Modal
+    tag_query = '&'.join([f'tags={tag}' for tag in selected_tags])
+    
+    return render(request, 'core/partials/filter_and_updates.html', {
+        'updates': updates,
+        'all_tags': all_tags,     # ← WICHTIG für Pills!
+        'selected_tags': selected_tags,
+        'tag_query': tag_query,
+    })
+
+
+def update_detail_htmx(request, pk):
+    """HTMX Partial: Modal Content"""
+    update = get_object_or_404(ProjectUpdate, pk=pk)
+    selected_tags = request.GET.getlist('tags')
+    
+    # Next/Previous (berücksichtigt Filter!)
+    filtered_updates = get_filtered_updates(selected_tags)
+    update_ids = list(filtered_updates.values_list('id', flat=True))
+    
+    try:
+        current_index = update_ids.index(update.id)
+        next_id = update_ids[current_index + 1] if current_index + 1 < len(update_ids) else None
+        prev_id = update_ids[current_index - 1] if current_index > 0 else None
+    except (ValueError, IndexError):
+        next_id = prev_id = None
+    
+    # Query-String für Filter
+    tag_query = '&'.join([f'tags={tag}' for tag in selected_tags])
+    
+    return render(request, 'core/partials/update_modal.html', {
+        'update': update,
+        'next_id': next_id,
+        'prev_id': prev_id,
+        'selected_tags': selected_tags,
+        'tag_query': tag_query,
+    })
+
+
+def get_filtered_updates(selected_tags):
+    """Helper: Filtered & Sorted Updates"""
+    updates = ProjectUpdate.objects.filter(is_current=True)
+    
+    if selected_tags:
+        # Smart Sorting: Meiste Tag-Matches zuerst!
+        updates = updates.filter(
+            tags__slug__in=selected_tags
+        ).annotate(
+            tag_match_count=Count('tags', filter=Q(tags__slug__in=selected_tags))
+        ).filter(
+            tag_match_count__gt=0
+        ).order_by('-tag_match_count', '-created_at').distinct()
+    else:
+        updates = updates.order_by('-created_at')
+    
+    return updates
+
+
